@@ -8,62 +8,51 @@
   font-style: normal;
 }
 
-html {
-  font-size: 1rem;
-}
-
 body {
   background-color: #fff;
 }
 
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
 h2 {
-  text-decoration: underline;
+  text-align: center;
+  font-size: 1rem;
 }
 
 header {
-  border: 1px solid black;
 }
 
-.container-header {
-  display: flex;
-  justify-content: right;
-}
 
-.container-header nav {
-  background-color: #222;
-}
-header h1 {
-  font-size: 6vmin;
-}
 
-header p {
-  font-size: 1.2rem;
-}
-
-.container-header ul {
+.nav-list {
   list-style-type: none;
-}
-
-.container-header ul li {
-  float: left;
-}
-
-.container-header ul li a {
-  display: block;
-  padding: 1.5rem;
   text-align: center;
-  color: #fff;
-  margin-right: 1rem;
-  text-decoration: none;
 }
 
-.banner {
+.list-item {
+  background-color: #222;
+  width: 30%;
+  max-width: 30%;
+  border-radius: 1rem;
+  margin: 1rem auto;
+  padding: 0.5rem;
+}
+
+.list-item a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.7rem;
+}
+
+.banner-content p {
   text-align: center;
 }
 
 .flex-row {
   display: flex;
-  gap: 5rem;
 }
 
 .col {
@@ -114,7 +103,6 @@ p {
 
 .retirement-income {
   background-color: lightcoral;
-
   padding: 10px;
 }
 

@@ -9,122 +9,94 @@
     <!-- Font imports:-->
     <link rel="stylesheet" href="https://use.typekit.net/joa5aiv.css" />
     <link rel="stylesheet" href="https://use.typekit.net/ycb5qtw.css" />
+    <script src="./resources/script.js"></script>
     <title>FERS Retirement Calculator</title>
   </head>
 
   <body>
-    <div>
-      <header>
-        <div class="container-header">
-          <nav>
-            <ul>
-              <li>
-                <a href="/resources/tsp.html" target="_blank">TSP Calculator</a>
-              </li>
-              <li>
-                <a href="https://www.tsp.gov" target="_blank">TSP Website</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
-      <div class="banner">
-        <div>
+    <header class="header">
+      <div class="container banner">
+        <div class="banner-content">
           <h1>Basic FERS Retirement Calculator</h1>
           <p>This website estimates the SCE FERS basic annuity percentage.</p>
         </div>
       </div>
-      <div class="flex-row">
-        <section class=" col section personal-info">
-          <h2>Personal Info</h2>
-          <label for="first-name">First Name:</label>
-          <input type="text" name="first-name" id="first-name" required />
-          <label for="middle-init">Middle Initial:</label>
-          <input type="text" name="middle-init" id="middle-init" />
-          <label for="last-name">Last Name:</label>
-          <input type="text" name="last-name" id="last-name" required />
-          <label for="retirement-age">Retirement Age:</label>
-          <input
-            type="number"
-            name="retirement-age"
-            id="retirement-age"
-            placeholder="0"
-            required
-          />
-          <div class="military-service">
-            <label for="military-service"
-              >Did you buy back military time?</label
-            >
-            <select name="military-service" id="mil-service">
-              <option value="no">No</option>
-              <option value="yes">Yes</option>
-            </select>
-          </div>
-          <label for="sickLeave">Current Sick Leave Balance:</label>
-          <input
-            type="number"
-            name="sickLeave"
-            id="sickLeave"
-            required
-            placeholder="0"
-          />
-          <label for="high3">High-3 Average Salary</label>
-          <input
-            type="number"
-            name="high3"
-            id="high4"
-            required
-            placeholder="0"
-          />
-          <label for="sbsa">Spousal Benefit Survivor Annuity Election:</label>
-          <select name="sbsa" id="percentages-list">
-            <option value="0">0%</option>
-            <option value="5">5%</option>
-            <option value="10">10%</option>
-          </select>
-        </section>
-        <section class=" col section dates-info">
-          <h2>FERS Retirement Dates</h2>
-          <div class="fers-dates">
-            <label for="enterOnDate">Enter On Date (EOD):</label>
-            <input type="date" name="enterOnDate" id="enterOnDate" required />
-            <label for="retirement-date">Retirement Date:</label>
-            <input
-              type="date"
-              name="retirement-date"
-              id="retirement-date"
-              required
-            />
-          </div>
-          <div class="military-dates">
-            <label for="mil-start-date">Military buyback start date:</label>
-            <input type="date" name="mil-start-date" id="mil-start-date" />
-            <label for="mil-end-date">Military buyback end date:</label>
-            <input type="date" name="mil-end-date" id="mil-end-date" />
-          </div>
-        </section>
-        <section class="col total-service-time">
-          <div class="service-items" id="total-time">
-            <h3>Total SCE Service Time:</h3>
-            <p>XX Years and XX Months</p>
-          </div>
-          <div class="service-items" id="service-percent">
-            <h3>Total years of service <span>(percentage)</span>:</h3>
-            <p>XX.X %</p>
-          </div>
-          <div class="service-items" id="annuity-percent">
-            <h3>Total Estimated Annuity <span> Percent</span>:</h3>
-            <p>XX.X%</p>
-          </div>
-          <div class="service-items" id="annuity-amount">
-            <h3>Total Estimated Annuity<span>Amount</span>:</h3>
-            <p>$XX,XXX</p>
-          </div>
-        </section>
+      <div class="container nav">
+        <nav>
+          <ul class="nav-list">
+            <li class="list-item">
+              <a href="/resources/tsp.html" target="_blank">TSP Calculator</a>
+            </li>
+            <li class="list-item">
+              <a href="https://www.tsp.gov" target="_blank">TSP Website</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-
+    </header>
+    <main>
+      <!-- <section class="personal__info">
+        <h2>Personal Info</h2>
+        <label for="first-name">First Name:</label>
+        <input type="text" name="first-name" id="first-name" required />
+        <label for="middle-init">Middle Initial:</label>
+        <input type="text" name="middle-init" id="middle-init" />
+        <label for="last-name">Last Name:</label>
+        <input type="text" name="last-name" id="last-name" required />
+        <label for="retirement-age">Retirement Age:</label>
+        <input
+          type="number"
+          name="retirement-age"
+          id="retirement-age"
+          placeholder="0"
+          required
+        />
+        <div class="military-service">
+          <label for="military-service">Military Buy back?</label>
+          <select name="military-service" id="mil-service">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+        <label for="sickLeave">Current Sick Leave Balance:</label>
+        <input
+          type="number"
+          name="sickLeave"
+          id="sickLeave"
+          required
+          placeholder="0"
+        />
+        <label for="high3">High-3 Average Salary</label>
+        <input type="number" name="high3" id="high3" required placeholder="0" />
+        <label for="sbsa">Spousal Benefit Survivor Annuity Election:</label>
+        <select name="sbsa" id="percentages-list">
+          <option value="0">0%</option>
+          <option value="5">5%</option>
+          <option value="10">10%</option>
+        </select>
+      </section> -->
+      <!-- <section class="col section dates-info">
+        <h2>FERS Retirement Dates</h2>
+        <div class="fers-dates">
+          <label for="enterOnDate">Enter On Date (EOD):</label>
+          <input type="date" name="enterOnDate" id="enterOnDate" required />
+          <label for="retirement-date">Retirement Date:</label>
+          <input
+            type="date"
+            name="retirement-date"
+            id="retirement-date"
+            required
+          />
+        </div>
+        <div class="military-dates">
+          <label for="mil-start-date">Military buyback start date:</label>
+          <input type="date" name="mil-start-date" id="mil-start-date" />
+          <label for="mil-end-date">Military buyback end date:</label>
+          <input type="date" name="mil-end-date" id="mil-end-date" />
+        </div>
+      </section>
       <section class="retirement-income">
-        <h2>Retirement Annuity Supplement (RAS)</h2>
+        <h2>Retirement Annuity (RAS)</h2>
         <label for="ssa">Montly Social Security Benefit: </label>
         <input type="text" name="ssa" placeholder="0" />
         <label for="other-income">Post-Retirement Income:</label>
@@ -134,10 +106,29 @@
           <p>Annual RAS amount: $xx,xxx.xx</p>
         </div>
       </section>
+      <section class="total-service-time">
+        <h2>Results:</h2>
+        <div class="service-items" id="total-time">
+          <h3>Total SCE Service Time:</h3>
+          <p>XX Years and XX Months</p>
+        </div>
+        <div class="service-items" id="service-percent">
+          <h3>Total years of service <span>(percentage)</span>:</h3>
+          <p>XX.X %</p>
+        </div>
+        <div class="service-items" id="annuity-percent">
+          <h3>Total Estimated Annuity <span> Percent</span>:</h3>
+          <p>XX.X%</p>
+        </div>
+        <div class="service-items" id="annuity-amount">
+          <h3>Total Estimated Annuity<span>Amount</span>:</h3>
+          <p>$XX,XXX</p>
+        </div>
+      </section>
+    </main>
 
-      <footer>
-        <nav></nav>
-      </footer>
-    </div>
+    <footer>
+      <nav></nav>
+    </footer> -->
   </body>
 </html>
