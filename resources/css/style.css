@@ -11,16 +11,17 @@ body {
   font-size: 1rem;
 }
 
-.banner-content {
+.container {
+  margin: 1rem auto;
+  width: 70%;
+  max-width: 1000px;
   text-align: center;
 }
 
-h2 {
-  margin-bottom: 0.7rem;
-}
-
+h2,
+h3,
 hr {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
 }
 
 .nav-list {
@@ -47,12 +48,6 @@ hr {
   font-size: 0.7rem;
 }
 
-.container {
-  margin: 2rem auto;
-  width: 70%;
-  text-align: center;
-}
-
 .info input,
 .info select {
   margin: 0.4rem auto;
@@ -68,69 +63,10 @@ input {
   flex-direction: column;
 }
 
-.dates-info {
-  background-color: lightskyblue;
-  padding: 5px 15px;
-}
-
-.total-service-time {
-  background-color: hsla(60, 25%, 44%, 0.5);
-  border: 1px solid black;
-}
-
-.retirement-income {
-  background-color: lightcoral;
-  padding: 10px;
-}
-
 #ras-info p {
   margin-bottom: 0.5rem;
 }
 
 .results__info {
   margin: 0.5rem auto;
-}
-
-.tsp {
-  padding: 10px;
-  background-color: lightblue;
-}
-
-.tsp-info {
-  width: 50%;
-  border: 1px solid black;
-  padding: 10px;
-}
-
-.tsp-info h3 {
-  text-align: center;
-}
-
-#tsp-button {
-  border: 1px solid black;
-  background-color: hsl(208, 100%, 97%);
-  border-radius: 4px;
-  padding: 1rem;
-  border-radius: 4px;
-  position: relative;
-  top: 5rem;
-  margin-left: 50px;
-}
-
-footer {
-  background-image: url("/resources/images/dollars.jpg");
-  background-size: contain;
-}
-
-footer nav {
-  text-align: center;
-}
-
-footer nav a {
-  color: white;
-  font-size: 1.5rem;
-}
-
-footer nav a:hover {
-  color: green;
 }

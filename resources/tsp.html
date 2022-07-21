@@ -9,39 +9,42 @@
     <title>TSP</title>
   </head>
   <body>
-    <header>
+    <!-- <header>
       <nav>
         <a href="/index.html">Back</a>
       </nav>
-    </header>
+    </header> -->
     <section class="tsp">
-      <h2>Thrift Savings Plan (TSP) Calculator</h2>
-      <div class="tsp-info tsp-future-value">
-        <h3>TSP Future Value Calculator</h3>
-        <label for="pay-period">Pay Period Contributions:</label>
-        <input type="text" name="pay-period" placeholder="0" />
-        <label for="return-rate">Annual Rate of Return:</label>
-        <input type="text" name="return-rate" placeholder="0.0" />
-      </div>
-      <div class="tsp-info tsp-post-retirement">
-        <h3>Post-retirement TSP Income</h3>
+      <div class="container">
+        <h2>Thrift Savings Plan (TSP) Calculator</h2>
+        <div class="container info">
+          <h3>TSP Future Value Calculator</h3>
+          <label for="pay-period">Pay Period Contributions:</label>
+          <input type="text" name="pay-period" placeholder="0" />
+          <label for="return-rate">Annual Rate of Return:</label>
+          <input type="text" name="return-rate" placeholder="0.0" />
+        </div>
+        <div class="container">
+          <h3>Post-retirement TSP Income</h3>
+          <div class="info">
+            <label for="retirement-balance">TSP Balance at Retirement:</label>
+            <input type="text" name="retirement-balance" placeholder="0" />
 
-        <label for="retirement-balance">TSP Balance at Retirement:</label>
-        <input type="text" name="retirement-balance" placeholder="0" />
+            <label for="withdrawl">One Time Withdrawl Amount:</label>
+            <input type="text" name="withdrawl" placeholder="0" />
 
-        <label for="withdrawl">One Time Withdrawl Amount:</label>
-        <input type="text" name="withdrawl" placeholder="0" />
+            <label for="withdrawl-age"> One-Time Withdrawl Age:</label>
+            <input type="text" name="withdrawl-age" placeholder="0" />
 
-        <label for="withdrawl-age"> One-Time Withdrawl Age:</label>
-        <input type="text" name="withdrawl-age" placeholder="0" />
+            <label for="annual-withdrawl-age"
+              >Age to start Annual Withdrawls:</label
+            >
+            <input type="text" name="annual-withdrawl-age" placeholder="0" />
 
-        <label for="annual-withdrawl-age"
-          >Age to start Annual Withdrawls:</label
-        >
-        <input type="text" name="annual-withdrawl-age" placeholder="0" />
-
-        <label for="post-return-rate">Annual Rate of Return</label>
-        <input type="text" name="post-return-rate" placeholder="0.0" />
+            <label for="post-return-rate">Annual Rate of Return</label>
+            <input type="text" name="post-return-rate" placeholder="0.0" />
+          </div>
+        </div>
       </div>
     </section>
   </body>
