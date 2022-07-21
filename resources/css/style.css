@@ -18,6 +18,10 @@ body {
   text-align: center;
 }
 
+.tsp__outer-container {
+  margin-top: 2rem;
+}
+
 h2,
 h3,
 hr {
