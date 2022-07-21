@@ -4,28 +4,28 @@
   margin: 0;
   box-sizing: border-box;
   font-family: lato, sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 body {
   background-color: #fff;
-}
-
-h1 {
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-h2 {
-  text-align: center;
   font-size: 1rem;
 }
 
-header {
+.banner-content {
+  text-align: center;
 }
 
+h1 {
+  /* font-size: 1.5rem; */
+}
 
+h2 {
+  margin-bottom: 0.7rem;
+}
+
+hr {
+  margin-bottom: 0.5rem;
+}
 
 .nav-list {
   list-style-type: none;
@@ -33,12 +33,16 @@ header {
 }
 
 .list-item {
-  background-color: #222;
-  width: 30%;
-  max-width: 30%;
+  background-color: rgb(66, 120, 191);
+  max-width: 100px;
   border-radius: 1rem;
   margin: 1rem auto;
   padding: 0.5rem;
+}
+
+.list-item:hover {
+  opacity: 0.6;
+  transition: 0.2s;
 }
 
 .list-item a {
@@ -47,26 +51,19 @@ header {
   font-size: 0.7rem;
 }
 
-.banner-content p {
+.container {
+  margin: 2rem auto;
+  width: 70%;
   text-align: center;
 }
 
-.flex-row {
-  display: flex;
+.info input,
+.info select {
+  margin: 0.4rem auto;
 }
 
 .col {
   width: 100%;
-}
-
-.personal-info {
-  background-color: aqua;
-  padding: 15px 15px;
-}
-
-.military-service {
-  display: flex;
-  flex-direction: row;
 }
 
 label,
@@ -85,31 +82,19 @@ input {
   border: 1px solid black;
 }
 
-.total-service-time span {
-  font-style: italic;
-  font-weight: bold;
-}
-
-.service-items h3,
-p {
-  display: inline-flex;
-  flex-direction: row;
-  padding: 5px;
-}
-
-#percentages {
-  text-align: start;
-}
-
 .retirement-income {
   background-color: lightcoral;
   padding: 10px;
 }
 
-#ras-info {
-  display: flex;
-  flex-direction: column;
+#ras-info p {
+  margin-bottom: 0.5rem;
 }
+
+.results__info {
+  margin: 0.5rem auto;
+}
+
 .tsp {
   padding: 10px;
   background-color: lightblue;
@@ -134,10 +119,6 @@ p {
   position: relative;
   top: 5rem;
   margin-left: 50px;
-}
-section h2 {
-  text-align: center;
-  margin-bottom: 10px;
 }
 
 footer {
