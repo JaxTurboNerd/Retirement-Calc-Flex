@@ -18,8 +18,8 @@
       <div class="container header__container">
         <div class="banner">
           <div class="banner-content">
-            <h1>Basic FERS Retirement Calculator</h1>
-            <p>This website estimates the SCE FERS basic annuity percentage.</p>
+            <h1>FERS Retirement Calculator</h1>
+            <p>This website estimates the SCE FERS basic annuity figures.</p>
           </div>
         </div>
         <div class="nav">
@@ -38,7 +38,7 @@
     </header>
     <main>
       <form action="#" method="post">
-        <div class="outer__container">
+        <div class="row">
           <section class="personal__info col">
             <div class="container personal">
               <h2>Personal Info</h2>
@@ -124,10 +124,12 @@
                 <input type="text" name="ssa" placeholder="0" />
                 <label for="other-income">Post-Retirement Income:</label>
                 <input type="text" name="other-income" placeholder="0" />
-                <div id="ras-info">
-                  <p>Montly RAS Amount:</p>
+                <div class="ras__info">
+                  <p class="ras__text">Montly RAS Amount:</p>
                   <p>$x,xxx.xx</p>
-                  <p>Annual RAS amount:</p>
+                </div>
+                <div class="ras__info">
+                  <p class="ras__text">Annual RAS amount:</p>
                   <p>$x,xxx.xx</p>
                 </div>
               </div>
@@ -135,7 +137,7 @@
           </section>
         </div>
         <section class="results__section">
-          <div class="container">
+          <div class="container" style="max-width: 1200px">
             <h2>Results:</h2>
             <div class="info results">
               <div class="service-items" id="total-time">
@@ -162,8 +164,5 @@
         </section>
       </form>
     </main>
-    <footer>
-      <nav></nav>
-    </footer>
   </body>
 </html>
