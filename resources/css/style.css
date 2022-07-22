@@ -11,11 +11,17 @@ body {
   font-size: 1rem;
 }
 
+section {
+  background-color: hsla(203, 92%, 75%, 0.7);
+  border: 1px solid black;
+}
+
 .container {
-  margin: 1rem auto;
-  width: 70%;
-  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1400px;
   text-align: center;
+  padding: 1rem;
 }
 
 .tsp__outer-container {
@@ -52,9 +58,14 @@ hr {
   font-size: 0.7rem;
 }
 
+.banner-content p {
+  font-style: italic;
+}
+
 .info input,
 .info select {
-  margin: 0.4rem auto;
+  /* margin top/horizonta/bottom: */
+  margin: 0 auto 0.75rem;
 }
 
 .col {
@@ -73,4 +84,52 @@ input {
 
 .results__info {
   margin: 0.5rem auto;
+}
+
+@media screen and (min-width: 700px) {
+  .nav-list,
+  .outer__container {
+    display: flex;
+  }
+
+  .col {
+    width: 100%;
+  }
+
+  .results {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .results hr {
+    display: none;
+  }
+
+  .service-items {
+    padding: 1rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  .header__container {
+    width: 100%;
+    display: flex;
+  }
+
+  .banner {
+    margin-left: auto;
+  }
+
+  .nav {
+    margin-left: auto;
+  }
+
+  .list-item {
+    margin-left: 2rem;
+    white-space: nowrap;
+  }
 }

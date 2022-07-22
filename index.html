@@ -13,9 +13,9 @@
     <title>FERS Retirement Calculator</title>
   </head>
 
-  <body>
+  <body style="background-color: lightyellow">
     <header class="header">
-      <div class="container">
+      <div class="container header__container">
         <div class="banner">
           <div class="banner-content">
             <h1>Basic FERS Retirement Calculator</h1>
@@ -38,103 +38,106 @@
     </header>
     <main>
       <form action="#" method="post">
-        <section class="personal__info">
-          <div class="container personal">
-            <h2>Personal Info</h2>
-            <div class="info">
-              <label for="first-name">First Name:</label>
-              <input type="text" name="first-name" id="first-name" required />
-              <label for="middle-init">Middle Initial:</label>
-              <input type="text" name="middle-init" id="middle-init" />
-              <label for="last-name">Last Name:</label>
-              <input type="text" name="last-name" id="last-name" required />
-              <label for="retirement-age">Retirement Age:</label>
-              <input
-                type="number"
-                name="retirement-age"
-                id="retirement-age"
-                placeholder="0"
-                required
-              />
-            </div>
-          </div>
-          <div class="container military__service">
-            <div class="info">
-              <label for="military-service">Military Buy back?</label>
-              <select name="military-service" id="mil-service">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
-              </select>
-              <label for="sickLeave">Current Sick Leave Balance:</label>
-              <input
-                type="number"
-                name="sickLeave"
-                id="sickLeave"
-                required
-                placeholder="0"
-              />
-              <label for="high3">High-3 Average Salary</label>
-              <input
-                type="number"
-                name="high3"
-                id="high3"
-                required
-                placeholder="0"
-              />
-              <label for="sbsa"
-                >Spousal Benefit Survivor Annuity Election:</label
-              >
-              <select name="sbsa" id="percentages-list">
-                <option value="0">0%</option>
-                <option value="5">5%</option>
-                <option value="10">10%</option>
-              </select>
-            </div>
-          </div>
-        </section>
-        <section class="dates-info">
-          <div class="container dates">
-            <div class="info">
-              <h2>FERS Retirement Dates</h2>
-              <label for="enterOnDate">Enter On Date (EOD):</label>
-              <input type="date" name="enterOnDate" id="enterOnDate" required />
-              <label for="retirement-date">Retirement Date:</label>
-              <input
-                type="date"
-                name="retirement-date"
-                id="retirement-date"
-                required
-              />
-            </div>
-            <div class="info military-dates">
-              <label for="mil-start-date">Military buyback start date:</label>
-              <input type="date" name="mil-start-date" id="mil-start-date" />
-              <label for="mil-end-date">Military buyback end date:</label>
-              <input type="date" name="mil-end-date" id="mil-end-date" />
-            </div>
-          </div>
-        </section>
-        <section class="retirement-income">
-          <div class="container">
-            <div class="info">
-              <h2>Retirement Annuity (RAS)</h2>
-              <label for="ssa">Montly Social Security Benefit: </label>
-              <input type="text" name="ssa" placeholder="0" />
-              <label for="other-income">Post-Retirement Income:</label>
-              <input type="text" name="other-income" placeholder="0" />
-              <div id="ras-info">
-                <p>Montly RAS Amount:</p>
-                <p>$x,xxx.xx</p>
-                <p>Annual RAS amount:</p>
-                <p>$x,xxx.xx</p>
+        <div class="outer__container">
+          <section class="personal__info col">
+            <div class="container personal">
+              <h2>Personal Info</h2>
+              <div class="info">
+                <label for="first-name">First Name:</label>
+                <input type="text" name="first-name" id="first-name" required />
+                <label for="middle-init">Middle Initial:</label>
+                <input type="text" name="middle-init" id="middle-init" />
+                <label for="last-name">Last Name:</label>
+                <input type="text" name="last-name" id="last-name" required />
+                <label for="retirement-age">Retirement Age:</label>
+                <input
+                  type="number"
+                  name="retirement-age"
+                  id="retirement-age"
+                  placeholder="0"
+                  required
+                />
+              </div>
+              <div class="info">
+                <label for="military-service">Military Buy back?</label>
+                <select name="military-service" id="mil-service">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+                <label for="sickLeave">Current Sick Leave Balance:</label>
+                <input
+                  type="number"
+                  name="sickLeave"
+                  id="sickLeave"
+                  required
+                  placeholder="0"
+                />
+                <label for="high3">High-3 Average Salary</label>
+                <input
+                  type="number"
+                  name="high3"
+                  id="high3"
+                  required
+                  placeholder="0"
+                />
+                <label for="sbsa">Spousal Benefit Survivor Annuity:</label>
+                <select name="sbsa" id="percentages-list">
+                  <option value="0">0%</option>
+                  <option value="5">5%</option>
+                  <option value="10">10%</option>
+                </select>
               </div>
             </div>
-          </div>
-        </section>
-        <section class="results">
-          <div class="container results">
-            <div class="info">
-              <h2>Results:</h2>
+          </section>
+          <section class="dates-info col">
+            <div class="container dates">
+              <div class="info">
+                <h2>FERS Retirement Dates</h2>
+                <label for="enterOnDate">Enter On Date (EOD):</label>
+                <input
+                  type="date"
+                  name="enterOnDate"
+                  id="enterOnDate"
+                  required
+                />
+                <label for="retirement-date">Retirement Date:</label>
+                <input
+                  type="date"
+                  name="retirement-date"
+                  id="retirement-date"
+                  required
+                />
+              </div>
+              <div class="info military-dates">
+                <label for="mil-start-date">Military buyback start date:</label>
+                <input type="date" name="mil-start-date" id="mil-start-date" />
+                <label for="mil-end-date">Military buyback end date:</label>
+                <input type="date" name="mil-end-date" id="mil-end-date" />
+              </div>
+            </div>
+          </section>
+          <section class="retirement-income col">
+            <div class="container">
+              <div class="info">
+                <h2>Retirement Annuity (RAS)</h2>
+                <label for="ssa">Montly Social Security Benefit: </label>
+                <input type="text" name="ssa" placeholder="0" />
+                <label for="other-income">Post-Retirement Income:</label>
+                <input type="text" name="other-income" placeholder="0" />
+                <div id="ras-info">
+                  <p>Montly RAS Amount:</p>
+                  <p>$x,xxx.xx</p>
+                  <p>Annual RAS amount:</p>
+                  <p>$x,xxx.xx</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+        <section class="results__section">
+          <div class="container">
+            <h2>Results:</h2>
+            <div class="info results">
               <div class="service-items" id="total-time">
                 <h3>Total SCE Service Time:</h3>
                 <p class="results__info">XX Years and XX Months</p>
@@ -159,7 +162,6 @@
         </section>
       </form>
     </main>
-
     <footer>
       <nav></nav>
     </footer>
