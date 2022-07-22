@@ -80,6 +80,10 @@ input {
   flex-direction: column;
 }
 
+.military-dates {
+  /* display: none; */
+}
+
 .ras__info {
   margin: 1rem auto;
 }

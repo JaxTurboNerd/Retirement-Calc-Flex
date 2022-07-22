@@ -9,7 +9,8 @@
     <!-- Font imports:-->
     <link rel="stylesheet" href="https://use.typekit.net/joa5aiv.css" />
     <link rel="stylesheet" href="https://use.typekit.net/ycb5qtw.css" />
-    <script src="./resources/script.js"></script>
+    <script async src="./resources/scripts/script.js"></script>
+    <script async src="./resources/scripts/dates.js"></script>
     <title>FERS Retirement Calculator</title>
   </head>
 
@@ -41,7 +42,7 @@
         <div class="row">
           <section class="personal__info col">
             <div class="container personal">
-              <h2>Personal Info</h2>
+              <h2 id="personalInfo">Personal Info</h2>
               <div class="info">
                 <label for="first-name">First Name:</label>
                 <input type="text" name="first-name" id="first-name" required />
@@ -59,10 +60,10 @@
                 />
               </div>
               <div class="info">
-                <label for="military-service">Military Buy back?</label>
-                <select name="military-service" id="mil-service">
-                  <option value="no">No</option>
-                  <option value="yes">Yes</option>
+                <label for="military-buyback">Military Buy back?</label>
+                <select name="military-buyback" id="milBuyback">
+                  <option value="false">No</option>
+                  <option value="true">Yes</option>
                 </select>
                 <label for="sickLeave">Current Sick Leave Balance:</label>
                 <input
@@ -104,7 +105,7 @@
                 <input
                   type="date"
                   name="retirement-date"
-                  id="retirement-date"
+                  id="retirementDate"
                   required
                 />
               </div>
@@ -113,6 +114,11 @@
                 <input type="date" name="mil-start-date" id="mil-start-date" />
                 <label for="mil-end-date">Military buyback end date:</label>
                 <input type="date" name="mil-end-date" id="mil-end-date" />
+              </div>
+              <div class="dates__container">
+                <button class="dates__btn" type="button" name="datesButton">
+                  Calculate
+                </button>
               </div>
             </div>
           </section>
@@ -124,6 +130,11 @@
                 <input type="text" name="ssa" placeholder="0" />
                 <label for="other-income">Post-Retirement Income:</label>
                 <input type="text" name="other-income" placeholder="0" />
+                <div class="ras__container">
+                  <button class="ras__btn" type="button" name="rasButton">
+                    Calculate
+                  </button>
+                </div>
                 <div class="ras__info">
                   <p class="ras__text">Montly RAS Amount:</p>
                   <p>$x,xxx.xx</p>
