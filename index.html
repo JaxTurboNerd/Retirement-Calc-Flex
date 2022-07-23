@@ -38,49 +38,84 @@
       </div>
     </header>
     <main>
-      <form action="#" method="post">
+      <form action="#" method="post" autocomplete="off">
         <div class="row">
           <section class="personal__info col">
             <div class="container personal">
               <h2 id="personalInfo">Personal Info</h2>
               <div class="info">
                 <label for="first-name">First Name:</label>
-                <input type="text" name="first-name" id="first-name" required />
+                <input
+                  type="text"
+                  name="first-name"
+                  id="firstName"
+                  value=""
+                  placeholder="First"
+                  required
+                />
                 <label for="middle-init">Middle Initial:</label>
-                <input type="text" name="middle-init" id="middle-init" />
+                <input
+                  type="text"
+                  name="middle-init"
+                  id="middleInit"
+                  value=""
+                  placeholder="I"
+                />
                 <label for="last-name">Last Name:</label>
-                <input type="text" name="last-name" id="last-name" required />
+                <input
+                  type="text"
+                  name="last-name"
+                  id="lastName"
+                  value=""
+                  placeholder="Last"
+                  required
+                />
                 <label for="retirement-age">Retirement Age:</label>
                 <input
                   type="number"
                   name="retirement-age"
-                  id="retirement-age"
+                  id="retirementAge"
+                  value=""
                   placeholder="0"
+                  min="0"
+                  max="99"
                   required
                 />
               </div>
               <div class="info">
                 <label for="military-buyback">Military Buy back?</label>
                 <select name="military-buyback" id="milBuyback">
-                  <option value="false">No</option>
+                  <option value="false" selected>No</option>
                   <option value="true">Yes</option>
                 </select>
                 <label for="sickLeave">Current Sick Leave Balance:</label>
-                <input
-                  type="number"
-                  name="sickLeave"
-                  id="sickLeave"
-                  required
-                  placeholder="0"
-                />
+                <span class="sickLeaveHours">
+                  <input
+                    type="number"
+                    name="sickLeave"
+                    id="sickLeave"
+                    value="0"
+                    required
+                    placeholder="0"
+                    min="0"
+                    max="9999"
+                  />
+                  hrs
+                </span>
+
                 <label for="high3">High-3 Average Salary</label>
-                <input
-                  type="number"
-                  name="high3"
-                  id="high3"
-                  required
-                  placeholder="0"
-                />
+                <span class="currency"
+                  >$<input
+                    type="number"
+                    name="high3"
+                    id="high3"
+                    value="0"
+                    required
+                    placeholder="$"
+                    min="0"
+                    max="500000"
+                /></span>
+
                 <label for="sbsa">Spousal Benefit Survivor Annuity:</label>
                 <select name="sbsa" id="percentages-list">
                   <option value="0">0%</option>
@@ -99,6 +134,7 @@
                   type="date"
                   name="enterOnDate"
                   id="enterOnDate"
+                  value=""
                   required
                 />
                 <label for="retirement-date">Retirement Date:</label>
@@ -106,6 +142,7 @@
                   type="date"
                   name="retirement-date"
                   id="retirementDate"
+                  value=""
                   required
                 />
               </div>

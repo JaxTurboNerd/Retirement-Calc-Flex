@@ -80,8 +80,24 @@ input {
   flex-direction: column;
 }
 
+.currency {
+  display: inline-flex;
+}
+
+.sickLeaveHours {
+  display: inline-flex;
+}
+
+#sickLeave {
+  margin-right: 0.2em;
+}
+
+#high3 {
+  margin-left: 0.2em;
+}
+
 .military-dates {
-  /* display: none; */
+  display: none;
 }
 
 .ras__info {
