@@ -5,12 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Gregory Boyd" />
-    <link href="./resources/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <!-- Font imports:-->
     <link rel="stylesheet" href="https://use.typekit.net/joa5aiv.css" />
     <link rel="stylesheet" href="https://use.typekit.net/ycb5qtw.css" />
-    <script async src="./resources/scripts/script.js"></script>
-    <script async src="./resources/scripts/dates.js"></script>
+    <script async src="./scripts/script.js"></script>
+    <!-- <script async src="./scripts/luxon.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
+    -->
+    <script async src="./scripts/dates.js" type="module"></script>
     <title>FERS Retirement Calculator</title>
   </head>
 
@@ -27,7 +30,7 @@
           <nav>
             <ul class="nav-list">
               <li class="list-item">
-                <a href="/resources/tsp.html" target="_blank">TSP Calculator</a>
+                <a href="tsp.html" target="_blank">TSP Calculator</a>
               </li>
               <li class="list-item">
                 <a href="https://www.tsp.gov" target="_blank">TSP Website</a>
