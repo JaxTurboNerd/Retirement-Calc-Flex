@@ -9,11 +9,13 @@
     <!-- Font imports:-->
     <link rel="stylesheet" href="https://use.typekit.net/joa5aiv.css" />
     <link rel="stylesheet" href="https://use.typekit.net/ycb5qtw.css" />
+    <script async src="./scripts/luxon.js"></script>
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script async src="./scripts/script.js"></script>
-    <!-- <script async src="./scripts/luxon.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
-    -->
     <script async src="./scripts/dates.js" type="module"></script>
+    <!-- Use the luxon.js file and not the cdn. works as of now! -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script> -->
+
     <title>FERS Retirement Calculator</title>
   </head>
 
@@ -41,7 +43,7 @@
       </div>
     </header>
     <main>
-      <form action="#" method="post" autocomplete="off">
+      <form id="retirement-form" action="#" method="post" autocomplete="off">
         <div class="row">
           <section class="personal__info col">
             <div class="container personal">
@@ -149,7 +151,7 @@
                   required
                 />
               </div>
-              <div class="info military-dates">
+              <div class="info military-dates display__toggle">
                 <label for="mil-start-date">Military buyback start date:</label>
                 <input
                   type="date"

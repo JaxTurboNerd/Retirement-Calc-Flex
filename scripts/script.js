@@ -6,11 +6,14 @@ let milDateElements = document.querySelector(".military-dates");
 milBuyback.addEventListener("change", (event) => {
   let boughtBack = event.target.value;
   console.log(boughtBack);
-  if (boughtBack) {
-    milDateElements.style.display = "block";
-  } else {
-    milDateElements.style.display = "none";
-  }
+  milDateElements.classList.toggle("display__toggle");
+  // milDateElements.classList.toggle("toggle__display");
+  // if (boughtBack == "true") {
+
+  //   milDateElements.style.display = "block";
+  // } else {
+  //   milDateElements.style.display = "none";
+  // }
 });
 
 //Create array of all the input elements, add evetlistener and style when focused:
@@ -24,4 +27,3 @@ for (let i = 0; i < inputElements.length; i++) {
     e.target.style.backgroundColor = "white";
   });
 }
-

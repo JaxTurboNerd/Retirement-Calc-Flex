@@ -1,3 +1,5 @@
+
+
 //Retirement Dates => calculate total federal service time
 let enterOnDate = document.querySelector("#enterOnDate");
 let retirementDate = document.querySelector("#retirementDate");
@@ -50,7 +52,7 @@ const serviceTime = (date1, date2) => {
   return serviceComputation;
 };
 
-//vanilla js
+//Date formatter - vanilla js
 function formatDate(inputDate) {
   //Must use UTC values to fix being off by one day:
   const workingDate = new Date(inputDate);
