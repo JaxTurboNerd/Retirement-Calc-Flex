@@ -9,13 +9,13 @@
     <!-- Font imports:-->
     <link rel="stylesheet" href="https://use.typekit.net/joa5aiv.css" />
     <link rel="stylesheet" href="https://use.typekit.net/ycb5qtw.css" />
+    <!-- Scripts: -->
     <script async src="./scripts/luxon.js"></script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script async src="./scripts/script.js"></script>
     <script async src="./scripts/dates.js" type="module"></script>
     <!-- Use the luxon.js file and not the cdn. works as of now! -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script> -->
-
     <title>FERS Retirement Calculator</title>
   </head>
 
@@ -43,49 +43,61 @@
       </div>
     </header>
     <main>
-      <form id="retirement-form" action="#" method="post" autocomplete="off">
+      <form id="retirement-form" action="#" method="POST" autocomplete="off">
         <div class="row">
           <section class="personal__info col">
             <div class="container personal">
               <h2 id="personalInfo">Personal Info</h2>
               <div class="info">
-                <label for="first-name">First Name:</label>
-                <input
-                  type="text"
-                  name="first-name"
-                  id="firstName"
-                  value=""
-                  placeholder="First"
-                  required
-                />
-                <label for="middle-init">Middle Initial:</label>
-                <input
-                  type="text"
-                  name="middle-init"
-                  id="middleInit"
-                  value=""
-                  placeholder="I"
-                />
-                <label for="last-name">Last Name:</label>
-                <input
-                  type="text"
-                  name="last-name"
-                  id="lastName"
-                  value=""
-                  placeholder="Last"
-                  required
-                />
-                <label for="retirement-age">Retirement Age:</label>
-                <input
-                  type="number"
-                  name="retirement-age"
-                  id="retirementAge"
-                  value=""
-                  placeholder="0"
-                  min="0"
-                  max="99"
-                  required
-                />
+                <div>
+                  <label for="firstName">First Name:</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    value=""
+                    placeholder="First"
+                    minlength="1"
+                    maxlength="30"
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="middleInit">Middle Initial:</label>
+                  <input
+                    type="text"
+                    name="middleInit"
+                    id="middleInit"
+                    placeholder="I"
+                    minlength="0"
+                    maxlength="1"
+                  />
+                </div>
+                <div>
+                  <label for="lastName">Last Name:</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Last"
+                    required
+                    minlength="1"
+                    maxlength="30"
+                  />
+                </div>
+                <div>
+                  <label for="retirementAge">Retirement Age:</label>
+                  <input
+                    type="number"
+                    name="retirementAge"
+                    id="retirementAge"
+                    placeholder="0"
+                    min="1"
+                    max="99"
+                    value=""
+                    required
+                  />
+                </div>
               </div>
               <div class="info">
                 <label for="military-buyback">Military Buy back?</label>
@@ -93,40 +105,44 @@
                   <option value="false" selected>No</option>
                   <option value="true">Yes</option>
                 </select>
-                <label for="sickLeave">Current Sick Leave Balance:</label>
-                <span class="sickLeaveHours">
-                  <input
-                    type="number"
-                    name="sickLeave"
-                    id="sickLeave"
-                    value="0"
-                    required
-                    placeholder="0"
-                    min="0"
-                    max="9999"
-                  />
-                  hrs
-                </span>
-
-                <label for="high3">High-3 Average Salary</label>
-                <span class="currency"
-                  >$<input
-                    type="number"
-                    name="high3"
-                    id="high3"
-                    value="0"
-                    required
-                    placeholder="$"
-                    min="0"
-                    max="500000"
-                /></span>
-
-                <label for="sbsa">Spousal Benefit Survivor Annuity:</label>
-                <select name="sbsa" id="percentages-list">
-                  <option value="0">0%</option>
-                  <option value="5">5%</option>
-                  <option value="10">10%</option>
-                </select>
+                <div>
+                  <label for="sickLeave">Current Sick Leave Balance:</label>
+                  <span class="sickLeaveHours">
+                    <input
+                      type="number"
+                      name="sickLeave"
+                      id="sickLeave"
+                      value="0"
+                      required
+                      placeholder="0"
+                      min="0"
+                      max="9999"
+                    />
+                    hrs
+                  </span>
+                </div>
+                <div>
+                  <label for="high3">High-3 Average Salary</label>
+                  <span class="currency"
+                    >$<input
+                      type="number"
+                      name="high3"
+                      id="high3"
+                      value=""
+                      required
+                      placeholder="00,000"
+                      min="0"
+                      max="500000"
+                  /></span>
+                </div>
+                <div>
+                  <label for="sbsa">Spousal Benefit Survivor Annuity:</label>
+                  <select name="sbsa" id="percentages-list">
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="10">10%</option>
+                  </select>
+                </div>
               </div>
             </div>
           </section>
@@ -134,22 +150,26 @@
             <div class="container dates">
               <div class="info">
                 <h2>FERS Retirement Dates</h2>
-                <label for="enterOnDate">Enter On Date (EOD):</label>
-                <input
-                  type="date"
-                  name="enterOnDate"
-                  id="enterOnDate"
-                  value=""
-                  required
-                />
-                <label for="retirement-date">Retirement Date:</label>
-                <input
-                  type="date"
-                  name="retirement-date"
-                  id="retirementDate"
-                  value=""
-                  required
-                />
+                <div>
+                  <label for="enterOnDate">Enter On Date (EOD):</label>
+                  <input
+                    type="date"
+                    name="enterOnDate"
+                    id="enterOnDate"
+                    value=""
+                    required
+                  />
+                </div>
+                <div>
+                  <label for="retirementDate">Retirement Date:</label>
+                  <input
+                    type="date"
+                    name="retiremenDate"
+                    id="retirementDate"
+                    value=""
+                    required
+                  />
+                </div>
               </div>
               <div class="info military-dates display__toggle">
                 <label for="mil-start-date">Military buyback start date:</label>
@@ -168,9 +188,10 @@
                 />
               </div>
               <div class="dates__container">
-                <button class="dates__btn" type="button" name="datesButton">
+                <!-- <button class="dates__btn" type="submit" name="datesButton">
                   Calculate
-                </button>
+                </button> -->
+                <input type="submit" value="Form Submit" />
               </div>
             </div>
           </section>
@@ -178,14 +199,35 @@
             <div class="container">
               <div class="info">
                 <h2>Retirement Annuity (RAS)</h2>
-                <label for="ssa">Montly Social Security Benefit: </label>
-                <input type="text" name="ssa" placeholder="0" />
-                <label for="other-income">Post-Retirement Income:</label>
-                <input type="text" name="other-income" placeholder="0" />
+                <div>
+                  <label for="ssa">Montly Social Security Benefit: </label>
+                  <input
+                    type="number"
+                    name="ssa"
+                    placeholder="0"
+                    min="0"
+                    max="99999"
+                    id="ssa"
+                    value=""
+                  />
+                </div>
+                <div>
+                  <label for="otherIncome">Post-Retirement Income:</label>
+                  <input
+                    type="number"
+                    name="otherIncome"
+                    placeholder="0"
+                    id="otherIncome"
+                    min="0"
+                    max="999999"
+                    value=""
+                  />
+                </div>
+
                 <div class="ras__container">
-                  <button class="ras__btn" type="button" name="rasButton">
+                  <!-- <button class="ras__btn" type="button" name="rasButton">
                     Calculate
-                  </button>
+                  </button> -->
                 </div>
                 <div class="ras__info">
                   <p class="ras__text">Montly RAS Amount:</p>
@@ -227,5 +269,8 @@
         </section>
       </form>
     </main>
+    <script>
+      const validate = new window.JustValidate("#retirement-form");
+    </script>
   </body>
 </html>

@@ -1,3 +1,17 @@
+// Just-validate configuration settings:
+const validation = new JustValidate("#retirement-form", {
+  errorFieldCssClass: "is-invalid",
+  successFieldCssClass: "is-valid",
+  errorLabelCssClass: "is-label-invalid",
+  focusInvalidField: "true",
+  lockForm: "true",
+  tooltip: {
+    position: "right",
+  },
+  successMessage: "good job dumb ass!",
+  // errorContainer: ".errors-container",
+});
+
 // Military Buyback value to display/hide Military buyback dates:
 let milBuyback = document.querySelector("#milBuyback");
 let milDateElements = document.querySelector(".military-dates");
@@ -5,15 +19,8 @@ let milDateElements = document.querySelector(".military-dates");
 //Show Military dates if the user selects buyback option "yes"
 milBuyback.addEventListener("change", (event) => {
   let boughtBack = event.target.value;
-  console.log(boughtBack);
+  // console.log(boughtBack);
   milDateElements.classList.toggle("display__toggle");
-  // milDateElements.classList.toggle("toggle__display");
-  // if (boughtBack == "true") {
-
-  //   milDateElements.style.display = "block";
-  // } else {
-  //   milDateElements.style.display = "none";
-  // }
 });
 
 //Create array of all the input elements, add evetlistener and style when focused:
@@ -27,3 +34,98 @@ for (let i = 0; i < inputElements.length; i++) {
     e.target.style.backgroundColor = "white";
   });
 }
+
+//Form Validation:
+validation
+  .addField("#firstName", [
+    {
+      rule: "minLength",
+      value: 1,
+    },
+    {
+      rule: "maxLength",
+      value: 30,
+    },
+    {
+      rule: "required",
+      errorMessage: "First name is required!",
+    },
+  ])
+  .addField("#lastName", [
+    {
+      rule: "minLength",
+      value: 1,
+    },
+    {
+      rule: "maxLength",
+      value: 30,
+    },
+    {
+      rule: "required",
+      errorMessage: "Last name is required!",
+    },
+  ])
+  .addField("#middleInit", [
+    {
+      rule: "minLength",
+      value: 0,
+    },
+    {
+      rule: "maxLength",
+      value: 1,
+    },
+  ])
+  .addField("#retirementAge", [
+    {
+      rule: "required",
+      errorMessage: "Retirement Age is required!",
+    },
+    {
+      rule: "minNumber",
+      value: 1,
+    },
+    {
+      rule: "maxNumber",
+      value: 99,
+    },
+  ])
+  .addField("#sickLeave", [
+    {
+      rule: "required",
+      errorMessage: "Sick Leave balance required for accurate results",
+    },
+    {
+      rule: "minNumber",
+      value: 0,
+    },
+    {
+      rule: "maxNumber",
+      value: 9999,
+    },
+  ])
+  .addField("#high3", [
+    {
+      rule: "required",
+      errorMessage: "High 3 salary requried for accurate results",
+    },
+    {
+      rule: "minNumber",
+      value: 0,
+    },
+    {
+      rule: "maxNumber",
+      value: 500000,
+    },
+  ])
+  .addField("#enterOnDate", [
+    {
+      rule: "required",
+      errorMessage: "Please enter your Enter on Date.",
+    },
+  ])
+  .addField("#retirementDate", [
+    {
+      rule: "required",
+      errorMessage: "Please enter your Retirement Date.",
+    },
+  ]);

@@ -164,3 +164,17 @@ input {
     margin-left: 2rem;
   }
 }
+
+/* Just Validate classes */
+.is-valid {
+  border: 1px solid green;
+}
+
+.is-invalid {
+  border: 1px solid red;
+}
+
+.is-label-invalid {
+  text-decoration: underline;
+  transition: 0.4s;
+}

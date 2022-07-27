@@ -1,5 +1,3 @@
-
-
 //Retirement Dates => calculate total federal service time
 let enterOnDate = document.querySelector("#enterOnDate");
 let retirementDate = document.querySelector("#retirementDate");
@@ -15,6 +13,7 @@ let luxonEndDate;
 enterOnDate.addEventListener("change", () => {
   startDate = formatDate(enterOnDate.value);
   luxonStartDate = luxon.DateTime.fromISO(enterOnDate.value);
+  console.log(luxonStartDate.isValid);
 });
 
 retirementDate.addEventListener("change", () => {
@@ -65,6 +64,8 @@ function formatDate(inputDate) {
 //Luxon Library functions:
 const luxServiceTime = (start, end) => {
   const time = luxon.Interval.fromDateTimes(start, end);
+  //Check for correct before/after order:
+
   const objTime = time.toDuration(["years", "months", "days"]).toObject();
   const stringTime =
     objTime.years +
@@ -75,3 +76,5 @@ const luxServiceTime = (start, end) => {
     " days";
   return stringTime;
 };
+
+//Luxon Validations:
