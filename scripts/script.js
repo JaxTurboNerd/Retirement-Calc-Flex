@@ -8,8 +8,6 @@ const validation = new JustValidate("#retirement-form", {
   tooltip: {
     position: "right",
   },
-  successMessage: "good job dumb ass!",
-  // errorContainer: ".errors-container",
 });
 
 // Military Buyback value to display/hide Military buyback dates:
@@ -129,3 +127,8 @@ validation
       errorMessage: "Please enter your Retirement Date.",
     },
   ]);
+
+const form = document.querySelector("#retirement-form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+});

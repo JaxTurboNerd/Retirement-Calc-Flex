@@ -3,53 +3,31 @@ let enterOnDate = document.querySelector("#enterOnDate");
 let retirementDate = document.querySelector("#retirementDate");
 let milStartDate = document.querySelector("#milStartDate");
 let milEndDate = document.querySelector("#milEndDate");
+let milService = document.querySelector("#milBuyback");
+let datesButton = document.querySelector("#datesBtn");
 
-let startDate;
-let retireDate;
-let retirementDays;
-let luxonStartDate;
-let luxonEndDate;
+//Variables declarations:
+let foundError = false;
 
 enterOnDate.addEventListener("change", () => {
-  startDate = formatDate(enterOnDate.value);
-  luxonStartDate = luxon.DateTime.fromISO(enterOnDate.value);
-  console.log(luxonStartDate.isValid);
+  //check for null and valid date values:
+  checkValidDate(enterOnDate);
 });
 
 retirementDate.addEventListener("change", () => {
-  retireDate = formatDate(retirementDate.value);
-  luxonEndDate = luxon.DateTime.fromISO(retirementDate.value);
-  retirementDays = serviceTime(startDate, retireDate);
-  // console.log(retirementDays);
-  console.log(luxServiceTime(luxonStartDate, luxonEndDate));
+  //check for null and valid date values:
+  checkValidDate(retirementDate);
 });
 
 milStartDate.addEventListener("change", () => {
-  let milStart = formatDate(milStartDate.value);
-  console.log(milStart);
-  //Add other code:
+  // check for null and valid date values
+  checkValidDate(milStartDate);
 });
 
 milEndDate.addEventListener("change", () => {
-  let milEnd = formatDate(milEndDate.value);
-  console.log(milEnd);
-  //add other code:
+  //Check for null and valid date values:
+  checkValidDate(milEndDate);
 });
-
-//Calculate the difference in DAYS between two dates: (vanilla js)
-const serviceTime = (date1, date2) => {
-  const startDate = new Date(date1);
-  const endDate = new Date(date2);
-
-  const timeDifference = endDate.getTime() - startDate.getTime();
-  const totalServiceDays = timeDifference / (1000 * 60 * 60 * 24) + 1;
-  // console.log(totalServiceDays);
-  let years = Math.floor(totalServiceDays / 365);
-  let daysRemainder = totalServiceDays % 365;
-  // console.log("remaining days: " + daysRemainder);
-  let serviceComputation = "years: " + years + " days:" + daysRemainder;
-  return serviceComputation;
-};
 
 //Date formatter - vanilla js
 function formatDate(inputDate) {
@@ -61,12 +39,59 @@ function formatDate(inputDate) {
   return month + "/" + day + "/" + year;
 }
 
-//Luxon Library functions:
-const luxServiceTime = (start, end) => {
-  const time = luxon.Interval.fromDateTimes(start, end);
-  //Check for correct before/after order:
+//vanilla js
+function showError(input, message) {
+  const formControl = input.parentElement;
+  formControl.className = "form-control error";
+  input.nextElementSibling.innerText = message;
+}
 
-  const objTime = time.toDuration(["years", "months", "days"]).toObject();
+//vanill js
+function resetClass(input) {
+  const formControl = input.parentElement;
+  formControl.className = "form-control";
+}
+
+//LUXON-Library functions:
+
+//Check for a valid date:
+function checkValidDate(date) {
+  const workingDate = luxon.DateTime.fromISO(date.value);
+  if (!workingDate.isValid) {
+    foundError = true;
+    showError(date, "Please enter a valid date!");
+    return;
+  } else {
+    foundError = false;
+    resetClass(date);
+  }
+}
+
+//function to calculate total service time in years/months/days
+//also checks the start/end dates are in correct order as input by
+//the user
+const calculateTime = (start, end) => {
+  //create DateTime instances from ISO values:
+  const startDate = luxon.DateTime.fromISO(start.value);
+  const endDate = luxon.DateTime.fromISO(end.value);
+  //create Interval instance from the DateTime instances:
+  const serviceTime = luxon.Interval.fromDateTimes(startDate, endDate);
+
+  // Check for proper date order using invalid method:
+  if (!serviceTime.isValid) {
+    const reason = serviceTime.invalidReason;
+    showError(
+      end,
+      "Please check your dates.  The end date cannot be before your start date"
+    );
+    // console.log("invalid reason: " + reason);
+    return;
+  } else {
+    resetClass(end);
+  }
+  const objTime = serviceTime
+    .toDuration(["years", "months", "days"])
+    .toObject();
   const stringTime =
     objTime.years +
     " years, " +
@@ -74,7 +99,31 @@ const luxServiceTime = (start, end) => {
     " months, " +
     (objTime.days + 1) +
     " days";
+  console.log(stringTime);
   return stringTime;
 };
 
-//Luxon Validations:
+datesButton.addEventListener("click", () => {
+  //check for valid (including null values) start and end dates:
+  checkValidDate(enterOnDate);
+  if (!foundError) {
+    checkValidDate(retirementDate);
+  }
+
+  //Check for nul military dates only if the user selected buyback = 'yes'
+  if (milService.value === "true") {
+    checkValidDate(milStartDate);
+    if (!foundError) {
+      checkValidDate(milEndDate);
+    }
+    if (!foundError) {
+      //check proper dates order and calculates total service time
+      calculateTime(milStartDate, milEndDate);
+    }
+  }
+
+  //check proper dates order and calculates total service time
+  if (!foundError) {
+    calculateTime(enterOnDate, retirementDate);
+  }
+});

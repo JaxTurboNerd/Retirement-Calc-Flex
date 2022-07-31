@@ -14,7 +14,7 @@
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script async src="./scripts/script.js"></script>
     <script async src="./scripts/dates.js" type="module"></script>
-    <!-- Use the luxon.js file and not the cdn. works as of now! -->
+    <!-- Use the luxon.js file and not the cdn. -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script> -->
     <title>FERS Retirement Calculator</title>
   </head>
@@ -148,9 +148,9 @@
           </section>
           <section class="dates-info col">
             <div class="container dates">
-              <div class="info">
+              <div class="dates-info">
                 <h2>FERS Retirement Dates</h2>
-                <div>
+                <div class="form-control">
                   <label for="enterOnDate">Enter On Date (EOD):</label>
                   <input
                     type="date"
@@ -159,8 +159,9 @@
                     value=""
                     required
                   />
+                  <small>Error Message</small>
                 </div>
-                <div>
+                <div class="form-control">
                   <label for="retirementDate">Retirement Date:</label>
                   <input
                     type="date"
@@ -169,29 +170,47 @@
                     value=""
                     required
                   />
+                  <small>Error Message</small>
                 </div>
               </div>
               <div class="info military-dates display__toggle">
-                <label for="mil-start-date">Military buyback start date:</label>
-                <input
-                  type="date"
-                  name="mil-start-date"
-                  id="milStartDate"
-                  value=""
-                />
-                <label for="mil-end-date">Military buyback end date:</label>
-                <input
-                  type="date"
-                  name="mil-end-date"
-                  id="milEndDate"
-                  value=""
-                />
+                <div class="form-control">
+                  <label for="mil-start-date"
+                    >Military buyback start date:</label
+                  >
+                  <input
+                    type="date"
+                    name="mil-start-date"
+                    id="milStartDate"
+                    value=""
+                  />
+                  <small>Error Message</small>
+                </div>
+                <div class="form-control">
+                  <label for="mil-end-date">Military buyback end date:</label>
+                  <input
+                    type="date"
+                    name="mil-end-date"
+                    id="milEndDate"
+                    value=""
+                  />
+                  <small>Error Message</small>
+                </div>
               </div>
               <div class="dates__container">
-                <!-- <button class="dates__btn" type="submit" name="datesButton">
-                  Calculate
-                </button> -->
-                <input type="submit" value="Form Submit" />
+                <button
+                  type="button"
+                  class="dates__btn"
+                  name="datesButton"
+                  id="datesBtn"
+                >
+                  Calculate Dates
+                </button>
+                <input
+                  type="submit"
+                  value="Form Submit"
+                  style="margin: 2em auto"
+                />
               </div>
             </div>
           </section>
@@ -223,11 +242,10 @@
                     value=""
                   />
                 </div>
-
                 <div class="ras__container">
-                  <!-- <button class="ras__btn" type="button" name="rasButton">
+                  <button class="ras__btn" type="button" name="rasButton">
                     Calculate
-                  </button> -->
+                  </button>
                 </div>
                 <div class="ras__info">
                   <p class="ras__text">Montly RAS Amount:</p>
@@ -271,6 +289,7 @@
     </main>
     <script>
       const validate = new window.JustValidate("#retirement-form");
+      const validDate = window.JustValidatePluginDate;
     </script>
   </body>
 </html>

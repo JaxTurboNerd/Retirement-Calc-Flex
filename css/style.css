@@ -70,6 +70,31 @@ hr {
   margin: 0 auto 0.75rem;
 }
 
+.dates-info input {
+  margin: 0 auto;
+}
+
+.form-control {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.form-control small {
+  /* position: absolute;
+  bottom: 1em;
+  left: 17em; */
+  visibility: hidden;
+}
+
+.form-control.error input {
+  border-color: red;
+}
+
+.form-control.error small {
+  color: red;
+  visibility: visible;
+}
+
 .col {
   width: 100%;
 }
