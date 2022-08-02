@@ -37,6 +37,10 @@ hr {
   margin-bottom: 0.7rem;
 }
 
+button {
+  padding: 0.2em;
+}
+
 .nav-list {
   list-style-type: none;
 }

@@ -5,9 +5,17 @@ let milStartDate = document.querySelector("#milStartDate");
 let milEndDate = document.querySelector("#milEndDate");
 let milService = document.querySelector("#milBuyback");
 let datesButton = document.querySelector("#datesBtn");
+let federalTime = document.querySelector(".federal-time");
+let federalPercent = document.querySelector(".federal-percent");
+let militaryTime = document.querySelector(".mil__time__results");
+let totalServiceTime = document.querySelector(".total__time");
 
 //Variables declarations:
 let foundError = false;
+let computedFedTime = "";
+let computedMilitaryTime = "";
+let computedTotalTime = "";
+let computedFedPercent = "";
 
 enterOnDate.addEventListener("change", () => {
   //check for null and valid date values:
@@ -68,8 +76,7 @@ function checkValidDate(date) {
 }
 
 //function to calculate total service time in years/months/days
-//also checks the start/end dates are in correct order as input by
-//the user
+//also checks the start/end dates are in correct order
 const calculateTime = (start, end) => {
   //create DateTime instances from ISO values:
   const startDate = luxon.DateTime.fromISO(start.value);
@@ -79,7 +86,7 @@ const calculateTime = (start, end) => {
 
   // Check for proper date order using invalid method:
   if (!serviceTime.isValid) {
-    const reason = serviceTime.invalidReason;
+    // const reason = serviceTime.invalidReason;
     showError(
       end,
       "Please check your dates.  The end date cannot be before your start date"
@@ -89,18 +96,46 @@ const calculateTime = (start, end) => {
   } else {
     resetClass(end);
   }
-  const objTime = serviceTime
+  const duration = serviceTime
     .toDuration(["years", "months", "days"])
     .toObject();
   const stringTime =
-    objTime.years +
+    duration.years +
     " years, " +
-    objTime.months +
+    duration.months +
     " months, " +
-    (objTime.days + 1) +
+    (duration.days + 1) +
     " days";
-  console.log(stringTime);
+  // console.log(stringTime);
   return stringTime;
+};
+
+//function that calculates the total service time when both Federal and
+//military dates have been supplied. Uses Luxon Duration
+const calculateCombinedTime = (fedStart, fedEnd, milStart, milEnd) => {
+  const fedStartDate = luxon.DateTime.fromISO(fedStart.value);
+  const fedEndDate = luxon.DateTime.fromISO(fedEnd.value);
+  const milStartDate = luxon.DateTime.fromISO(milStart.value);
+  const milEndDate = luxon.DateTime.fromISO(milEnd.value);
+  //create Duration Object periods for both fedaral and military times:
+  const federalObject = luxon.Interval.fromDateTimes(fedStartDate, fedEndDate)
+    .toDuration(["years", "months", "days"])
+    .toObject();
+  const militaryObject = luxon.Interval.fromDateTimes(milStartDate, milEndDate)
+    .toDuration(["years", "months", "days"])
+    .toObject();
+  const federalDuration = luxon.Duration.fromObject(federalObject);
+  const militaryDuration = luxon.Duration.fromObject(militaryObject);
+  //add the duration objects to get a total service time:
+  const totalServiceTime = federalDuration.plus(militaryDuration);
+  //Normalize the duration so there are no values of days > 30, months > 12, etc:
+  const normalizedObject =
+    luxon.Duration.fromDurationLike(totalServiceTime).toObject();
+  const normalizedTime = luxon.Duration.fromObject(normalizedObject)
+    .normalize()
+    .toObject();
+  //String Output:
+  return luxon.Duration.fromObject(normalizedTime).toHuman();
 };
 
 datesButton.addEventListener("click", () => {
@@ -118,12 +153,21 @@ datesButton.addEventListener("click", () => {
     }
     if (!foundError) {
       //check proper dates order and calculates total service time
-      calculateTime(milStartDate, milEndDate);
+      federalTime.innerHTML = calculateTime(enterOnDate, retirementDate);
+      militaryTime.innerHTML = calculateTime(milStartDate, milEndDate);
+      totalServiceTime.innerHTML = calculateCombinedTime(
+        enterOnDate,
+        retirementDate,
+        milStartDate,
+        milEndDate
+      );
     }
-  }
-
-  //check proper dates order and calculates total service time
-  if (!foundError) {
-    calculateTime(enterOnDate, retirementDate);
+  } else {
+    //check proper dates order and calculate total service time
+    if (!foundError) {
+      computedFedTime = calculateTime(enterOnDate, retirementDate);
+      federalTime.innerHTML = computedFedTime;
+      totalServiceTime.innerHTML = computedFedTime;
+    }
   }
 });

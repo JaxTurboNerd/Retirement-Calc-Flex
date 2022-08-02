@@ -13,12 +13,12 @@ const validation = new JustValidate("#retirement-form", {
 // Military Buyback value to display/hide Military buyback dates:
 let milBuyback = document.querySelector("#milBuyback");
 let milDateElements = document.querySelector(".military-dates");
+let militaryServiceTime = document.querySelector(".military__results");
 
 //Show Military dates if the user selects buyback option "yes"
 milBuyback.addEventListener("change", (event) => {
-  let boughtBack = event.target.value;
-  // console.log(boughtBack);
   milDateElements.classList.toggle("display__toggle");
+  militaryServiceTime.classList.toggle("display__toggle");
 });
 
 //Create array of all the input elements, add evetlistener and style when focused:

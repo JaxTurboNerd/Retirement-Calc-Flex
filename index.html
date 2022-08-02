@@ -12,8 +12,8 @@
     <!-- Scripts: -->
     <script async src="./scripts/luxon.js"></script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-    <script async src="./scripts/script.js"></script>
-    <script async src="./scripts/dates.js" type="module"></script>
+    <script defer src="./scripts/script.js"></script>
+    <script defer src="./scripts/dates.js" type="module"></script>
     <!-- Use the luxon.js file and not the cdn. -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script> -->
     <title>FERS Retirement Calculator</title>
@@ -204,7 +204,7 @@
                   name="datesButton"
                   id="datesBtn"
                 >
-                  Calculate Dates
+                  Calculate Time
                 </button>
                 <input
                   type="submit"
@@ -264,13 +264,21 @@
             <h2>Results:</h2>
             <div class="info results">
               <div class="service-items" id="total-time">
-                <h3>Total SCE Service Time:</h3>
-                <p class="results__info">XX Years and XX Months</p>
+                <h3>Total Service Time:</h3>
+                <p class="results__info total__time">XX Years and XX Months</p>
+                <h4>Federal</h4>
+                <p class="results__info federal-time">XX Years and XX Months</p>
+                <div class="military__results display__toggle">
+                  <h4>Military</h4>
+                  <p class="results__info mil__time__results">
+                    XX Years and XX Months
+                  </p>
+                </div>
                 <hr />
               </div>
               <div class="service-items" id="service-percent">
-                <h3>Total years of service:</h3>
-                <p class="results__info">XX.X %</p>
+                <h3>Total Service Percent:</h3>
+                <p class="results__info federal-percent">XX.X %</p>
                 <hr />
               </div>
               <div class="service-items" id="annuity-percent">
