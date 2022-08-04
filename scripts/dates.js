@@ -14,9 +14,8 @@ let sickLeave = document.querySelector("#sickLeave");
 //Variables declarations:
 let foundError = false;
 let computedFedTime = "";
-let computedMilitaryTime = "";
-let finalServiceTime;
-// let computedTotalTime = "";
+let federalDuration;
+let militaryDuration;
 let computedFedPercent = "";
 
 enterOnDate.addEventListener("change", () => {
@@ -78,13 +77,13 @@ function checkValidDate(date) {
 
 //function to calculate total service time in years/months/days
 //also checks the start/end dates are in correct order
-const calculateTime = (start, end, leave) => {
+const calculateTime = (start, end, isMilitaryTime) => {
   //sick leave balance conversion:
-  let additionalDays;
-  if (leave.value < 6) {
-    leave.value = 0;
+  let additionalDays = 0;
+  if (sickLeave.value < 6) {
+    additionalDays = 0;
   } else {
-    additionalDays = Math.round(leave.value / 5.8);
+    additionalDays = Math.round(sickLeave.value / 5.8);
   }
   //create DateTime instances from ISO values:
   const startDate = luxon.DateTime.fromISO(start.value);
@@ -105,13 +104,22 @@ const calculateTime = (start, end, leave) => {
     resetClass(end);
   }
 
-  const serviceTimeObj = serviceTime
+  const timeObj = serviceTime
     .toDuration(["years", "months", "days"])
     .toObject();
+
   // Cast to duration:
-  const federalDuration = luxon.Duration.fromObject(serviceTimeObj);
+  let totalDuration;
+  //Add one day to the duration to make the dates inclusive
+  const duration = luxon.Duration.fromObject(timeObj).plus({ days: 1 });
   const leaveDuration = luxon.Duration.fromObject({ days: additionalDays });
-  const totalDuration = federalDuration.plus(leaveDuration);
+  if (isMilitaryTime) {
+    totalDuration = duration;
+    militaryDuration = duration;
+  } else {
+    totalDuration = duration.plus(leaveDuration);
+    federalDuration = totalDuration;
+  }
 
   //Normalize the durations:
   const normalizedObject =
@@ -121,45 +129,23 @@ const calculateTime = (start, end, leave) => {
     .toObject();
 
   //return the final output:
-  finalServiceTime = luxon.Duration.fromObject(normalizedTime).toHuman();
-  return finalServiceTime;
+  return luxon.Duration.fromObject(normalizedTime).toHuman();
 };
 
 //function that calculates the total service time when both Federal and
-//military dates have been supplied. Uses Luxon Duration
-const calculateCombinedTime = (fedStart, fedEnd, milStart, milEnd, leave) => {
-  const fedStartDate = luxon.DateTime.fromISO(fedStart.value);
-  const fedEndDate = luxon.DateTime.fromISO(fedEnd.value);
-  const milStartDate = luxon.DateTime.fromISO(milStart.value);
-  const milEndDate = luxon.DateTime.fromISO(milEnd.value);
-  const additionalDays = Math.ceil(leave.value / 5.8);
-
-  //create Duration Object periods for both fedaral,  military and sick leave times:
-  const federalObject = luxon.Interval.fromDateTimes(fedStartDate, fedEndDate)
-    .toDuration(["years", "months", "days"])
-    .toObject();
-  const militaryObject = luxon.Interval.fromDateTimes(milStartDate, milEndDate)
-    .toDuration(["years", "months", "days"])
-    .toObject();
-  const federalDuration = luxon.Duration.fromObject(federalObject);
-  const militaryDuration = luxon.Duration.fromObject(militaryObject);
-  const leaveDuration = luxon.Duration.fromObject({ days: additionalDays });
-
+//military dates have been supplied.
+const combinedTime = () => {
   //add the duration objects to get a total service time:
-  const totalServiceTime = federalDuration
-    .plus(militaryDuration)
-    .plus(leaveDuration);
-  //add the additional days from S/L conversion
-  // totalServiceTime = totalServiceTime.plus(leaveDuration);
+  const totalDuration = federalDuration.plus(militaryDuration);
+
   //Normalize the duration so there are no values of days > 30, months > 12, etc:
   const normalizedObject =
-    luxon.Duration.fromDurationLike(totalServiceTime).toObject();
+    luxon.Duration.fromDurationLike(totalDuration).toObject();
   const normalizedTime = luxon.Duration.fromObject(normalizedObject)
     .normalize()
     .toObject();
   //String Output:
-  finalServiceTime = luxon.Duration.fromObject(normalizedTime).toHuman();
-  return finalServiceTime;
+  return luxon.Duration.fromObject(normalizedTime).toHuman();
 };
 
 datesButton.addEventListener("click", () => {
@@ -177,23 +163,16 @@ datesButton.addEventListener("click", () => {
     }
     if (!foundError) {
       //check proper dates order and calculates total service time
-      federalTime.innerHTML = calculateTime(enterOnDate, retirementDate);
-      militaryTime.innerHTML = calculateTime(milStartDate, milEndDate);
-      totalServiceTime.innerHTML = calculateCombinedTime(
-        enterOnDate,
-        retirementDate,
-        milStartDate,
-        milEndDate,
-        sickLeave
-      );
+      federalTime.innerHTML = calculateTime(enterOnDate, retirementDate, false);
+      militaryTime.innerHTML = calculateTime(milStartDate, milEndDate, true);
+      totalServiceTime.innerHTML = combinedTime();
     }
   } else {
     //check proper dates order and calculate total service time
     if (!foundError) {
-      computedFedTime = calculateTime(enterOnDate, retirementDate, sickLeave);
+      computedFedTime = calculateTime(enterOnDate, retirementDate, false);
       federalTime.innerHTML = computedFedTime;
       totalServiceTime.innerHTML = computedFedTime;
     }
   }
 });
-export { calculateTime, calculateCombinedTime };
