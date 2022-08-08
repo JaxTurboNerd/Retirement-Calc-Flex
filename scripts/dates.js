@@ -6,17 +6,18 @@ let milEndDate = document.querySelector("#milEndDate");
 let milService = document.querySelector("#milBuyback");
 let datesButton = document.querySelector("#datesBtn");
 let federalTime = document.querySelector(".federal-time");
-let federalPercent = document.querySelector(".federal-percent");
+let annuityPercent = document.querySelector(".total-percent");
 let militaryTime = document.querySelector(".mil__time__results");
 let totalServiceTime = document.querySelector(".total__time");
 let sickLeave = document.querySelector("#sickLeave");
 
 //Variables declarations:
 let foundError = false;
-let computedFedTime = "";
+let fedServiceTime;
+let milServiceTime;
 let federalDuration;
 let militaryDuration;
-let computedFedPercent = "";
+let servicePercent;
 
 enterOnDate.addEventListener("change", () => {
   //check for null and valid date values:
@@ -107,12 +108,12 @@ const calculateTime = (start, end, isMilitaryTime) => {
   const timeObj = serviceTime
     .toDuration(["years", "months", "days"])
     .toObject();
-
   // Cast to duration:
   let totalDuration;
   //Add one day to the duration to make the dates inclusive
   const duration = luxon.Duration.fromObject(timeObj).plus({ days: 1 });
   const leaveDuration = luxon.Duration.fromObject({ days: additionalDays });
+
   if (isMilitaryTime) {
     totalDuration = duration;
     militaryDuration = duration;
@@ -127,7 +128,6 @@ const calculateTime = (start, end, isMilitaryTime) => {
   const normalizedTime = luxon.Duration.fromObject(normalizedObject)
     .normalize()
     .toObject();
-
   //return the final output:
   return luxon.Duration.fromObject(normalizedTime).toHuman();
 };
@@ -148,6 +148,47 @@ const combinedTime = () => {
   return luxon.Duration.fromObject(normalizedTime).toHuman();
 };
 
+const servicePercentage = () => {
+  const fedTimeObj =
+    luxon.Duration.fromDurationLike(federalDuration).toObject();
+  const fedNormalizedTime = luxon.Duration.fromObject(fedTimeObj)
+    .normalize()
+    .toObject();
+  const federalYears = fedNormalizedTime.years;
+  const federalMonths = fedNormalizedTime.months;
+  let milYears = 0;
+  let milMonths = 0;
+  let fedPercent = 0;
+  let milPercent = 0;
+  let totalPercent = 0;
+
+  if (milService.value === "true") {
+    const milTimeObj =
+      luxon.Duration.fromDurationLike(militaryDuration).toObject();
+    const milNormalizedTime = luxon.Duration.fromObject(milTimeObj)
+      .normalize()
+      .toObject();
+    milYears = milNormalizedTime.years;
+    milMonths = milNormalizedTime.months;
+  }
+  //1.7% for the first 20 years(unless served less than 20 years). 1% for every year over 20
+  //Check SCE employee has MORE than 20 years service, ie, 1.7% category
+  if (federalYears < 20) {
+    fedPercent = federalYears * 1.0 + (federalMonths / 12) * 1.0;
+  } else {
+    //need to set values so any time over 20 years is now calculated at 1% and not 1.7%
+    const excessYears = federalYears - 20;
+    fedPercent = 34.0 + excessYears + federalMonths / 12;
+  }
+
+  //Add any military time @ 1% per year
+  milPercent = milYears * 1.0 + (milMonths / 12) * 1.0;
+  totalPercent = fedPercent + milPercent;
+  return totalPercent.toFixed(2);
+};
+
+const totalAnnuity = () => {};
+
 datesButton.addEventListener("click", () => {
   //check for valid (including null values) start and end dates:
   checkValidDate(enterOnDate);
@@ -163,16 +204,20 @@ datesButton.addEventListener("click", () => {
     }
     if (!foundError) {
       //check proper dates order and calculates total service time
-      federalTime.innerHTML = calculateTime(enterOnDate, retirementDate, false);
-      militaryTime.innerHTML = calculateTime(milStartDate, milEndDate, true);
+      fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
+      milServiceTime = calculateTime(milStartDate, milEndDate, true);
+      federalTime.innerHTML = fedServiceTime;
+      militaryTime.innerHTML = milServiceTime;
       totalServiceTime.innerHTML = combinedTime();
     }
   } else {
     //check proper dates order and calculate total service time
     if (!foundError) {
-      computedFedTime = calculateTime(enterOnDate, retirementDate, false);
-      federalTime.innerHTML = computedFedTime;
-      totalServiceTime.innerHTML = computedFedTime;
+      fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
+      federalTime.innerHTML = fedServiceTime;
+      totalServiceTime.innerHTML = fedServiceTime;
     }
   }
+
+  annuityPercent.innerHTML = servicePercentage();
 });
