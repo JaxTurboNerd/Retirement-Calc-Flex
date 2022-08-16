@@ -136,10 +136,10 @@
                 </div>
                 <div>
                   <label for="sbsa">Spousal Benefit Survivor Annuity:</label>
-                  <select name="sbsa" id="percentages-list">
+                  <select name="sbsa" id="survivor-benefit">
                     <option value="0">0%</option>
-                    <option value="5">5%</option>
-                    <option value="10">10%</option>
+                    <option value="0.05">5%</option>
+                    <option value="0.10">10%</option>
                   </select>
                 </div>
               </div>
@@ -219,6 +219,7 @@
                 <h2>Retirement Annuity (RAS)</h2>
                 <div>
                   <label for="ssa">Montly Social Security Benefit: </label>
+                  <p style="font-style: italic">(page 2 of SSA statement)</p>
                   <input
                     type="number"
                     name="ssa"
@@ -248,11 +249,11 @@
                 </div>
                 <div class="ras__info">
                   <p class="ras__text">Montly RAS Amount:</p>
-                  <p>$x,xxx.xx</p>
+                  <p class="rasMonthly">$x,xxx.xx</p>
                 </div>
                 <div class="ras__info">
                   <p class="ras__text">Annual RAS amount:</p>
-                  <p>$x,xxx.xx</p>
+                  <p class="rasAnnual">$x,xxx.xx</p>
                 </div>
               </div>
             </div>
@@ -285,9 +286,9 @@
                 <p class="results__info total-percent">XX.X%</p>
                 <hr />
               </div>
-              <div class="service-items" id="annuity-amount">
+              <div class="service-items">
                 <h3>Total Estimated Annuity:</h3>
-                <p class="results__info">$XX,XXX</p> 
+                <p class="results__info annuity-amount">$XX,XXX</p>
               </div>
             </div>
           </div>

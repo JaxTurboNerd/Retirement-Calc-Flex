@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/resources/css/style.css" />
-    <script src="/resources/script/script.js"></script>
+    <link rel="stylesheet" href="/css/tsp.css" type="text/css" />
+    <!-- Scripts: -->
+    <script src="./scripts/finance.js"></script>
     <title>TSP</title>
   </head>
   <body class="tsp__body">
@@ -19,33 +20,66 @@
         <h2>Thrift Savings Plan (TSP) Calculator</h2>
         <div class="container info">
           <h3>TSP Future Value Calculator</h3>
-          <label for="pay-period">Pay Period Contributions:</label>
-          <input type="text" name="pay-period" placeholder="0" />
-          <label for="return-rate">Annual Rate of Return:</label>
-          <input type="text" name="return-rate" placeholder="0.0" />
+          <div>
+            <label for="tsp-balance">Current TSP Balance:</label>
+            <input type="text" name="tsp-balance" placeholder="0" />
+          </div>
+          <div>
+            <label for="pay-period">Pay Period Contributions:</label>
+            <input type="text" name="pay-period" placeholder="0" />
+          </div>
+          <div>
+            <label for="return-rate"
+              ><span class="italicized">Estimated</span> Annual Rate of
+              Return:</label
+            >
+            <input type="text" name="return-rate" placeholder="0.0" />
+          </div>
         </div>
         <div class="container">
           <h3>Post-retirement TSP Income</h3>
           <div class="info">
-            <label for="retirement-balance">TSP Balance at Retirement:</label>
-            <input type="text" name="retirement-balance" placeholder="0" />
+            <div>
+              <label for="retirement-balance">TSP Balance at Retirement:</label>
+              <input type="text" name="retirement-balance" placeholder="0" />
+            </div>
+            <div>
+              <label for="withdrawl">One Time Withdrawl Amount:</label>
+              <input type="text" name="withdrawl" placeholder="0" />
+            </div>
+            <div>
+              <label for="withdrawl-age"> One-Time Withdrawl Age:</label>
+              <input type="text" name="withdrawl-age" placeholder="0" />
+            </div>
+            <div>
+              <label for="annual-withdrawl-age"
+                >Age to start Annual Withdrawls:</label
+              >
+              <input type="text" name="annual-withdrawl-age" placeholder="0" />
+            </div>
 
-            <label for="withdrawl">One Time Withdrawl Amount:</label>
-            <input type="text" name="withdrawl" placeholder="0" />
-
-            <label for="withdrawl-age"> One-Time Withdrawl Age:</label>
-            <input type="text" name="withdrawl-age" placeholder="0" />
-
-            <label for="annual-withdrawl-age"
-              >Age to start Annual Withdrawls:</label
-            >
-            <input type="text" name="annual-withdrawl-age" placeholder="0" />
-
-            <label for="post-return-rate">Annual Rate of Return</label>
-            <input type="text" name="post-return-rate" placeholder="0.0" />
+            <div>
+              <label for="post-return-rate">Annual Rate of Return</label>
+              <input type="text" name="post-return-rate" placeholder="0.0" />
+            </div>
           </div>
         </div>
       </div>
     </section>
+    <section class="display__market">
+      <p class="market__data">
+        <span style="display: block">Current Market Data:</span>
+        <span class="market__info" id="sp500"></span>
+        <span class="market__info" id="djia"></span>
+        <span class="market__info" id="nasdaq"></span>
+        <span class="market__info" id="russell"></span>
+      </p>
+    </section>
+    <!-- <section class="marquee">
+      <div class="marquee-container">
+        <hr />
+        <p class="marquee-content">Hello Sample data</p>
+      </div>
+    </section> -->
   </body>
 </html>

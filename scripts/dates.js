@@ -7,9 +7,16 @@ let milService = document.querySelector("#milBuyback");
 let datesButton = document.querySelector("#datesBtn");
 let federalTime = document.querySelector(".federal-time");
 let annuityPercent = document.querySelector(".total-percent");
+let annuityAmount = document.querySelector(".annuity-amount");
 let militaryTime = document.querySelector(".mil__time__results");
 let totalServiceTime = document.querySelector(".total__time");
 let sickLeave = document.querySelector("#sickLeave");
+let survivorBenefit = document.querySelector("#survivor-benefit");
+let highThree = document.querySelector("#high3");
+let ssa = document.querySelector("#ssa");
+let postRetirmentIncome = document.querySelector("#otherIncome");
+let monthlyRAS = document.querySelector(".rasMonthly");
+let annualRAS = document.querySelector(".rasAnnual");
 
 //Variables declarations:
 let foundError = false;
@@ -18,6 +25,21 @@ let milServiceTime;
 let federalDuration;
 let militaryDuration;
 let servicePercent;
+let finalAnnuity;
+let rasMonthly;
+let rasAnnual;
+
+//Number formatting:
+let usCurrency = Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
+let percentFormat = Intl.NumberFormat("en-US", {
+  style: "percent",
+  maximumFractionDigits: 2,
+  roundingIncrement: 1,
+});
 
 enterOnDate.addEventListener("change", () => {
   //check for null and valid date values:
@@ -182,12 +204,31 @@ const servicePercentage = () => {
   }
 
   //Add any military time @ 1% per year
-  milPercent = milYears * 1.0 + (milMonths / 12) * 1.0;
+  milPercent = milYears + milMonths / 12;
   totalPercent = fedPercent + milPercent;
-  return totalPercent.toFixed(2);
+  servicePercent = totalPercent.toFixed(2);
+  return percentFormat.format(servicePercent * 0.01);
 };
 
-const totalAnnuity = () => {};
+const totalAnnuity = (salary, survivorBenefit) => {
+  finalAnnuity = salary.value * (servicePercent * 0.01);
+  finalAnnuity = finalAnnuity - finalAnnuity * survivorBenefit.value;
+  return usCurrency.format(finalAnnuity);
+};
+
+const calculateRAS = () => {
+  const fedTimeObj =
+    luxon.Duration.fromDurationLike(federalDuration).toObject();
+  const fedNormalizedTime = luxon.Duration.fromObject(fedTimeObj)
+    .normalize()
+    .toObject();
+  const federalYears = fedNormalizedTime.years;
+  const federalMonths = fedNormalizedTime.months;
+
+  let rasFactor = Math.round(federalYears + federalMonths / 12) / 40;
+  rasMonthly = usCurrency.format(ssa.value * rasFactor);
+  rasAnnual = usCurrency.format(ssa.value * rasFactor * 12);
+};
 
 datesButton.addEventListener("click", () => {
   //check for valid (including null values) start and end dates:
@@ -220,4 +261,8 @@ datesButton.addEventListener("click", () => {
   }
 
   annuityPercent.innerHTML = servicePercentage();
+  annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
+  calculateRAS();
+  monthlyRAS.innerHTML = rasMonthly;
+  annualRAS.innerHTML = rasAnnual;
 });
