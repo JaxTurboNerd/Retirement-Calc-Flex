@@ -1,4 +1,4 @@
-import { googleAPIKey, yahooAPIKey } from "..config/";
+import { googleAPIKey, yahooAPIKey } from "../config.js";
 
 //Number(Currency) formatting:
 let usCurrency = Intl.NumberFormat("en-US", {
