@@ -29,6 +29,13 @@ input {
   margin: 0 auto 0.75em;
 }
 
+.dollar-sign {
+  display: inline-flex;
+}
+
+#payPeriods {
+  margin-left: 0.5em;
+}
 .italicized {
   font-style: italic;
   font-weight: 600;

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/tsp.css" type="text/css" />
     <!-- Scripts: -->
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script src="./scripts/finance.js" type="module"></script>
     <title>TSP</title>
   </head>
@@ -16,26 +17,78 @@
       </nav>
     </header> -->
     <section class="tsp__section">
-      <div class="container tsp__outer-container">
-        <h2>Thrift Savings Plan (TSP) Calculator</h2>
-        <div class="container info">
-          <h3>TSP Future Value Calculator</h3>
-          <div>
-            <label for="tsp-balance">Current TSP Balance:</label>
-            <input type="text" name="tsp-balance" placeholder="0" />
-          </div>
-          <div>
-            <label for="pay-period">Pay Period Contributions:</label>
-            <input type="text" name="pay-period" placeholder="0" />
-          </div>
-          <div>
-            <label for="return-rate"
-              ><span class="italicized">Estimated</span> Annual Rate of
-              Return:</label
-            >
-            <input type="text" name="return-rate" placeholder="0.0" />
+      <div class="container">
+        <div class="container">
+          <form action="#" id="futureValue" method="POST" autocomplete="off">
+            <h2>Thrift Savings Plan (TSP) Calculator</h2>
+            <div class="container info">
+              <h3>TSP Future Value Calculator</h3>
+              <div>
+                <label for="tsp-balance">Current TSP Balance:</label>
+                <input
+                  type="text"
+                  name="tsp-balance"
+                  id="tspBalance"
+                  placeholder="0"
+                  value=""
+                  required
+                  min="0"
+                  max="99000000"
+                />
+              </div>
+              <div>
+                <label for="pay-period">Pay Period Contributions:</label>
+                <span class="dollar-sign"
+                  >$
+                  <input
+                    type="text"
+                    name="pay-period"
+                    id="payPeriods"
+                    placeholder="0"
+                    value=""
+                    required
+                    min="0"
+                    max="25000"
+                  />
+                </span>
+              </div>
+              <div>
+                <label for="return-rate"
+                  ><span class="italicized">Estimated</span> Annual Rate of
+                  Return:</label
+                >
+                <input
+                  type="text"
+                  name="return-rate"
+                  id="returnRate"
+                  placeholder="0.0"
+                  value=""
+                  required
+                  min="0"
+                  max="99.9"
+                />
+              </div>
+              <div>
+                <label for="future-years">Years until retirement:</label>
+                <input
+                  type="text"
+                  name="future-years"
+                  id="futureYears"
+                  placeholder="0"
+                  value=""
+                  required
+                  min="0"
+                  max="99"
+                />
+              </div>
+              <div class="button">
+                <button class="calculate__btn">Calculate</button>
+              </div>
+          </form>
+          
           </div>
         </div>
+
         <div class="container">
           <h3>Post-retirement TSP Income</h3>
           <div class="info">
