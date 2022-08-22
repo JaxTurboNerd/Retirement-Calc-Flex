@@ -12,7 +12,6 @@ body {
   background-color: #fff;
   font-size: 1rem;
   height: 100vh;
-  /* background-color: lightblue; */
 }
 
 .container {
@@ -22,23 +21,88 @@ body {
   text-align: center;
   padding: 1rem;
 }
-label,
-input {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto 0.75em;
+
+form {
+  margin: 0 auto;
+  max-width: 500px;
 }
 
-.dollar-sign {
-  display: inline-flex;
+label {
+  padding: 0.5em;
+}
+
+h5 {
+  margin-bottom: 0.5em;
+}
+
+hr {
+  margin: 0 auto;
+  width: 30%;
+}
+
+.dollar__flex {
+  display: flex;
+  justify-content: center;
+}
+
+.flex__col label,
+.flex__col input {
+  display: block;
+  margin: 0 auto;
+}
+
+.currency {
+  margin-right: 0.3em;
+}
+
+.percent {
+  margin-left: 0.3em;
 }
 
 #payPeriods {
   margin-left: 0.5em;
 }
-.italicized {
-  font-style: italic;
-  font-weight: 600;
+
+.form-control {
+  position: relative;
+}
+
+.form-control small {
+  visibility: hidden;
+}
+
+.form-control.error input {
+  border-color: red;
+}
+
+.form-control.error small {
+  color: red;
+  visibility: visible;
+}
+
+.button__container {
+  margin-top: 0.6em;
+}
+
+button {
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 0.5em;
+  transition-property: all;
+  transition-duration: 1s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  border-color: green;
+}
+
+button:active {
+  transform: translate(1px, 2px);
+  -webkit-transform: translate(1px, 2px);
+  -moz-transform: translate(1px, 2px);
 }
 
 .market__info {

@@ -88,9 +88,6 @@ button {
 }
 
 .form-control small {
-  /* position: absolute;
-  bottom: 1em;
-  left: 17em; */
   visibility: hidden;
 }
 

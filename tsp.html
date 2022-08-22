@@ -7,117 +7,143 @@
     <link rel="stylesheet" href="/css/tsp.css" type="text/css" />
     <!-- Scripts: -->
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-    <script src="./scripts/finance.js" type="module"></script>
+    <script defer src="./scripts/finance.js" type="module"></script>
     <title>TSP</title>
   </head>
-  <body class="tsp__body">
-    <!-- <header>
-      <nav>
-        <a href="/index.html">Back</a>
-      </nav>
-    </header> -->
-    <section class="tsp__section">
-      <div class="container">
-        <div class="container">
-          <form action="#" id="futureValue" method="POST" autocomplete="off">
-            <h2>Thrift Savings Plan (TSP) Calculator</h2>
-            <div class="container info">
-              <h3>TSP Future Value Calculator</h3>
-              <div>
-                <label for="tsp-balance">Current TSP Balance:</label>
+  <body>
+    <div class="container">
+      <section>
+        <form action="#" id="futureValue-form" method="POST" autocomplete="off">
+          <h2>Thrift Savings Plan (TSP) Calculator</h2>
+          <div>
+            <h3>TSP Future Value Calculator</h3>
+            <div class="form-control">
+              <label for="tsp-balance">Current TSP Balance:</label>
+              <div class="dollar__flex">
+                <span class="currency">$</span>
                 <input
-                  type="text"
-                  name="tsp-balance"
-                  id="tspBalance"
+                class="dollar__input"
+                type="number"
+                name="tsp-balance"
+                id="tspBalance"
+                placeholder="0"
+                value="0"
+                required
+                min="0"
+                max="99000000"
+              />
+              </div>
+              <small class="error__message">Please enter a numerical value</small>
+              <hr>
+            </div>
+            <div class="form-control">
+              <label for="pay-period">Pay Period Contributions:</label>
+              <h5>(Includes Agency Contributions)</h5>
+              <div class="dollar__flex">
+                <span class="currency">$</span>
+                <input
+                  type="number"
+                  name="pay-period"
+                  id="ppContribution"
                   placeholder="0"
-                  value=""
+                  value="0"
                   required
                   min="0"
-                  max="99000000"
+                  max="25000"
                 />
               </div>
-              <div>
-                <label for="pay-period">Pay Period Contributions:</label>
-                <span class="dollar-sign"
-                  >$
-                  <input
-                    type="text"
-                    name="pay-period"
-                    id="payPeriods"
-                    placeholder="0"
-                    value=""
-                    required
-                    min="0"
-                    max="25000"
-                  />
-                </span>
-              </div>
-              <div>
-                <label for="return-rate"
-                  ><span class="italicized">Estimated</span> Annual Rate of
-                  Return:</label
-                >
+              <small class="error__message">Please enter a numerical value</small>
+              <hr>
+            </div>
+            <div class="form-control">
+              <label for="return-rate">Estimated Annual Rate of
+                Return:</label
+              >
+              <div class="dollar__flex">
                 <input
-                  type="text"
-                  name="return-rate"
-                  id="returnRate"
-                  placeholder="0.0"
-                  value=""
-                  required
-                  min="0"
-                  max="99.9"
-                />
+                type="number"
+                name="return-rate"
+                id="returnRate"
+                placeholder="0.0"
+                value="0.0"
+                required
+                min="0"
+                max="99.9"
+              />
+              <span class="percent">%</span>
               </div>
-              <div>
+              <small class="error__message">Please enter a numerical value</small>
+              <hr>
+            </div>
+            <div class="form-control">
+              <div class="flex__col">
                 <label for="future-years">Years until retirement:</label>
                 <input
-                  type="text"
-                  name="future-years"
-                  id="futureYears"
-                  placeholder="0"
-                  value=""
-                  required
-                  min="0"
-                  max="99"
+                type="number"
+                name="future-years"
+                id="futureYears"
+                placeholder="0"
+                value="0"
+                required
+                min="0"
+                max="99"
                 />
               </div>
-              <div class="button">
-                <button class="calculate__btn">Calculate</button>
-              </div>
-          </form>
-          
+              <small class="error__message">Please enter a numerical value</small>
+              <hr>
+            </div>
+            <div class="button__container">
+              <button class="calculate__btn" type="button">Calculate</button>
+            </div>
+            <div class="container results">
+              <h3>Estimated value of TSP account</h3>
+              <p class="tsp__results"></p>
+            </div>
+        </form>
+    </section>
+    <section>
+      <h3>Post-retirement TSP Income</h3>
+        <form action="#" method="post" id="post-retire__form" autocomplete="off"></form>
+        <div class="form-control">
+          <label for="retirement-balance">TSP Balance at Retirement:</label>
+          <div class="dollar__flex">
+            <span class="currency">$</span>
+            <input type="number" name="retirement-balance" placeholder="0" />
           </div>
+          <small class="error__message">Please enter a numerical value</small>
+          <hr>
         </div>
-
-        <div class="container">
-          <h3>Post-retirement TSP Income</h3>
-          <div class="info">
-            <div>
-              <label for="retirement-balance">TSP Balance at Retirement:</label>
-              <input type="text" name="retirement-balance" placeholder="0" />
-            </div>
-            <div>
-              <label for="withdrawl">One Time Withdrawl Amount:</label>
-              <input type="text" name="withdrawl" placeholder="0" />
-            </div>
-            <div>
-              <label for="withdrawl-age"> One-Time Withdrawl Age:</label>
-              <input type="text" name="withdrawl-age" placeholder="0" />
-            </div>
-            <div>
-              <label for="annual-withdrawl-age"
-                >Age to start Annual Withdrawls:</label
-              >
-              <input type="text" name="annual-withdrawl-age" placeholder="0" />
-            </div>
-
-            <div>
-              <label for="post-return-rate">Annual Rate of Return</label>
-              <input type="text" name="post-return-rate" placeholder="0.0" />
-            </div>
+        <div class="form-control">
+          <label for="withdrawl">One Time Withdrawl Amount:</label>
+          <div class="dollar__flex">
+            <span class="currency">$</span>
+            <input type="number" name="withdrawl" placeholder="0" />      
           </div>
+          <small class="error__message">Please enter a numerical value</small>
+          <hr>
         </div>
-      </div>
+        <div class="form-control">
+          <label for="withdrawl-age"> One-Time Withdrawl Age:</label>
+          <div class="dollar__flex">
+            <input type="number" name="withdrawl-age" placeholder="0" />
+          </div>
+          <small class="error__message">Please enter a numerical value</small>
+          <hr>
+        </div>
+        <div class="flex__col">
+          <label for="annual-withdrawl-age"
+            >Age to start Annual Withdrawls:</label>
+          <input type="number" name="annual-withdrawl-age" placeholder="0" />
+          <hr>
+        </div>
+        <div class="form-control">
+          <label for="post-return-rate">Annual Rate of Return</label>
+          <div class="dollar__flex">
+            <input type="number" name="post-return-rate" placeholder="0.0" />
+            <span class="percent">%</span>
+          </div>
+          <small class="error__message">Please enter a numerical value</small>
+        </div>
     </section>
     <section class="display__market">
       <p class="market__data">
@@ -134,5 +160,6 @@
         <p class="marquee-content">Hello Sample data</p>
       </div>
     </section> -->
+    </div>
   </body>
 </html>
