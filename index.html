@@ -17,8 +17,8 @@
     <title>FERS Retirement Calculator</title>
   </head>
 
-  <body style="background-color: lightyellow">
-    <header class="header">
+  <body>
+    <header>
       <div class="container header__container">
         <div class="banner">
           <div class="banner-content">
@@ -43,7 +43,7 @@
     <main>
       <form id="retirement-form" action="#" method="POST" autocomplete="off">
         <div class="row">
-          <section class="personal__info col">
+          <section>
             <div class="container personal">
               <h2 id="personalInfo">Personal Info</h2>
               <div class="info">
@@ -83,7 +83,7 @@
                     maxlength="30"
                   />
                 </div>
-                <div>
+                <div class="form-control age">
                   <label for="retirementAge">Retirement Age:</label>
                   <input
                     type="number"
@@ -95,6 +95,7 @@
                     value=""
                     required
                   />
+                  <small>Error Message</small>
                 </div>
               </div>
               <div class="info">
@@ -119,10 +120,13 @@
                     hrs
                   </span>
                 </div>
-                <div>
+                <div class="form-control">
                   <label for="high3">High-3 Average Salary</label>
-                  <span class="currency"
-                    >$<input
+                  <div class="dollar__format">
+                    <div class="dollar__sign">
+                      <span>$</span>
+                    </div>
+                    <input
                       type="number"
                       name="high3"
                       id="high3"
@@ -131,21 +135,23 @@
                       placeholder="00,000"
                       min="0"
                       max="500000"
-                  /></span>
+                    />
+                  </div>
+                  <small>Error Message</small>
                 </div>
                 <div>
                   <label for="sbsa">Spousal Benefit Survivor Annuity:</label>
                   <select name="sbsa" id="survivor-benefit">
                     <option value="0">0%</option>
                     <option value="0.05">5%</option>
-                    <option value="0.10">10%</option>
+                    <option value="0.10" selected>10%</option>
                   </select>
                 </div>
               </div>
             </div>
           </section>
-          <section class="dates-info col">
-            <div class="container dates">
+          <section class="col">
+            <div class="container">
               <div class="dates-info">
                 <h2>FERS Retirement Dates</h2>
                 <div class="form-control">
@@ -171,7 +177,7 @@
                   <small>Error Message</small>
                 </div>
               </div>
-              <div class="info military-dates display__toggle">
+              <div class="dates-info military-dates display__toggle">
                 <div class="form-control">
                   <label for="mil-start-date"
                     >Military buyback start date:</label
@@ -195,7 +201,7 @@
                   <small>Error Message</small>
                 </div>
               </div>
-              <div class="dates__container">
+              <div>
                 <button
                   type="button"
                   class="dates__btn"
@@ -204,88 +210,70 @@
                 >
                   Calculate Time
                 </button>
-                <input
-                  type="submit"
-                  value="Form Submit"
-                  style="margin: 2em auto"
-                />
               </div>
             </div>
           </section>
-          <section class="retirement-income col">
+          <section>
             <div class="container">
               <div class="info">
                 <h2>Retirement Annuity (RAS)</h2>
                 <div>
                   <label for="ssa">Montly Social Security Benefit: </label>
                   <p style="font-style: italic">(page 2 of SSA statement)</p>
-                  <input
-                    type="number"
-                    name="ssa"
-                    placeholder="0"
-                    min="0"
-                    max="99999"
-                    id="ssa"
-                    value=""
-                  />
-                </div>
-                <div>
-                  <label for="otherIncome">Post-Retirement Income:</label>
-                  <input
-                    type="number"
-                    name="otherIncome"
-                    placeholder="0"
-                    id="otherIncome"
-                    min="0"
-                    max="999999"
-                    value=""
-                  />
-                </div>
-                <div class="ras__container">
-                  <button class="ras__btn" type="button" name="rasButton">
-                    Calculate
-                  </button>
+                  <div class="dollar__format">
+                    <div class="dollar__sign">
+                      <span class="currency">$</span>
+                    </div>
+                    <input
+                      type="number"
+                      name="ssa"
+                      placeholder="0"
+                      min="0"
+                      max="99999"
+                      id="ssa"
+                      value="0"
+                    />
+                  </div>
                 </div>
                 <div class="ras__info">
                   <p class="ras__text">Montly RAS Amount:</p>
-                  <p class="rasMonthly">$x,xxx.xx</p>
+                  <p class="rasMonthly"></p>
                 </div>
                 <div class="ras__info">
                   <p class="ras__text">Annual RAS amount:</p>
-                  <p class="rasAnnual">$x,xxx.xx</p>
+                  <p class="rasAnnual"></p>
                 </div>
+                <input id="form__submit" type="submit" value="Form Submit" />
               </div>
             </div>
           </section>
         </div>
-        <section class="results__section">
+        <section>
           <div class="container" style="max-width: 1200px">
             <h2>Results:</h2>
             <div class="info results">
-              <div class="service-items" id="total-time">
+              <div>
                 <h3>Total Service Time:</h3>
-                <p class="results__info total__time">XX Years and XX Months</p>
+                <p class="total__time">XX Years and XX Months</p>
                 <h4>Federal</h4>
-                <p class="results__info federal-time">XX Years and XX Months</p>
+                <p class="federal-time">XX Years and XX Months</p>
                 <div class="military__results display__toggle">
                   <h4>Military</h4>
-                  <p class="results__info mil__time__results">
-                    XX Years and XX Months
-                  </p>
+                  <p class="mil__time__results">XX Years and XX Months</p>
                 </div>
                 <hr />
               </div>
-              <div class="service-items" id="service-percent">
+              <!-- <div class="service-items" id="service-percent">
                 <h3>Total Service Percent:</h3>
                 <p class="results__info service-percent">XX.X %</p>
                 <hr />
-              </div>
-              <div class="service-items" id="annuity-percent">
+              </div> -->
+              <div id="annuity-percent">
                 <h3>Total Estimated Annuity:</h3>
                 <p class="results__info total-percent">XX.X%</p>
                 <hr />
               </div>
-              <div class="service-items">
+              <div>
                 <h3>Total Estimated Annuity:</h3>
                 <p class="results__info annuity-amount">$XX,XXX</p>
               </div>

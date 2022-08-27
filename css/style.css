@@ -14,14 +14,20 @@ body {
   height: 100vh;
 }
 
+header {
+  border-bottom: 1px solid lightslategray;
+}
+
 section {
-  background-color: hsla(203, 92%, 75%, 0.7);
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  width: 100%;
+  box-shadow: 0 0.5em 0.5em lightgray;
 }
 
 button:hover {
   cursor: pointer;
 }
+
 .container {
   margin: 0 auto;
   width: 100%;
@@ -72,6 +78,57 @@ button {
   font-style: italic;
 }
 
+label {
+  margin-bottom: 0.25rem;
+}
+
+input {
+  box-sizing: 0 1px 2px 0;
+  border-radius: 4px;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  box-shadow: 0 1px 2px 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+input:focus {
+  outline: none;
+}
+
+label,
+input {
+  display: flex;
+  flex-direction: column;
+}
+
+/* styling to place $ inside the input field: */
+.dollar__format {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+.dollar__sign {
+  position: absolute;
+  left: 0;
+  margin-left: 0.5rem;
+  align-items: center;
+  display: flex;
+}
+
+.dollar__format input {
+  width: 100%;
+  padding-left: 1.75rem;
+}
+
+span {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+/* End dollar sign styling */
+
 .info input,
 .info select {
   /* margin top/horizonta/bottom: */
@@ -87,6 +144,10 @@ button {
   margin-bottom: 0.75rem;
 }
 
+.form-control.age {
+  margin-bottom: 0;
+}
+
 .form-control small {
   visibility: hidden;
 }
@@ -100,18 +161,8 @@ button {
   visibility: visible;
 }
 
-.col {
-  width: 100%;
-}
-
-label,
-input {
-  display: flex;
-  flex-direction: column;
-}
-
-.currency {
-  display: inline-flex;
+#form__submit {
+  margin: 2em auto;
 }
 
 .sickLeaveHours {
@@ -122,10 +173,6 @@ input {
   margin-right: 0.2em;
 }
 
-#high3 {
-  margin-left: 0.2em;
-}
-
 .display__toggle {
   display: none;
 }
@@ -134,11 +181,7 @@ input {
   margin: 1rem auto;
 }
 
-.ras__text {
-  font-weight: 600;
-}
-
-.results__info {
+.results p {
   margin: 0.5rem auto;
 }
 
@@ -167,7 +210,7 @@ input {
     display: none;
   }
 
-  .service-items {
+  .results > div {
     padding: 1rem;
   }
 }

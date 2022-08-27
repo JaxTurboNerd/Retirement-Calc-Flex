@@ -22,13 +22,44 @@ body {
   padding: 1rem;
 }
 
+section {
+  margin: 1em auto;
+  box-shadow: 0 0.5em 0.5em 0 lightgray;
+  padding: 2em;
+}
+
 form {
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 600px;
+}
+
+input,
+select {
+  box-sizing: 0 1px 2px 0;
+  border-radius: 4px;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  box-shadow: 0 1px 2px 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+
+input:focus,
+select:focus {
+  outline: none;
 }
 
 label {
   padding: 0.5em;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+h2 {
+  margin-bottom: 1em;
 }
 
 h5 {
@@ -36,19 +67,71 @@ h5 {
 }
 
 hr {
-  margin: 0 auto;
+  margin: 0 auto 0.5rem auto;
   width: 30%;
 }
 
-.dollar__flex {
-  display: flex;
-  justify-content: center;
-}
-
-.flex__col label,
-.flex__col input {
+/* styling to place $ inside the input field: */
+.inset__format {
+  position: relative;
   display: block;
   margin: 0 auto;
+  max-width: fit-content;
+}
+
+.percent__format {
+  position: relative;
+  display: flex;
+  margin: 0 auto;
+  max-width: fit-content;
+}
+
+.dollar__sign {
+  position: absolute;
+  left: 0;
+  margin-left: 0.5rem;
+  align-items: center;
+  display: flex;
+}
+
+.percent__sign {
+  position: absolute;
+  right: 0;
+  align-items: center;
+  display: flex;
+}
+
+.inset__format input {
+  width: 100%;
+  padding-left: 1.75rem;
+}
+
+.percent__format input {
+  width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 1.25rem;
+}
+
+span {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+/* End dollar sign styling */
+
+.col,
+.col label,
+.col input {
+  display: block;
+  margin: 0 auto;
+}
+
+.freq {
+  margin-bottom: 1em;
+}
+
+.freq label {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .currency {
@@ -89,7 +172,7 @@ button {
   cursor: pointer;
   border-radius: 0.5em;
   transition-property: all;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
 }
 
 button:hover {
@@ -156,5 +239,39 @@ button:active {
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+
+/* media queries */
+@media (min-width: 1000px) {
+  .flex {
+    display: flex;
+    flex-direction: row;
+  }
+  .left__col {
+    max-width: 30%;
+    margin-left: 15%;
+    padding: 2em;
+    border: 1px solid lightgray;
+    box-shadow: 1px 1px 2px 1px gray;
+    border-radius: 1em;
+    background-color: rgba(173, 216, 230, 0.3);
+  }
+  .results {
+    max-width: 30%;
+    margin-right: 15%;
+    padding: 2em;
+    border: 1px solid lightgray;
+    border-radius: 1em;
+    box-shadow: 1px 1px 2px 1px gray;
+  }
+
+  .freq__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .freq {
+    margin: 0;
   }
 }

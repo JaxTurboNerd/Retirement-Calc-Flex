@@ -1,3 +1,5 @@
+//This script file calculates the service times from the dates supplied by the user
+//This also calculates the annuity and RAS amounts
 //Retirement Dates => calculate total federal service time
 let enterOnDate = document.querySelector("#enterOnDate");
 let retirementDate = document.querySelector("#retirementDate");
@@ -10,6 +12,7 @@ let annuityPercent = document.querySelector(".total-percent");
 let annuityAmount = document.querySelector(".annuity-amount");
 let militaryTime = document.querySelector(".mil__time__results");
 let totalServiceTime = document.querySelector(".total__time");
+let retirementAge = document.querySelector("#retirementAge");
 let sickLeave = document.querySelector("#sickLeave");
 let survivorBenefit = document.querySelector("#survivor-benefit");
 let highThree = document.querySelector("#high3");
@@ -82,6 +85,21 @@ function showError(input, message) {
 function resetClass(input) {
   const formControl = input.parentElement;
   formControl.className = "form-control";
+}
+
+//check for valid input
+function checkValidInput(input, message) {
+  if (input.value === "" || input.value <= 0) {
+    foundError = true;
+    input.style = "border: 1px solid red";
+    alert(message);
+    // showError(input, message);
+    return;
+  } else {
+    foundError = false;
+    input.style = "border: 0";
+    // resetClass(input);
+  }
 }
 
 //LUXON-Library functions:
@@ -231,8 +249,15 @@ const calculateRAS = () => {
 };
 
 datesButton.addEventListener("click", () => {
-  //check for valid (including null values) start and end dates:
-  checkValidDate(enterOnDate);
+  //check for valid retirement age & high-3 salary:
+  checkValidInput(retirementAge, "Please enter a valid age");
+  if (!foundError) {
+    checkValidInput(highThree, "Please enter a valid High 3 salary");
+  }
+  if (!foundError) {
+    //check for valid (including null values) start and end dates:
+    checkValidDate(enterOnDate);
+  }
   if (!foundError) {
     checkValidDate(retirementDate);
   }
