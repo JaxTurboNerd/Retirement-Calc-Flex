@@ -18,6 +18,12 @@ let ppContributions = document.querySelector("#ppContributions");
 let returnRate = document.querySelector("#returnRate");
 let futureYears = document.querySelector("#futureYears");
 let calculateButton = document.querySelector(".calculate__btn");
+let savingsBalance = document.querySelector("#savingsBalance");
+let withdrawlAmount = document.querySelector("#withdrawl");
+let frequency = document.querySelector("#frequency");
+let investmentReturn = document.querySelector("#investmentReturn");
+let inflation = document.querySelector("#inflation");
+let taxRate = document.querySelector("#taxRate");
 
 //Variable declarations:
 let foundError = false;
@@ -91,6 +97,20 @@ ppContributions.addEventListener("input", (event) => {
   ).toLocaleString("en-US");
 });
 
+savingsBalance.addEventListener("input", (event) => {
+  //provides input mask with comma formatting
+  event.target.value = (
+    parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
+  ).toLocaleString("en-US");
+});
+
+withdrawlAmount.addEventListener("input", (event) => {
+  //provides input mask with comma formatting
+  event.target.value = (
+    parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
+  ).toLocaleString("en-US");
+});
+
 calculateButton.addEventListener("click", () => {
   //run through numerical validations for each input field
   checkValidNumber(tspBalance);
@@ -108,35 +128,6 @@ calculateButton.addEventListener("click", () => {
     calculateTSPValue();
   }
 });
-
-//Form Validations:
-// validation
-//   .addField("#tspBalance", [
-//     { rule: "required", errorMessage: "Please enter your current TSP balance" },
-//     { rule: "minNumber", value: 0 },
-//     { rule: "maxNumber", value: 99000000 },
-//   ])
-//   .addField("#ppContributions", [
-//     {
-//       rule: "required",
-//       errorMessage: "Please enter total pay period contributions",
-//     },
-//     { rule: "minNumber", value: 0 },
-//     { rule: "maxNumber", value: 25000 },
-//   ])
-//   .addField("#returnRate", [
-//     { rule: "required", errorMessage: "Please enter the expected Return Rate" },
-//     { rule: "minNumber", value: 0 },
-//     { rule: "maxNumber", value: 99.9 },
-//   ])
-//   .addField("#futureYears", [
-//     {
-//       rule: "required",
-//       errorMessage: "Please enter the number of years until retirement",
-//     },
-//     { rule: "minNumber", value: 0 },
-//     { rule: "maxNumber", value: 99 },
-//   ]);
 
 //Yahoo finance API via RAPIDAPI
 const encodedParams = new URLSearchParams();

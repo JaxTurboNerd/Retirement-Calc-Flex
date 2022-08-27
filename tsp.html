@@ -126,12 +126,12 @@
               <span class="currency">$</span>
             </div>
             <input
-              type="number"
+              type="text"
               name="savings-balance"
+              id="savingsBalance"
               placeholder="0"
-              min="0"
-              max="99999999"
-              maxlength="8"
+              value="0"
+              maxlength="10"
             />
           </div>
           <small class="error__message">Please enter a numerical value</small>
@@ -145,12 +145,13 @@
                 <span class="currency">$</span>
               </div>
               <input
-                type="number"
+                type="text"
                 name="withdrawl"
+                id="withdrawl"
                 placeholder="0"
+                value="0"
                 min="0"
-                max="99999999"
-                maxlength="8"
+                maxlength="10"
               />
             </div>
             <small class="error__message">Please enter a numerical value</small>
@@ -158,19 +159,20 @@
           <div class="col freq">
             <label for="frequency">Withdrawl Fequency:</label>
             <select name="frequency" id="frequency">
+              <option value="once">Once</option>
               <option value="month">Per Month</option>
               <option value="year" selected>Per Year</option>
             </select>
           </div>
-          <!-- <hr /> -->
         </div>
+        <hr />
         <div class="form-control">
           <label for="investment-return"> Expected Investment Return:</label>
           <div class="percent__format">
             <input
               type="number"
-              name="return-rate"
-              id="returnRate"
+              name="investment-return"
+              id="investmentReturn"
               placeholder="0.0"
               value="0.0"
               required
@@ -191,7 +193,7 @@
             <input
               type="number"
               name="inflation"
-              id="returnRate"
+              id="inflation"
               placeholder="0.0"
               value="0.0"
               required
@@ -212,7 +214,7 @@
             <input
               type="number"
               name="tax-rate"
-              id="returnRate"
+              id="taxRate"
               placeholder="0.0"
               value="0.0"
               required

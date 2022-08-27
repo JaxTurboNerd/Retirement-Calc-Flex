@@ -35,7 +35,7 @@ form {
 
 input,
 select {
-  box-sizing: 0 1px 2px 0;
+  box-sizing: border-box;
   border-radius: 4px;
   border: 1px solid rgba(128, 128, 128, 0.5);
   box-shadow: 0 1px 2px 0;
@@ -89,7 +89,7 @@ hr {
 .dollar__sign {
   position: absolute;
   left: 0;
-  margin-left: 0.5rem;
+  margin-left: 1.6rem;
   align-items: center;
   display: flex;
 }
@@ -102,7 +102,7 @@ hr {
 }
 
 .inset__format input {
-  width: 100%;
+  width: 75%;
   padding-left: 1.75rem;
 }
 
