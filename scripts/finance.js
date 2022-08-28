@@ -27,6 +27,7 @@ let usCurrency = Intl.NumberFormat("en-US", {
 function isValidNumber(input) {
   //remove the commas from the input string
   let newValue = parseFloat(input.value.replace(/,/g, ""));
+  console.log(`parsed value: ${newValue}`);
   if (isNaN(newValue) || newValue < 0) {
     foundError = true;
     showError(input);
@@ -118,7 +119,9 @@ ppContributions.addEventListener("input", (event) => {
 
 returnRate.addEventListener("input", (event) => {
   //validates only numbers and decimals
-  event.target.value = event.target.value.replace(/[^\d.]/gi, "");
+  event.target.value = event.target.value
+    .replace(/[^\d.]/gi, "")
+    .replace(/\.{2,}/g, ".");
 });
 
 futureYears.addEventListener("input", (event) => {
@@ -144,17 +147,23 @@ withdrawlAmount.addEventListener("input", (event) => {
 
 investmentReturn.addEventListener("input", (event) => {
   //validates only numbers and decimals
-  event.target.value = event.target.value.replace(/[^\d.]/gi, "");
+  event.target.value = event.target.value
+    .replace(/[^\d.]/gi, "")
+    .replace(/\.{2,}/g, ".");
 });
 
 inflation.addEventListener("input", (event) => {
   //validates only numbers and decimals
-  event.target.value = event.target.value.replace(/[^\d.]/gi, "");
+  event.target.value = event.target.value
+    .replace(/[^\d.]/gi, "")
+    .replace(/\.{2,}/g, ".");
 });
 
 taxRate.addEventListener("input", (event) => {
   //validates only numbers and decimals
-  event.target.value = event.target.value.replace(/[^\d.]/gi, "");
+  event.target.value = event.target.value
+    .replace(/[^\d.]/gi, "")
+    .replace(/\.{2,}/g, ".");
 });
 
 tspButton.addEventListener("click", () => {
