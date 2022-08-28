@@ -71,6 +71,11 @@ hr {
   width: 30%;
 }
 
+#futureYears {
+  max-width: 20%;
+  text-align: center;
+}
+
 /* styling to place $ inside the input field: */
 .inset__format {
   position: relative;
@@ -89,34 +94,34 @@ hr {
 .dollar__sign {
   position: absolute;
   left: 0;
-  margin-left: 1.6rem;
+  margin-left: 1.85rem;
   align-items: center;
   display: flex;
 }
 
 .percent__sign {
   position: absolute;
-  right: 0;
+  right: 35%;
   align-items: center;
   display: flex;
 }
 
 .inset__format input {
-  width: 75%;
+  width: 70%;
   padding-left: 1.75rem;
 }
 
 .percent__format input {
-  width: 100%;
-  padding-left: 0.5rem;
-  padding-right: 1.25rem;
+  width: 40%;
+  margin-left: 3.5rem;
+  text-align: center;
 }
 
 span {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-/* End dollar sign styling */
+/* End dollar sign/percent styling */
 
 .col,
 .col label,
@@ -186,6 +191,13 @@ button:active {
   transform: translate(1px, 2px);
   -webkit-transform: translate(1px, 2px);
   -moz-transform: translate(1px, 2px);
+}
+
+#returnRate:invalid,
+#investmentReturn:invalid,
+#inflation:invalid,
+#taxRate:invalid {
+  border: 1px solid red;
 }
 
 .market__info {

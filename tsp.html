@@ -65,12 +65,10 @@
               <hr />
             </div>
             <div class="form-control">
-              <label for="return-rate">Estimated Annual Rate of Return:</label>
+              <label for="return-rate">Estimated Annual Return:</label>
               <div class="percent__format">
                 <input
-                  type="number"
-                  inputmode="decimal"
-                  step="0.1"
+                  type="text"
                   name="return-rate"
                   id="returnRate"
                   placeholder="0.0"
@@ -78,6 +76,7 @@
                   required
                   min="0"
                   max="99.9"
+                  maxlength="4"
                 />
                 <div class="percent__sign">
                   <span class="currency">%</span>
@@ -92,14 +91,14 @@
               <div class="col">
                 <label for="future-years">Years until retirement:</label>
                 <input
-                  type="number"
+                  type="text"
                   name="future-years"
                   id="futureYears"
-                  placeholder="0"
                   value="0"
                   required
                   min="0"
                   max="99"
+                  maxlength="2"
                 />
               </div>
               <small class="error__message"
@@ -108,7 +107,7 @@
               <hr />
             </div>
             <div class="button__container">
-              <button class="calculate__btn" type="button">Calculate</button>
+              <button class="tsp__btn" type="button">Calculate</button>
             </div>
           </div>
           <div class="container results">
@@ -160,8 +159,8 @@
             <label for="frequency">Withdrawl Fequency:</label>
             <select name="frequency" id="frequency">
               <option value="once">Once</option>
-              <option value="month">Per Month</option>
-              <option value="year" selected>Per Year</option>
+              <option value="month">Monthly</option>
+              <option value="year" selected>Yearly</option>
             </select>
           </div>
         </div>
@@ -170,7 +169,7 @@
           <label for="investment-return"> Expected Investment Return:</label>
           <div class="percent__format">
             <input
-              type="number"
+              type="text"
               name="investment-return"
               id="investmentReturn"
               placeholder="0.0"
@@ -191,7 +190,7 @@
           <label for="inflation">Inflation:</label>
           <div class="percent__format">
             <input
-              type="number"
+              type="text"
               name="inflation"
               id="inflation"
               placeholder="0.0"
@@ -212,11 +211,11 @@
           <label for="tax-rate">Estimated Tax Rate:</label>
           <div class="percent__format">
             <input
-              type="number"
+              type="text"
               name="tax-rate"
               id="taxRate"
-              placeholder="0.0"
-              value="0.0"
+              placeholder="0"
+              value="0"
               required
               min="0"
               max="99.9"
@@ -227,6 +226,9 @@
             </div>
           </div>
           <small class="error__message">Please enter a numerical value</small>
+        </div>
+        <div class="button__container">
+          <button class="savings__btn" type="button">Calculate</button>
         </div>
         <p>Your money will last xx years</p>
       </section>
