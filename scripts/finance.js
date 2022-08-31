@@ -17,18 +17,36 @@ let savingsButton = document.querySelector(".savings__btn");
 //Variable declarations:
 let foundError = false;
 
+const intElements = [
+  tspBalance,
+  ppContributions,
+  futureYears,
+  savingsBalance,
+  withdrawlAmount,
+];
+const floatElements = [returnRate, investmentReturn, inflation, taxRate];
+
 //Currency formatting:
 let usCurrency = Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
 
+//Number formatting(for years result):
+let yearsFormat = Intl.NumberFormat("en-US", {
+  maximumFractionDigits: 1,
+});
+
 //Input validation functions:
 function isValidNumber(input) {
   //remove the commas from the input string
   let newValue = parseFloat(input.value.replace(/,/g, ""));
-  console.log(`parsed value: ${newValue}`);
-  if (isNaN(newValue) || newValue < 0) {
+  if (
+    isNaN(newValue) ||
+    newValue < 0 ||
+    //prevents division by zero in duration calculation
+    (input.id === "withdrawl" && input.value == 0)
+  ) {
     foundError = true;
     showError(input);
     return false;
@@ -39,7 +57,7 @@ function isValidNumber(input) {
   }
 }
 
-//displayss a <small> error tag </small> if a validation error exists:
+//displayss the <small> error tag </small> if a validation error exists:
 function showError(input) {
   const dollarFlex = input.parentElement;
   const formControl = dollarFlex.parentElement;
@@ -90,80 +108,39 @@ function calculateInvestmentDuration() {
   const interestRate = parseFloat(investmentReturn.value) * 0.01;
   const numerator = Math.log(1 - (interestRate * balance) / withdrawlSum);
   const denominator = Math.log(1 + interestRate);
+  console.log(
+    `balance: ${balance}, withdrawl: ${withdrawlSum}, rate: ${interestRate}`
+  );
+  console.log(`numerator: ${numerator}, denominator: ${denominator}`);
 
   //Need to check for zeros entered by user...will result in NaN
+  //Withdrawl amount cannot be zero...division by zero = NaN
   //code here:
 
   const periods = -(numerator / denominator);
-  console.log(
-    `balance: ${balance} withdrawl: ${withdrawlSum} rate: ${interestRate}`
-  );
-  console.log(periods);
-  return periods;
+  document.querySelector(
+    "#durationResults"
+  ).innerHTML = `Your savings will last ${yearsFormat.format(periods)} years.`;
 }
 
 //Event Listeners:
-tspBalance.addEventListener("input", (event) => {
-  //provides input mask with comma formatting
-  event.target.value = (
-    parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
-  ).toLocaleString("en-US");
+//loop through array of similar element value types (ie, int or float):
+intElements.forEach((input) => {
+  input.addEventListener("input", (event) => {
+    //provides input mask with comma formatting
+    event.target.value = (
+      parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
+    ).toLocaleString("en-US");
+  });
 });
 
-ppContributions.addEventListener("input", (event) => {
-  //provides input mask with comma formatting
-  event.target.value = (
-    parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
-  ).toLocaleString("en-US");
-});
-
-returnRate.addEventListener("input", (event) => {
-  //validates only numbers and decimals
-  event.target.value = event.target.value
-    .replace(/[^\d.]/gi, "")
-    .replace(/\.{2,}/g, ".");
-});
-
-futureYears.addEventListener("input", (event) => {
-  //make sure there will always be a value in the input field:
-  event.target.value = (
-    parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
-  ).toLocaleString("en-US");
-});
-
-savingsBalance.addEventListener("input", (event) => {
-  //provides input mask with comma formatting
-  event.target.value = (
-    parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
-  ).toLocaleString("en-US");
-});
-
-withdrawlAmount.addEventListener("input", (event) => {
-  //provides input mask with comma formatting
-  event.target.value = (
-    parseInt(event.target.value.replace(/[^\d]+/gi, "")) || 0
-  ).toLocaleString("en-US");
-});
-
-investmentReturn.addEventListener("input", (event) => {
-  //validates only numbers and decimals
-  event.target.value = event.target.value
-    .replace(/[^\d.]/gi, "")
-    .replace(/\.{2,}/g, ".");
-});
-
-inflation.addEventListener("input", (event) => {
-  //validates only numbers and decimals
-  event.target.value = event.target.value
-    .replace(/[^\d.]/gi, "")
-    .replace(/\.{2,}/g, ".");
-});
-
-taxRate.addEventListener("input", (event) => {
-  //validates only numbers and decimals
-  event.target.value = event.target.value
-    .replace(/[^\d.]/gi, "")
-    .replace(/\.{2,}/g, ".");
+floatElements.forEach((input) => {
+  input.addEventListener("input", (event) => {
+    //validates only numbers and decimals
+    event.target.value = event.target.value
+      .replace(/[^\d.]/gi, "")
+      .replace(/\.{2,}/g, ".");
+  });
 });
 
 tspButton.addEventListener("click", () => {

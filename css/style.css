@@ -19,7 +19,6 @@ header {
 }
 
 section {
-  /* border: 1px solid black; */
   width: 100%;
   box-shadow: 0 0.5em 0.5em lightgray;
 }
@@ -79,10 +78,14 @@ button {
 }
 
 label {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0.25rem;
 }
 
 input {
+  display: flex;
+  flex-direction: column;
   box-sizing: 0 1px 2px 0;
   border-radius: 4px;
   border: 1px solid rgba(128, 128, 128, 0.5);
@@ -90,16 +93,11 @@ input {
   font-size: 0.875rem;
   line-height: 1.25rem;
   cursor: pointer;
+  text-align: center;
 }
 
 input:focus {
   outline: none;
-}
-
-label,
-input {
-  display: flex;
-  flex-direction: column;
 }
 
 /* styling to place $ inside the input field: */
@@ -113,14 +111,13 @@ input {
 .dollar__sign {
   position: absolute;
   left: 0;
-  margin-left: 0.5rem;
-  align-items: center;
+  padding-left: 0.25rem;
   display: flex;
 }
 
 .dollar__format input {
-  width: 100%;
   padding-left: 1.75rem;
+  text-align: center;
 }
 
 span {
@@ -135,17 +132,20 @@ span {
   margin: 0 auto 0.75rem;
 }
 
+#high3,
+#retirementAge {
+  margin: 0 auto;
+}
+
+#ssa {
+  margin-top: 0.35rem;
+}
 .dates-info input {
   margin: 0 auto;
 }
 
 .form-control {
   position: relative;
-  margin-bottom: 0.75rem;
-}
-
-.form-control.age {
-  margin-bottom: 0;
 }
 
 .form-control small {
@@ -163,6 +163,7 @@ span {
 
 #form__submit {
   margin: 2em auto;
+  padding: 0.25em;
 }
 
 .sickLeaveHours {
@@ -202,8 +203,12 @@ span {
   }
 
   .results {
-    display: flex;
-    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 75%;
+    padding: 2em;
+    border: 1px solid lightgray;
+    border-radius: 1em;
+    box-shadow: 1px 1px 2px 1px gray;
   }
 
   .results hr {

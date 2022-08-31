@@ -77,11 +77,18 @@ hr {
 }
 
 /* styling to place $ inside the input field: */
-.inset__format {
+.dollar__format {
   position: relative;
   display: block;
   margin: 0 auto;
   max-width: fit-content;
+}
+
+.dollar__sign {
+  position: absolute;
+  left: 0;
+  display: flex;
+  padding-left: 0.25rem;
 }
 
 .percent__format {
@@ -91,29 +98,14 @@ hr {
   max-width: fit-content;
 }
 
-.dollar__sign {
-  position: absolute;
-  left: 0;
-  margin-left: 2rem;
-  align-items: center;
-  display: flex;
-}
-
 .percent__sign {
   position: absolute;
-  right: 35%;
-  align-items: center;
+  right: 0;
   display: flex;
 }
 
-.inset__format input {
-  width: 70%;
-  padding-left: 1.75rem;
-}
-
+.dollar__format input,
 .percent__format input {
-  width: 40%;
-  margin-left: 3.5rem;
   text-align: center;
 }
 
@@ -196,7 +188,8 @@ button:active {
 #returnRate:invalid,
 #investmentReturn:invalid,
 #inflation:invalid,
-#taxRate:invalid {
+#taxRate:invalid,
+#withdrawl:invalid {
   border: 1px solid red;
 }
 

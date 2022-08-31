@@ -6,7 +6,7 @@ let retirementDate = document.querySelector("#retirementDate");
 let milStartDate = document.querySelector("#milStartDate");
 let milEndDate = document.querySelector("#milEndDate");
 let milService = document.querySelector("#milBuyback");
-let datesButton = document.querySelector("#datesBtn");
+let calculateButton = document.querySelector("#calculateBtn");
 let federalTime = document.querySelector(".federal-time");
 let annuityPercent = document.querySelector(".total-percent");
 let annuityAmount = document.querySelector(".annuity-amount");
@@ -17,20 +17,20 @@ let sickLeave = document.querySelector("#sickLeave");
 let survivorBenefit = document.querySelector("#survivor-benefit");
 let highThree = document.querySelector("#high3");
 let ssa = document.querySelector("#ssa");
-let postRetirmentIncome = document.querySelector("#otherIncome");
 let monthlyRAS = document.querySelector(".rasMonthly");
 let annualRAS = document.querySelector(".rasAnnual");
 
 //Variables declarations:
 let foundError = false;
-let fedServiceTime;
-let milServiceTime;
 let federalDuration;
 let militaryDuration;
-let servicePercent;
-let finalAnnuity;
-let rasMonthly;
-let rasAnnual;
+export let fedServiceTime;
+export let milServiceTime;
+export let totalTime;
+export let servicePercent;
+export let finalAnnuity;
+export let rasMonthly;
+export let rasAnnual;
 
 //Number formatting:
 let usCurrency = Intl.NumberFormat("en-US", {
@@ -44,26 +44,6 @@ let percentFormat = Intl.NumberFormat("en-US", {
   roundingIncrement: 1,
 });
 
-enterOnDate.addEventListener("change", () => {
-  //check for null and valid date values:
-  checkValidDate(enterOnDate);
-});
-
-retirementDate.addEventListener("change", () => {
-  //check for null and valid date values:
-  checkValidDate(retirementDate);
-});
-
-milStartDate.addEventListener("change", () => {
-  // check for null and valid date values
-  checkValidDate(milStartDate);
-});
-
-milEndDate.addEventListener("change", () => {
-  //Check for null and valid date values:
-  checkValidDate(milEndDate);
-});
-
 //Date formatter - vanilla js
 function formatDate(inputDate) {
   //Must use UTC values to fix being off by one day:
@@ -75,40 +55,52 @@ function formatDate(inputDate) {
 }
 
 //vanilla js
-function showError(input, message) {
-  const formControl = input.parentElement;
-  formControl.className = "form-control error";
-  input.nextElementSibling.innerText = message;
-}
-
-//vanill js
-function resetClass(input) {
-  const formControl = input.parentElement;
-  formControl.className = "form-control";
-}
 
 //check for valid input
-function checkValidInput(input, message) {
-  if (input.value === "" || input.value <= 0) {
+function checkValidInput(input) {
+  //remove commas from the input value:
+  let newValue = parseInt(input.value.replace(/,/g, ""));
+  if (newValue === "" || newValue <= 0 || isNaN(newValue)) {
     foundError = true;
-    input.style = "border: 1px solid red";
-    alert(message);
-    // showError(input, message);
+    showError(input);
     return;
   } else {
     foundError = false;
     input.style = "border: 0";
-    // resetClass(input);
+    resetClass(input);
+  }
+}
+
+function showError(input) {
+  //check if the input has id=#high3
+  if (input.id === "high3") {
+    const formControl = input.parentElement.parentElement;
+    formControl.className = "form-control error";
+  } else {
+    const formControl = input.parentElement;
+    formControl.className = "form-control error";
+  }
+}
+
+//vanill js
+function resetClass(input) {
+  //check if the input has id=#high3
+  if (input.id === "high3") {
+    const formControl = input.parentElement.parentElement;
+    formControl.className = "form-control";
+  } else {
+    const formControl = input.parentElement;
+    formControl.className = "form-control";
   }
 }
 
 //LUXON-Library functions:
 //Check for a valid date:
-function checkValidDate(date) {
+export function checkValidDate(date) {
   const workingDate = luxon.DateTime.fromISO(date.value);
   if (!workingDate.isValid) {
     foundError = true;
-    showError(date, "Please enter a valid date!");
+    showError(date);
     return;
   } else {
     foundError = false;
@@ -185,7 +177,7 @@ const combinedTime = () => {
     .normalize()
     .toObject();
   //String Output:
-  return luxon.Duration.fromObject(normalizedTime).toHuman();
+  return (totalTime = luxon.Duration.fromObject(normalizedTime).toHuman());
 };
 
 const servicePercentage = () => {
@@ -228,8 +220,10 @@ const servicePercentage = () => {
   return percentFormat.format(servicePercent * 0.01);
 };
 
-const totalAnnuity = (salary, survivorBenefit) => {
-  finalAnnuity = salary.value * (servicePercent * 0.01);
+const totalAnnuity = (high3, survivorBenefit) => {
+  //remove any commas from the user input:
+  let salary = parseInt(high3.value.replace(/,/g, ""));
+  finalAnnuity = salary * (servicePercent * 0.01);
   finalAnnuity = finalAnnuity - finalAnnuity * survivorBenefit.value;
   return usCurrency.format(finalAnnuity);
 };
@@ -243,16 +237,17 @@ const calculateRAS = () => {
   const federalYears = fedNormalizedTime.years;
   const federalMonths = fedNormalizedTime.months;
 
+  let ssaValue = parseInt(ssa.value.replace(/,/g, ""));
   let rasFactor = Math.round(federalYears + federalMonths / 12) / 40;
-  rasMonthly = usCurrency.format(ssa.value * rasFactor);
-  rasAnnual = usCurrency.format(ssa.value * rasFactor * 12);
+  rasMonthly = usCurrency.format(ssaValue * rasFactor);
+  rasAnnual = usCurrency.format(ssaValue * rasFactor * 12);
 };
 
-datesButton.addEventListener("click", () => {
+calculateButton.addEventListener("click", () => {
   //check for valid retirement age & high-3 salary:
-  checkValidInput(retirementAge, "Please enter a valid age");
+  checkValidInput(retirementAge);
   if (!foundError) {
-    checkValidInput(highThree, "Please enter a valid High 3 salary");
+    checkValidInput(highThree);
   }
   if (!foundError) {
     //check for valid (including null values) start and end dates:
@@ -272,22 +267,26 @@ datesButton.addEventListener("click", () => {
       //check proper dates order and calculates total service time
       fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
       milServiceTime = calculateTime(milStartDate, milEndDate, true);
-      federalTime.innerHTML = fedServiceTime;
+      //federalTime.innerHTML = fedServiceTime;
       militaryTime.innerHTML = milServiceTime;
       totalServiceTime.innerHTML = combinedTime();
+      annuityPercent.innerHTML = servicePercentage();
+      annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
+      calculateRAS();
+      monthlyRAS.innerHTML = rasMonthly;
+      annualRAS.innerHTML = rasAnnual;
     }
   } else {
     //check proper dates order and calculate total service time
     if (!foundError) {
       fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
-      federalTime.innerHTML = fedServiceTime;
+      // federalTime.innerHTML = fedServiceTime;
       totalServiceTime.innerHTML = fedServiceTime;
+      annuityPercent.innerHTML = servicePercentage();
+      annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
+      calculateRAS();
+      monthlyRAS.innerHTML = rasMonthly;
+      annualRAS.innerHTML = rasAnnual;
     }
   }
-
-  annuityPercent.innerHTML = servicePercentage();
-  annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
-  calculateRAS();
-  monthlyRAS.innerHTML = rasMonthly;
-  annualRAS.innerHTML = rasAnnual;
 });

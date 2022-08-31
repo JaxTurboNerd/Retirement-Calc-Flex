@@ -18,32 +18,30 @@
           <div class="left__col">
             <h2>TSP Future Value Calculator</h2>
             <div class="form-control">
-              <label for="tsp-balance">Current TSP Balance:</label>
-              <div class="inset__format">
+              <label for="tspBalance">Current TSP Balance:</label>
+              <div class="dollar__format">
                 <div class="dollar__sign">
                   <span class="currency">$</span>
                 </div>
                 <input
-                  class="dollar__input"
                   type="text"
                   name="tsp-balance"
                   id="tspBalance"
+                  size="15"
                   placeholder="0"
                   value="0"
                   required
-                  min="0"
                   maxlength="10"
                 />
               </div>
-              <small class="error__message"
-                >Please enter a numerical value</small
+              <small>Please enter a numerical value</small
               >
               <hr />
             </div>
             <div class="form-control">
               <label for="ppContributions">Pay Period Contributions:</label>
               <h5>(Includes Agency Contributions)</h5>
-              <div class="inset__format">
+              <div class="dollar__format">
                 <div class="dollar__sign">
                   <span class="currency">$</span>
                 </div>
@@ -51,58 +49,52 @@
                   type="text"
                   name="ppContributions"
                   id="ppContributions"
+                  size="15"
                   placeholder="0"
                   value="0"
                   required
-                  min="0"
                   maxlength="5"
                   pattern="^[\d,]+$"
                 />
               </div>
-              <small class="error__message"
-                >Please enter a numerical value</small
+              <small>Please enter a numerical value</small
               >
               <hr />
             </div>
             <div class="form-control">
-              <label for="return-rate">Estimated Annual Return:</label>
+              <label for="returnRate">Estimated Annual Return:</label>
               <div class="percent__format">
                 <input
                   type="text"
                   name="return-rate"
                   id="returnRate"
+                  size="10"
                   placeholder="0.0"
                   value="0.0"
                   required
-                  min="0"
-                  max="99.9"
                   maxlength="4"
                 />
                 <div class="percent__sign">
                   <span class="currency">%</span>
                 </div>
               </div>
-              <small class="error__message"
-                >Please enter a numerical value</small
+              <small>Please enter a numerical value</small
               >
               <hr />
             </div>
             <div class="form-control">
               <div class="col">
-                <label for="future-years">Years until retirement:</label>
+                <label for="futureYears">Years until retirement:</label>
                 <input
                   type="text"
                   name="future-years"
                   id="futureYears"
                   value="0"
                   required
-                  min="0"
-                  max="99"
                   maxlength="2"
                 />
               </div>
-              <small class="error__message"
-                >Please enter a numerical value</small
+              <small>Please enter a numerical value</small
               >
               <hr />
             </div>
@@ -119,8 +111,8 @@
       <section style="max-width: 50%">
         <h2>How Long Will My Money Last?</h2>
         <div class="form-control">
-          <label for="savings-balance">Savings Balance:</label>
-          <div class="inset__format">
+          <label for="savingsBalance">Savings Balance:</label>
+          <div class="dollar__format">
             <div class="dollar__sign">
               <span class="currency">$</span>
             </div>
@@ -128,18 +120,19 @@
               type="text"
               name="savings-balance"
               id="savingsBalance"
+              size="15"
               placeholder="0"
               value="0"
               maxlength="10"
             />
           </div>
-          <small class="error__message">Please enter a numerical value</small>
+          <small>Please enter a numerical value</small>
           <hr />
         </div>
         <div class="form-control freq__container">
           <div>
             <label for="withdrawl">Withdrawl Amount:</label>
-            <div class="inset__format">
+            <div class="dollar__format">
               <div class="dollar__sign">
                 <span class="currency">$</span>
               </div>
@@ -147,13 +140,14 @@
                 type="text"
                 name="withdrawl"
                 id="withdrawl"
-                placeholder="0"
-                value="0"
-                min="0"
+                size="15"
+                placeholder="1"
+                value="1"
+                min="1"
                 maxlength="10"
               />
             </div>
-            <small class="error__message">Please enter a numerical value</small>
+            <small>value MUST be greater than 0</small>
           </div>
           <div class="col freq">
             <label for="frequency">Withdrawl Fequency:</label>
@@ -166,24 +160,23 @@
         </div>
         <hr />
         <div class="form-control">
-          <label for="investment-return"> Expected Investment Return:</label>
+          <label for="investmentReturn"> Expected Investment Return:</label>
           <div class="percent__format">
             <input
               type="text"
               name="investment-return"
               id="investmentReturn"
+              size="10"
               placeholder="0.0"
               value="0.0"
               required
-              min="0"
-              max="99.9"
               maxlength="4"
             />
             <div class="percent__sign">
               <span class="currency">%</span>
             </div>
           </div>
-          <small class="error__message">Please enter a numerical value</small>
+          <small>Please enter a numerical value</small>
           <hr />
         </div>
         <div class="form-control">
@@ -193,44 +186,44 @@
               type="text"
               name="inflation"
               id="inflation"
+              size="10"
               placeholder="0.0"
               value="0.0"
               required
-              min="0"
-              max="99.9"
               maxlength="4"
+              disabled
             />
             <div class="percent__sign">
               <span class="currency">%</span>
             </div>
           </div>
-          <small class="error__message">Please enter a numerical value</small>
+          <small>Please enter a numerical value</small>
           <hr />
         </div>
         <div class="form-control">
-          <label for="tax-rate">Estimated Tax Rate:</label>
+          <label for="taxRate">Estimated Tax Rate:</label>
           <div class="percent__format">
             <input
               type="text"
               name="tax-rate"
               id="taxRate"
+              size="10"
               placeholder="0"
               value="0"
               required
-              min="0"
-              max="99.9"
               maxlength="4"
+              disabled
             />
             <div class="percent__sign">
               <span class="currency">%</span>
             </div>
           </div>
-          <small class="error__message">Please enter a numerical value</small>
+          <small">Please enter a numerical value</small>
         </div>
         <div class="button__container">
           <button class="savings__btn" type="button">Calculate</button>
         </div>
-        <p>Your money will last xx years</p>
+        <p id="durationResults">Your money will last xx years</p>
       </section>
       <section class="display__market">
         <p class="market__data">

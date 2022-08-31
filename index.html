@@ -12,11 +12,10 @@
     <!-- Scripts: -->
     <script async src="./scripts/luxon.js"></script>
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
-    <script defer src="./scripts/script.js"></script>
-    <script defer src="./scripts/dates.js" type="module"></script>
+    <script defer src="./scripts/script.js" type="module"></script>
+    <script defer src="./scripts/annuity.js" type="module"></script>
     <title>FERS Retirement Calculator</title>
   </head>
-
   <body>
     <header>
       <div class="container header__container">
@@ -41,7 +40,13 @@
       </div>
     </header>
     <main>
-      <form id="retirement-form" action="#" method="POST" autocomplete="off">
+      <form
+        id="retirementForm"
+        action="#"
+        method="POST"
+        autocomplete="off"
+        enctype="multipart/form-data"
+      >
         <div class="row">
           <section>
             <div class="container personal">
@@ -86,20 +91,19 @@
                 <div class="form-control age">
                   <label for="retirementAge">Retirement Age:</label>
                   <input
-                    type="number"
+                    type="text"
                     name="retirementAge"
                     id="retirementAge"
-                    placeholder="0"
-                    min="1"
-                    max="99"
-                    value=""
+                    size="5"
+                    value="1"
                     required
+                    maxlength="2"
                   />
-                  <small>Error Message</small>
+                  <small>Enter an age greater than 1</small>
                 </div>
               </div>
               <div class="info">
-                <label for="military-buyback">Military Buy back?</label>
+                <label for="milBuyback">Military Buy back?</label>
                 <select name="military-buyback" id="milBuyback">
                   <option value="false" selected>No</option>
                   <option value="true">Yes</option>
@@ -108,14 +112,14 @@
                   <label for="sickLeave">Current Sick Leave Balance:</label>
                   <span class="sickLeaveHours">
                     <input
-                      type="number"
+                      type="text"
                       name="sickLeave"
                       id="sickLeave"
+                      size="6"
                       value="0"
                       required
                       placeholder="0"
-                      min="0"
-                      max="9999"
+                      maxlength="4"
                     />
                     hrs
                   </span>
@@ -127,25 +131,47 @@
                       <span>$</span>
                     </div>
                     <input
-                      type="number"
+                      type="text"
                       name="high3"
                       id="high3"
+                      size="13"
                       value=""
                       required
                       placeholder="00,000"
-                      min="0"
-                      max="500000"
+                      maxlength="7"
                     />
                   </div>
-                  <small>Error Message</small>
+                  <small>Enter a valid numerical value</small>
                 </div>
                 <div>
-                  <label for="sbsa">Spousal Benefit Survivor Annuity:</label>
-                  <select name="sbsa" id="survivor-benefit">
+                  <label for="survivor-benefit"
+                    >Spousal Benefit Survivor Annuity:</label
+                  >
+                  <select name="survivor-benefit" id="survivor-benefit">
                     <option value="0">0%</option>
                     <option value="0.05">5%</option>
                     <option value="0.10" selected>10%</option>
                   </select>
+                </div>
+                <div>
+                  <h3>Retirement Annuity (RAS)</h3>
+                  <div>
+                    <label for="ssa">Montly Social Security Benefit: </label>
+                    <p style="font-style: italic">(page 2 of SSA statement)</p>
+                    <div class="dollar__format">
+                      <div class="dollar__sign">
+                        <span class="currency">$</span>
+                      </div>
+                      <input
+                      type="text"
+                      name="ssa"
+                      id="ssa"
+                      size="12"
+                      placeholder="0"
+                      value="0"
+                      maxlength="5"
+                    />
+                    </div>
                 </div>
               </div>
             </div>
@@ -163,77 +189,76 @@
                     value=""
                     required
                   />
-                  <small>Error Message</small>
+                  <small>Please enter a valid date</small>
                 </div>
                 <div class="form-control">
                   <label for="retirementDate">Retirement Date:</label>
                   <input
                     type="date"
-                    name="retiremenDate"
+                    name="retirementDate"
                     id="retirementDate"
                     value=""
                     required
                   />
-                  <small>Error Message</small>
+                  <small>Please enter a valid date</small>
                 </div>
               </div>
               <div class="dates-info military-dates display__toggle">
                 <div class="form-control">
-                  <label for="mil-start-date"
-                    >Military buyback start date:</label
-                  >
+                  <label for="milStartDate">Military buyback start date:</label>
                   <input
                     type="date"
-                    name="mil-start-date"
+                    name="milStartDate"
                     id="milStartDate"
                     value=""
                   />
                   <small>Error Message</small>
                 </div>
                 <div class="form-control">
-                  <label for="mil-end-date">Military buyback end date:</label>
+                  <label for="milEndDate">Military buyback end date:</label>
                   <input
                     type="date"
-                    name="mil-end-date"
+                    name="milEndDate"
                     id="milEndDate"
                     value=""
                   />
-                  <small>Error Message</small>
+                  <small>Please enter a valid date</small>
                 </div>
               </div>
               <div>
                 <button
                   type="button"
-                  class="dates__btn"
-                  name="datesButton"
-                  id="datesBtn"
+                  class="calculate__Btn"
+                  name="calculateButton"
+                  id="calculateBtn"
                 >
                   Calculate Time
                 </button>
+                <input id="form__submit" type="submit" value="Save Results" />
               </div>
             </div>
           </section>
           <section>
             <div class="container">
-              <div class="info">
-                <h2>Retirement Annuity (RAS)</h2>
+              <div class="results">
                 <div>
-                  <label for="ssa">Montly Social Security Benefit: </label>
-                  <p style="font-style: italic">(page 2 of SSA statement)</p>
-                  <div class="dollar__format">
-                    <div class="dollar__sign">
-                      <span class="currency">$</span>
-                    </div>
-                    <input
-                      type="number"
-                      name="ssa"
-                      placeholder="0"
-                      min="0"
-                      max="99999"
-                      id="ssa"
-                      value="0"
-                    />
+                  <h2>Results</h2>
+                  <h3>Total Service Time:</h3>
+                  <p class="total__time"></p>
+                  <div class="military__results display__toggle">
+                    <h4>Military</h4>
+                    <p class="mil__time__results">XX Years and XX Months</p>
                   </div>
+                  <hr />
+                </div>
+                <div id="annuity-percent">
+                  <h3>Estimated Annuity Percent:</h3>
+                  <p class="results__info total-percent"></p>
+                  <hr />
+                </div>
+                <div>
+                  <h3>Estimated Annuity Amount:</h3>
+                  <p class="results__info annuity-amount"></p>
                 </div>
                 <div class="ras__info">
                   <p class="ras__text">Montly RAS Amount:</p>
@@ -243,47 +268,17 @@
                   <p class="ras__text">Annual RAS amount:</p>
                   <p class="rasAnnual"></p>
                 </div>
-                <input id="form__submit" type="submit" value="Form Submit" />
               </div>
             </div>
           </section>
         </div>
-        <section>
-          <div class="container" style="max-width: 1200px">
-            <h2>Results:</h2>
-            <div class="info results">
-              <div>
-                <h3>Total Service Time:</h3>
-                <p class="total__time">XX Years and XX Months</p>
-                <h4>Federal</h4>
-                <p class="federal-time">XX Years and XX Months</p>
-                <div class="military__results display__toggle">
-                  <h4>Military</h4>
-                  <p class="mil__time__results">XX Years and XX Months</p>
-                </div>
-                <hr />
-              </div>
-              <!-- <div class="service-items" id="service-percent">
-                <h3>Total Service Percent:</h3>
-                <p class="results__info service-percent">XX.X %</p>
-                <hr />
-              </div> -->
-              <div id="annuity-percent">
-                <h3>Total Estimated Annuity:</h3>
-                <p class="results__info total-percent">XX.X%</p>
-                <hr />
-              </div>
-              <div>
-                <h3>Total Estimated Annuity:</h3>
-                <p class="results__info annuity-amount">$XX,XXX</p>
-              </div>
-            </div>
-          </div>
-        </section>
       </form>
+      <section>
+        <div class="container"></div>
+      </section>
     </main>
     <script>
-      const validate = new window.JustValidate("#retirement-form");
+      const validate = new window.JustValidate("#retirementForm");
       const validDate = window.JustValidatePluginDate;
     </script>
   </body>
