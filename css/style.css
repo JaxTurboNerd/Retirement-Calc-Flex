@@ -15,11 +15,15 @@ body {
 }
 
 header {
-  border-bottom: 1px solid lightslategray;
+  text-align: center;
+  padding: 1rem;
+}
+
+main {
+  border-top: 1px solid lightslategray;
 }
 
 section {
-  width: 100%;
   box-shadow: 0 0.5em 0.5em lightgray;
 }
 
@@ -29,14 +33,8 @@ button:hover {
 
 .container {
   margin: 0 auto;
-  width: 100%;
-  max-width: 1400px;
   text-align: center;
   padding: 1rem;
-}
-
-.tsp__outer-container {
-  margin-top: 2rem;
 }
 
 h2,
@@ -49,11 +47,15 @@ button {
   padding: 0.2em;
 }
 
-.nav-list {
+nav ul {
+  margin: 0 auto;
+  max-width: 300px;
+  display: flex;
+  display: -webkit-flex;
   list-style-type: none;
 }
 
-.list-item {
+li {
   background-color: rgb(66, 120, 191);
   max-width: 100px;
   border-radius: 1rem;
@@ -62,18 +64,18 @@ button {
   cursor: pointer;
 }
 
-.list-item a {
+li a {
   color: #fff;
   text-decoration: none;
   font-size: 0.75rem;
 }
 
-.list-item:hover {
+li:hover {
   opacity: 0.6;
   transition: 0.2s;
 }
 
-.banner-content p {
+.banner p {
   font-style: italic;
 }
 
@@ -192,20 +194,31 @@ span {
   margin: 0.5rem auto;
 }
 
-@media screen and (min-width: 700px) {
-  .nav-list,
+@media screen and (min-width: 750px) {
   .row {
     display: flex;
     display: -webkit-flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
   }
 
-  .list-item {
+  .first,
+  .second {
+    width: 45%;
+  }
+
+  .third {
+    width: 100%;
+  }
+
+  li {
     white-space: nowrap;
     /* padding top/horizontal/bottom: */
-    padding: 0.6em 2em 0.6em;
+    padding: 0.6em 1em 0.6em;
     max-width: none;
+    margin-right: 1rem;
   }
-  .list-item a {
+  li a {
     font-size: 0.8em;
   }
 
@@ -227,26 +240,16 @@ span {
   }
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1200px) {
   h1 {
     font-size: 3rem;
   }
 
-  .header__container {
-    width: 100%;
-    display: flex;
-    display: -webkit-flex;
+  section {
+    flex: 1;
   }
 
-  .banner {
-    margin-left: auto;
-  }
-
-  .nav {
-    margin-left: auto;
-  }
-
-  .list-item {
+  li + li {
     margin-left: 2rem;
   }
 }

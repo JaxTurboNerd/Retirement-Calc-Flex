@@ -18,25 +18,21 @@
   </head>
   <body>
     <header>
-      <div class="container header__container">
+      <div class="container row">
         <div class="banner">
-          <div class="banner-content">
-            <h1>FERS Retirement Calculator</h1>
-            <p>This website estimates the SCE FERS basic annuity figures.</p>
-          </div>
+          <h1>FERS Retirement Calculator</h1>
+          <p>This website estimates the SCE FERS basic annuity figures.</p>
         </div>
-        <div class="nav">
-          <nav>
-            <ul class="nav-list">
-              <li class="list-item">
-                <a href="tsp.html" target="_blank">TSP Calculator</a>
-              </li>
-              <li class="list-item">
-                <a href="https://www.tsp.gov" target="_blank">TSP Website</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <nav>
+          <ul>
+            <li>
+              <a href="tsp.html" target="_blank">TSP Calculator</a>
+            </li>
+            <li>
+              <a href="https://www.tsp.gov" target="_blank">TSP Website</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
     <main>
@@ -48,9 +44,9 @@
         enctype="multipart/form-data"
       >
         <div class="row">
-          <section>
-            <div class="container personal">
-              <h2 id="personalInfo">Personal Info</h2>
+          <section class="first">
+            <div class="container">
+              <h2>Personal Info</h2>
               <div class="info">
                 <div>
                   <label for="firstName">First Name:</label>
@@ -176,7 +172,7 @@
               </div>
             </div>
           </section>
-          <section class="col">
+          <section class="second">
             <div class="container">
               <div class="dates-info">
                 <h2>FERS Retirement Dates</h2>
@@ -238,7 +234,7 @@
               </div>
             </div>
           </section>
-          <section>
+          <section class="third">
             <div class="container">
               <div class="results">
                 <div>
@@ -270,7 +266,7 @@
                 </div>
               </div>
             </div>
-          </section>
+          </sectio>
         </div>
       </form>
       <section>
