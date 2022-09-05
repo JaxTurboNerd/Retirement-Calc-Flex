@@ -79,12 +79,14 @@ button {
 
 label {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   margin-bottom: 0.25rem;
 }
 
 input {
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   box-sizing: 0 1px 2px 0;
   border-radius: 4px;
@@ -105,6 +107,8 @@ input:focus {
   position: relative;
   display: block;
   margin: 0 auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 
@@ -113,6 +117,7 @@ input:focus {
   left: 0;
   padding-left: 0.25rem;
   display: flex;
+  display: -webkit-flex;
 }
 
 .dollar__format input {
@@ -168,6 +173,7 @@ span {
 
 .sickLeaveHours {
   display: inline-flex;
+  display: -webkit-inline-flex;
 }
 
 #sickLeave {
@@ -190,6 +196,7 @@ span {
   .nav-list,
   .row {
     display: flex;
+    display: -webkit-flex;
   }
 
   .list-item {
@@ -228,6 +235,7 @@ span {
   .header__container {
     width: 100%;
     display: flex;
+    display: -webkit-flex;
   }
 
   .banner {

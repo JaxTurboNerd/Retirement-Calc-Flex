@@ -108,132 +108,137 @@
           </div>
         </div>
       </section>
-      <section style="max-width: 50%">
-        <h2>How Long Will My Money Last?</h2>
-        <div class="form-control">
-          <label for="savingsBalance">Savings Balance:</label>
-          <div class="dollar__format">
-            <div class="dollar__sign">
-              <span class="currency">$</span>
-            </div>
-            <input
-              type="text"
-              name="savings-balance"
-              id="savingsBalance"
-              size="15"
-              placeholder="0"
-              value="0"
-              maxlength="10"
-            />
-          </div>
-          <small>Please enter a numerical value</small>
-          <hr />
-        </div>
-        <div class="form-control freq__container">
-          <div>
-            <label for="withdrawl">Withdrawl Amount:</label>
+      <section class="lower__section">
+        <div class="flex money__duration">
+          <div class="container user__input">
+            <h2>How Long Will My Money Last?</h2>
+            <div class="form-control">
+            <label for="savingsBalance">Savings Balance:</label>
             <div class="dollar__format">
               <div class="dollar__sign">
                 <span class="currency">$</span>
               </div>
               <input
                 type="text"
-                name="withdrawl"
-                id="withdrawl"
+                name="savings-balance"
+                id="savingsBalance"
                 size="15"
-                placeholder="1"
-                value="1"
-                min="1"
+                placeholder="0"
+                value="0"
                 maxlength="10"
               />
             </div>
-            <small>value MUST be greater than 0</small>
-          </div>
-          <div class="col freq">
-            <label for="frequency">Withdrawl Fequency:</label>
-            <select name="frequency" id="frequency">
-              <option value="once">Once</option>
-              <option value="month">Monthly</option>
-              <option value="year" selected>Yearly</option>
-            </select>
-          </div>
-        </div>
-        <hr />
-        <div class="form-control">
-          <label for="investmentReturn"> Expected Investment Return:</label>
-          <div class="percent__format">
-            <input
-              type="text"
-              name="investment-return"
-              id="investmentReturn"
-              size="10"
-              placeholder="0.0"
-              value="0.0"
-              required
-              maxlength="4"
-            />
-            <div class="percent__sign">
-              <span class="currency">%</span>
+            <small>Please enter a numerical value</small>
+            <hr />
             </div>
-          </div>
-          <small>Please enter a numerical value</small>
-          <hr />
-        </div>
-        <div class="form-control">
-          <label for="inflation">Inflation:</label>
-          <div class="percent__format">
-            <input
-              type="text"
-              name="inflation"
-              id="inflation"
-              size="10"
-              placeholder="0.0"
-              value="0.0"
-              required
-              maxlength="4"
-              disabled
-            />
-            <div class="percent__sign">
-              <span class="currency">%</span>
+            <div class="form-control freq__container">
+            <div>
+              <label for="withdrawl">Withdrawl Amount:</label>
+              <div class="dollar__format">
+                <div class="dollar__sign">
+                  <span class="currency">$</span>
+                </div>
+                <input
+                  type="text"
+                  name="withdrawl"
+                  id="withdrawl"
+                  size="15"
+                  placeholder="1"
+                  value="1"
+                  min="1"
+                  maxlength="10"
+                />
+              </div>
+              <small>value MUST be greater than 0</small>
             </div>
-          </div>
-          <small>Please enter a numerical value</small>
-          <hr />
-        </div>
-        <div class="form-control">
-          <label for="taxRate">Estimated Tax Rate:</label>
-          <div class="percent__format">
-            <input
-              type="text"
-              name="tax-rate"
-              id="taxRate"
-              size="10"
-              placeholder="0"
-              value="0"
-              required
-              maxlength="4"
-              disabled
-            />
-            <div class="percent__sign">
-              <span class="currency">%</span>
+            <div class="col freq">
+              <label for="frequency">Withdrawl Fequency:</label>
+              <select name="frequency" id="frequency">
+                <option value="once">Once</option>
+                <option value="month">Monthly</option>
+                <option value="year" selected>Yearly</option>
+              </select>
             </div>
+            </div>
+            <hr />
+            <div class="form-control">
+              <label for="investmentReturn"> Expected Investment Return:</label>
+              <div class="percent__format">
+                <input
+                  type="text"
+                  name="investment-return"
+                  id="investmentReturn"
+                  size="10"
+                  placeholder="0.0"
+                  value="0.0"
+                  required
+                  maxlength="4"
+                />
+                <div class="percent__sign">
+                  <span class="currency">%</span>
+                </div>
+              </div>
+              <small>Please enter a numerical value</small>
+              <hr />
+            </div>
+            <div class="form-control">
+              <label for="inflation">Inflation:</label>
+              <div class="percent__format">
+                <input
+                  type="text"
+                  name="inflation"
+                  id="inflation"
+                  size="10"
+                  placeholder="0.0"
+                  value="0.0"
+                  required
+                  maxlength="4"
+                  disabled
+                />
+                <div class="percent__sign">
+                  <span class="currency">%</span>
+                </div>
+              </div>
+              <small>Please enter a numerical value</small>
+              <hr />
+            </div>
+            <div class="form-control">
+              <label for="taxRate">Estimated Tax Rate:</label>
+              <div class="percent__format">
+                <input
+                  type="text"
+                  name="tax-rate"
+                  id="taxRate"
+                  size="10"
+                  placeholder="0"
+                  value="0"
+                  required
+                  maxlength="4"
+                  disabled
+                />
+                <div class="percent__sign">
+                  <span class="currency">%</span>
+                </div>
+              </div>
+              <small">Please enter a numerical value</small>
+            </div>
+            <div class="button__container">
+              <button class="savings__btn" type="button">Calculate</button>
+            </div>
+            <p id="durationResults">Your money will last xx years</p>
           </div>
-          <small">Please enter a numerical value</small>
+            <div class="container results market__data">
+              <p>
+              <span style="display: block">Current Market Data:</span>
+              <span class="market__info" id="sp500"></span>
+              <span class="market__info" id="djia"></span>
+              <span class="market__info" id="nasdaq"></span>
+              <span class="market__info" id="russell"></span>
+            </p>
+            </div>
         </div>
-        <div class="button__container">
-          <button class="savings__btn" type="button">Calculate</button>
-        </div>
-        <p id="durationResults">Your money will last xx years</p>
       </section>
-      <section class="display__market">
-        <p class="market__data">
-          <span style="display: block">Current Market Data:</span>
-          <span class="market__info" id="sp500"></span>
-          <span class="market__info" id="djia"></span>
-          <span class="market__info" id="nasdaq"></span>
-          <span class="market__info" id="russell"></span>
-        </p>
-      </section>
+  
       <!-- <section class="marquee">
       <div class="marquee-container">
         <hr />

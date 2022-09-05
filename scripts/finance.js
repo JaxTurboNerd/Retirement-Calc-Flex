@@ -106,21 +106,26 @@ function calculateInvestmentDuration() {
   const balance = parseFloat(savingsBalance.value.replace(/,/g, ""));
   const withdrawlSum = parseFloat(withdrawlAmount.value.replace(/,/g, ""));
   const interestRate = parseFloat(investmentReturn.value) * 0.01;
-  const numerator = Math.log(1 - (interestRate * balance) / withdrawlSum);
-  const denominator = Math.log(1 + interestRate);
-  console.log(
-    `balance: ${balance}, withdrawl: ${withdrawlSum}, rate: ${interestRate}`
-  );
-  console.log(`numerator: ${numerator}, denominator: ${denominator}`);
+  // const numerator = Math.log(1 - (interestRate * balance) / withdrawlSum);
+  // const denominator = Math.log(1 + interestRate);
+  // console.log(
+  //   `balance: ${balance}, withdrawl: ${withdrawlSum}, rate: ${interestRate}`
+  // );
+  // console.log(`numerator: ${numerator}, denominator: ${denominator}`);
 
   //Need to check for zeros entered by user...will result in NaN
   //Withdrawl amount cannot be zero...division by zero = NaN
   //code here:
-
-  const periods = -(numerator / denominator);
+  const interimValue = withdrawlSum / (withdrawlSum - balance * interestRate);
+  console.log(interimValue);
+  const timePeriod =
+    -Math.log(-interimValue) * (1 / Math.log(1 + interestRate));
+  // const periods = -(numerator / denominator);
   document.querySelector(
     "#durationResults"
-  ).innerHTML = `Your savings will last ${yearsFormat.format(periods)} years.`;
+  ).innerHTML = `Your savings will last ${yearsFormat.format(
+    timePeriod
+  )} years.`;
 }
 
 //Event Listeners:

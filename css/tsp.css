@@ -81,6 +81,8 @@ hr {
   position: relative;
   display: block;
   margin: 0 auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 
@@ -95,6 +97,8 @@ hr {
   position: relative;
   display: flex;
   margin: 0 auto;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
 }
 
@@ -210,8 +214,6 @@ button:active {
 
 @keyframes marquee {
   0% {
-    -moz-transform: translateX(100%);
-    -webkit-transform: translateX(100%);
     transform: translateX(100%);
   }
 
@@ -223,17 +225,6 @@ button:active {
     font-size: 1em;
   }
 
-  100% {
-    -moz-transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-  }
-}
-
-@-moz-keyframes marquee {
-  0% {
-    transform: translateX(100%);
-  }
   100% {
     transform: translateX(-100%);
   }
@@ -278,5 +269,9 @@ button:active {
 
   .freq {
     margin: 0;
+  }
+
+  .market__data {
+    max-width: 20%;
   }
 }
