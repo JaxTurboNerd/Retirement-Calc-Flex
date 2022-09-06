@@ -7,11 +7,11 @@ let milStartDate = document.querySelector("#milStartDate");
 let milEndDate = document.querySelector("#milEndDate");
 let milService = document.querySelector("#milBuyback");
 let calculateButton = document.querySelector("#calculateBtn");
-let federalTime = document.querySelector(".federal-time");
+let federalTime = document.querySelector("#federalTime");
 let annuityPercent = document.querySelector(".total-percent");
 let annuityAmount = document.querySelector(".annuity-amount");
 let militaryTime = document.querySelector(".mil__time__results");
-let totalServiceTime = document.querySelector(".total__time");
+let totalServiceTime = document.querySelector("#totalTime");
 let retirementAge = document.querySelector("#retirementAge");
 let sickLeave = document.querySelector("#sickLeave");
 let survivorBenefit = document.querySelector("#survivor-benefit");
@@ -31,6 +31,7 @@ export let servicePercent;
 export let finalAnnuity;
 export let rasMonthly;
 export let rasAnnual;
+let rasDecimal;
 
 //Number formatting:
 let usCurrency = Intl.NumberFormat("en-US", {
@@ -222,9 +223,11 @@ const servicePercentage = () => {
 
 const totalAnnuity = (high3, survivorBenefit) => {
   //remove any commas from the user input:
-  let salary = parseInt(high3.value.replace(/,/g, ""));
-  finalAnnuity = salary * (servicePercent * 0.01);
-  finalAnnuity = finalAnnuity - finalAnnuity * survivorBenefit.value;
+  const salary = parseInt(high3.value.replace(/,/g, ""));
+  let finalAnnuity = salary * (servicePercent * 0.01);
+  finalAnnuity =
+    finalAnnuity - finalAnnuity * survivorBenefit.value + rasDecimal;
+  console.log("ras decimal: " + rasDecimal + " final annuity: " + finalAnnuity);
   return usCurrency.format(finalAnnuity);
 };
 
@@ -239,6 +242,8 @@ const calculateRAS = () => {
 
   let ssaValue = parseInt(ssa.value.replace(/,/g, ""));
   let rasFactor = Math.round(federalYears + federalMonths / 12) / 40;
+  rasDecimal = ssaValue * rasFactor * 12;
+  console.log("in function ras: " + rasDecimal);
   rasMonthly = usCurrency.format(ssaValue * rasFactor);
   rasAnnual = usCurrency.format(ssaValue * rasFactor * 12);
 };
@@ -280,13 +285,13 @@ calculateButton.addEventListener("click", () => {
     //check proper dates order and calculate total service time
     if (!foundError) {
       fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
-      // federalTime.innerHTML = fedServiceTime;
+      federalTime.innerHTML = fedServiceTime;
       totalServiceTime.innerHTML = fedServiceTime;
       annuityPercent.innerHTML = servicePercentage();
-      annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
       calculateRAS();
       monthlyRAS.innerHTML = rasMonthly;
       annualRAS.innerHTML = rasAnnual;
+      annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
     }
   }
 });

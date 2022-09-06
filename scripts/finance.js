@@ -244,6 +244,6 @@ const indexOptions = {
 //     document.querySelector(
 //       "#russell"
 //     ).innerHTML = `${russellTitle}: ${russellValue}`;
-//     // console.log(response);
+//     console.log(response);
 //   })
 //   .catch((err) => console.error(err));

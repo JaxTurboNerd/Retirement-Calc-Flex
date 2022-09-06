@@ -54,7 +54,7 @@
                     type="text"
                     name="firstName"
                     id="firstName"
-                    value=""
+                    value="Gregory"
                     placeholder="First"
                     minlength="1"
                     maxlength="30"
@@ -70,6 +70,7 @@
                     placeholder="I"
                     minlength="0"
                     maxlength="1"
+                    value="E"
                   />
                 </div>
                 <div>
@@ -82,6 +83,7 @@
                     required
                     minlength="1"
                     maxlength="30"
+                    value="Boyd"
                   />
                 </div>
                 <div class="form-control age">
@@ -91,7 +93,7 @@
                     name="retirementAge"
                     id="retirementAge"
                     size="5"
-                    value="1"
+                    value="52"
                     required
                     maxlength="2"
                   />
@@ -112,7 +114,7 @@
                       name="sickLeave"
                       id="sickLeave"
                       size="6"
-                      value="0"
+                      value="200"
                       required
                       placeholder="0"
                       maxlength="4"
@@ -131,7 +133,7 @@
                       name="high3"
                       id="high3"
                       size="13"
-                      value=""
+                      value="150000"
                       required
                       placeholder="00,000"
                       maxlength="7"
@@ -164,7 +166,7 @@
                       id="ssa"
                       size="12"
                       placeholder="0"
-                      value="0"
+                      value="2000"
                       maxlength="5"
                     />
                     </div>
@@ -182,7 +184,7 @@
                     type="date"
                     name="enterOnDate"
                     id="enterOnDate"
-                    value=""
+                    value="2002-01-13"
                     required
                   />
                   <small>Please enter a valid date</small>
@@ -193,7 +195,7 @@
                     type="date"
                     name="retirementDate"
                     id="retirementDate"
-                    value=""
+                    value="2022-01-31"
                     required
                   />
                   <small>Please enter a valid date</small>
@@ -228,7 +230,7 @@
                   name="calculateButton"
                   id="calculateBtn"
                 >
-                  Calculate Time
+                  Calculate
                 </button>
                 <input id="form__submit" type="submit" value="Save Results" />
               </div>
@@ -237,15 +239,28 @@
           <section class="third">
             <div class="container">
               <div class="results">
-                <div>
+                <div class="time__results">
                   <h2>Results</h2>
                   <h3>Total Service Time:</h3>
-                  <p class="total__time"></p>
+                  <p id="totalTime"></p>
+                  <div class="federal__time">
+                    <h4>Federal:</h4>
+                    <p id="federalTime"></p>
+                  </div>
+                  
                   <div class="military__results display__toggle">
                     <h4>Military</h4>
-                    <p class="mil__time__results">XX Years and XX Months</p>
+                    <p class="mil__time__results"></p>
                   </div>
                   <hr />
+                </div>
+                <div class="ras__info">
+                  <p class="ras__text">Montly RAS Amount:</p>
+                  <p class="rasMonthly"></p>
+                </div>
+                <div class="ras__info">
+                  <p class="ras__text">Annual RAS amount:</p>
+                  <p class="rasAnnual"></p>
                 </div>
                 <div id="annuity-percent">
                   <h3>Estimated Annuity Percent:</h3>
@@ -256,14 +271,7 @@
                   <h3>Estimated Annuity Amount:</h3>
                   <p class="results__info annuity-amount"></p>
                 </div>
-                <div class="ras__info">
-                  <p class="ras__text">Montly RAS Amount:</p>
-                  <p class="rasMonthly"></p>
-                </div>
-                <div class="ras__info">
-                  <p class="ras__text">Annual RAS amount:</p>
-                  <p class="rasAnnual"></p>
-                </div>
+                
               </div>
             </div>
           </sectio>

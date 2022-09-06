@@ -44,7 +44,7 @@ hr {
 }
 
 button {
-  padding: 0.2em;
+  padding: 0.2em 0.3em;
 }
 
 nav ul {
@@ -187,11 +187,23 @@ span {
 }
 
 .ras__info {
-  margin: 1rem auto;
+  margin: 0 auto;
 }
 
 .results p {
-  margin: 0.5rem auto;
+  margin: 0 auto;
+}
+
+.results h3 {
+  margin: 0 auto;
+}
+
+.time__results p {
+  margin-bottom: 0.5rem;
+}
+
+.military__results {
+  padding: 0.5rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -236,7 +248,7 @@ span {
   }
 
   .results > div {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 }
 

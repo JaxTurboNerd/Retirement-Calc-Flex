@@ -24,6 +24,7 @@ let enterOnDate = document.querySelector("#enterOnDate");
 let retireDate = document.querySelector("#retirementDate");
 let milStartDate = document.querySelector("#milStartDate");
 let milEndDate = document.querySelector("#milEndDate");
+const form = document.querySelector("#retirementForm");
 
 //variable declarations:
 const integerElements = [retirementAge, sickLeave, high3, ssa];
@@ -84,6 +85,30 @@ dateElements.forEach((input) => {
   input.addEventListener("change", () => {
     checkValidDate(input);
   });
+});
+
+//Handle form data:
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+  //Append calculated results to the formData object:
+  formData.append("annuityPercent", servicePercent);
+  formData.append("annuityAmount", finalAnnuity);
+  formData.append("federalTime", fedServiceTime);
+  formData.append("militaryTime", milServiceTime);
+  formData.append("rasMonthly", rasMonthly);
+  formData.append("rasAnnual", rasAnnual);
+
+  //create instance of URLSearchParams with the form information
+  const payload = new URLSearchParams(formData);
+  //simulated endpoint request/response testing service
+  fetch("http://httpbin.org/post", {
+    method: "POST",
+    body: payload,
+  })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
 });
 
 //Form Validation:
@@ -172,28 +197,3 @@ validation
       errorMessage: "Please enter your Retirement Date.",
     },
   ]);
-
-//Handle form data:
-const form = document.querySelector("#retirementForm");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const formData = new FormData(form);
-  //Append calculated results to the formData object:
-  formData.append("annuityPercent", servicePercent);
-  formData.append("annuityAmount", finalAnnuity);
-  formData.append("federalTime", fedServiceTime);
-  formData.append("militaryTime", milServiceTime);
-  formData.append("rasMonthly", rasMonthly);
-  formData.append("rasAnnual", rasAnnual);
-  //create instance of URLSearchParams with the data form information
-  const payload = new URLSearchParams(formData);
-
-  //simulated endpoint request/response testing service
-  fetch("http://httpbin.org/post", {
-    method: "POST",
-    body: payload,
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
-});
