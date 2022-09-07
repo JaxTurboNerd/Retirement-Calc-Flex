@@ -197,6 +197,14 @@ button:active {
   border: 1px solid red;
 }
 
+.market__data {
+  max-width: 350px;
+  margin-top: 50%;
+  border: 1px solid lightgray;
+  border-radius: 1em;
+  box-shadow: 1px 1px 2px 1px gray;
+}
+
 .market__info {
   display: block;
 }
@@ -255,11 +263,14 @@ button:active {
   }
   .results {
     max-width: 30%;
-    margin-right: 15%;
     padding: 2em;
     border: 1px solid lightgray;
     border-radius: 1em;
     box-shadow: 1px 1px 2px 1px gray;
+  }
+
+  .market__data {
+    max-width: none;
   }
 
   .freq__container {
@@ -269,9 +280,5 @@ button:active {
 
   .freq {
     margin: 0;
-  }
-
-  .market__data {
-    max-width: 20%;
   }
 }
