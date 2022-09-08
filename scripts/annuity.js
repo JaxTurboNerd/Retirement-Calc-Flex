@@ -269,29 +269,37 @@ calculateButton.addEventListener("click", () => {
       checkValidDate(milEndDate);
     }
     if (!foundError) {
-      //check proper dates order and calculates total service time
-      fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
-      milServiceTime = calculateTime(milStartDate, milEndDate, true);
-      //federalTime.innerHTML = fedServiceTime;
-      militaryTime.innerHTML = milServiceTime;
-      totalServiceTime.innerHTML = combinedTime();
-      annuityPercent.innerHTML = servicePercentage();
-      annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
-      calculateRAS();
-      monthlyRAS.innerHTML = rasMonthly;
-      annualRAS.innerHTML = rasAnnual;
+      try {
+        //check proper dates order and calculates total service time
+        fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
+        milServiceTime = calculateTime(milStartDate, milEndDate, true);
+        //federalTime.innerHTML = fedServiceTime;
+        militaryTime.innerHTML = milServiceTime;
+        totalServiceTime.innerHTML = combinedTime();
+        annuityPercent.innerHTML = servicePercentage();
+        annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
+        calculateRAS();
+        monthlyRAS.innerHTML = rasMonthly;
+        annualRAS.innerHTML = rasAnnual;
+      } catch (error) {
+        console.log(error);
+      }
     }
   } else {
     //check proper dates order and calculate total service time
     if (!foundError) {
-      fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
-      federalTime.innerHTML = fedServiceTime;
-      totalServiceTime.innerHTML = fedServiceTime;
-      annuityPercent.innerHTML = servicePercentage();
-      calculateRAS();
-      monthlyRAS.innerHTML = rasMonthly;
-      annualRAS.innerHTML = rasAnnual;
-      annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
+      try {
+        fedServiceTime = calculateTime(enterOnDate, retirementDate, false);
+        federalTime.innerHTML = fedServiceTime;
+        totalServiceTime.innerHTML = fedServiceTime;
+        annuityPercent.innerHTML = servicePercentage();
+        calculateRAS();
+        monthlyRAS.innerHTML = rasMonthly;
+        annualRAS.innerHTML = rasAnnual;
+        annuityAmount.innerHTML = totalAnnuity(highThree, survivorBenefit);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 });
