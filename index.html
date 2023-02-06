@@ -23,7 +23,7 @@
           <h1>FERS Retirement Calculator</h1>
           <p>This website estimates the SCE FERS basic annuity figures.</p>
         </div>
-        <nav>
+        <!-- <nav>
           <ul>
             <li>
               <a href="tsp.html" target="_blank">TSP Calculator</a>
@@ -32,7 +32,7 @@
               <a href="https://www.tsp.gov" target="_blank">TSP Website</a>
             </li>
           </ul>
-        </nav>
+        </nav> -->
       </div>
     </header>
     <main>
@@ -48,7 +48,7 @@
             <div class="container">
               <h2>Personal Info</h2>
               <div class="info">
-                <div>
+                <!-- <div>
                   <label for="firstName">First Name:</label>
                   <input
                     type="text"
@@ -85,7 +85,7 @@
                     maxlength="30"
                     value="Boyd"
                   />
-                </div>
+                </div> -->
                 <div class="form-control age">
                   <label for="retirementAge">Retirement Age:</label>
                   <input
@@ -101,27 +101,6 @@
                 </div>
               </div>
               <div class="info">
-                <label for="milBuyback">Military Buy back?</label>
-                <select name="military-buyback" id="milBuyback">
-                  <option value="false" selected>No</option>
-                  <option value="true">Yes</option>
-                </select>
-                <div>
-                  <label for="sickLeave">Current Sick Leave Balance:</label>
-                  <span class="sickLeaveHours">
-                    <input
-                      type="text"
-                      name="sickLeave"
-                      id="sickLeave"
-                      size="6"
-                      value="200"
-                      required
-                      placeholder="0"
-                      maxlength="4"
-                    />
-                    hrs
-                  </span>
-                </div>
                 <div class="form-control">
                   <label for="high3">High-3 Average Salary</label>
                   <div class="dollar__format">
@@ -142,6 +121,22 @@
                   <small>Enter a valid numerical value</small>
                 </div>
                 <div>
+                  <label for="sickLeave">Current Sick Leave Balance:</label>
+                  <span class="sickLeaveHours">
+                    <input
+                      type="text"
+                      name="sickLeave"
+                      id="sickLeave"
+                      size="6"
+                      value="200"
+                      required
+                      placeholder="0"
+                      maxlength="4"
+                    />
+                    hrs
+                  </span>
+                </div>
+                <div>
                   <label for="survivor-benefit"
                     >Spousal Benefit Survivor Annuity:</label
                   >
@@ -150,6 +145,13 @@
                     <option value="0.05">5%</option>
                     <option value="0.10" selected>10%</option>
                   </select>
+                </div>
+                <div>
+                  <label for="milBuyback">Military Buy back?</label>
+                  <select name="military-buyback" id="milBuyback">
+                  <option value="false" selected>No</option>
+                  <option value="true">Yes</option>
+                </select>
                 </div>
                 <div>
                   <h3>Retirement Annuity (RAS)</h3>
@@ -169,7 +171,7 @@
                       value="2000"
                       maxlength="5"
                     />
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -226,13 +228,12 @@
               <div>
                 <button
                   type="button"
-                  class="calculate__Btn"
                   name="calculateButton"
                   id="calculateBtn"
                 >
                   Calculate
                 </button>
-                <input id="form__submit" type="submit" value="Save Results" />
+                <!-- <input id="form__submit" type="submit" value="Save Results" /> -->
               </div>
             </div>
           </section>
@@ -254,14 +255,7 @@
                   </div>
                   <hr />
                 </div>
-                <div class="ras__info">
-                  <p class="ras__text">Montly RAS Amount:</p>
-                  <p class="rasMonthly"></p>
-                </div>
-                <div class="ras__info">
-                  <p class="ras__text">Annual RAS amount:</p>
-                  <p class="rasAnnual"></p>
-                </div>
+                
                 <div id="annuity-percent">
                   <h3>Estimated Annuity Percent:</h3>
                   <p class="results__info total-percent"></p>
@@ -271,7 +265,14 @@
                   <h3>Estimated Annuity Amount:</h3>
                   <p class="results__info annuity-amount"></p>
                 </div>
-                
+                <div class="ras__info">
+                  <p class="ras__text">Montly RAS Amount:</p>
+                  <p class="rasMonthly"></p>
+                </div>
+                <div class="ras__info">
+                  <p class="ras__text">Annual RAS amount:</p>
+                  <p class="rasAnnual"></p>
+                </div>
               </div>
             </div>
           </sectio>
