@@ -154,10 +154,14 @@ span {
 #ssa {
   margin-top: 0.35rem;
 }
+.dates-info {
+  margin-bottom: 1.5em;
+}
 .dates-info input {
   margin: 0 auto;
 }
 
+/* Used to hide/display Date errors */
 .form-control {
   position: relative;
 }
@@ -171,6 +175,24 @@ span {
 }
 
 .form-control.error small {
+  color: red;
+  visibility: visible;
+}
+
+/* Used to hide/display Military Date errors */
+.form-control-mil {
+  position: relative;
+}
+
+.form-control-mil small {
+  visibility: hidden;
+}
+
+.form-control-mil.error input {
+  border-color: red;
+}
+
+.form-control-mil.error small {
   color: red;
   visibility: visible;
 }

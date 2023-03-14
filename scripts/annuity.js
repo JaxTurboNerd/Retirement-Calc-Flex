@@ -19,6 +19,10 @@ let highThree = document.querySelector("#high3");
 let ssa = document.querySelector("#ssa");
 let monthlyRAS = document.querySelector(".rasMonthly");
 let annualRAS = document.querySelector(".rasAnnual");
+let dateError = document.querySelector(".date-error");
+let orderErrorSmall = document.querySelector(".order-error");
+let milDateError = document.querySelector(".mil-date-error");
+let milOrderErrorSmall = document.querySelector(".mil-order-error");
 
 //Variables declarations:
 let foundError = false;
@@ -72,18 +76,70 @@ function checkValidInput(input) {
   }
 }
 
-function showError(input) {
-  //check if the input has id=#high3
-  if (input.id === "high3") {
-    const formControl = input.parentElement.parentElement;
-    formControl.className = "form-control error";
+//LUXON-Library functions:
+//Check for a valid date:
+export function checkValidDate(date) {
+  const workingDate = luxon.DateTime.fromISO(date.value);
+  if (!workingDate.isValid) {
+    foundError = true;
+    showError(date, "Please enter a valid date", false);
+    return;
   } else {
-    const formControl = input.parentElement;
-    formControl.className = "form-control error";
+    foundError = false;
+    resetClass(date);
   }
 }
 
-//vanill js
+function checkDateOrder(start, end) {
+  const startDate = luxon.DateTime.fromISO(start.value);
+  const endDate = luxon.DateTime.fromISO(end.value);
+  //create Interval instance from the DateTime instances, this will be
+  //used to check proper date order
+  const datesInterval = luxon.Interval.fromDateTimes(startDate, endDate);
+
+  // Check for proper date order using invalid method:
+  if (!datesInterval.isValid) {
+    foundError = true;
+    showError(end, "The end date must be after the start date", true);
+    return;
+  } else {
+    foundError = false;
+    resetClass(end);
+  }
+}
+
+function showError(input, message, isOrderError) {
+  const inputName = input.id;
+  //check if the input has id=#high3
+  if (inputName === "high3") {
+    const formControl = input.parentElement.parentElement;
+    formControl.className = "form-control error";
+  }
+  //check that the input name is NOT one of the military dates:
+  if (inputName.includes("mil")) {
+    //Military Dates errors:
+    if (isOrderError) {
+      const formControl = input.parentElement;
+      formControl.className = "form-control-mil error";
+      milOrderErrorSmall.innerHTML = message;
+    } else {
+      const formControl = input.parentElement;
+      formControl.className = "form-control-mil error";
+      milDateError.innerHTML = message;
+    }
+  } else {
+    if (isOrderError) {
+      const formControl = input.parentElement;
+      formControl.className = "form-control error";
+      orderErrorSmall.innerHTML = message;
+    } else {
+      const formControl = input.parentElement;
+      formControl.className = "form-control error";
+      dateError.innerHTML = message;
+    }
+  }
+}
+
 function resetClass(input) {
   //check if the input has id=#high3
   if (input.id === "high3") {
@@ -92,20 +148,6 @@ function resetClass(input) {
   } else {
     const formControl = input.parentElement;
     formControl.className = "form-control";
-  }
-}
-
-//LUXON-Library functions:
-//Check for a valid date:
-export function checkValidDate(date) {
-  const workingDate = luxon.DateTime.fromISO(date.value);
-  if (!workingDate.isValid) {
-    foundError = true;
-    showError(date);
-    return;
-  } else {
-    foundError = false;
-    resetClass(date);
   }
 }
 
@@ -119,24 +161,12 @@ const calculateTime = (start, end, isMilitaryTime) => {
   } else {
     additionalDays = Math.round(sickLeave.value / 5.8);
   }
+
   //create DateTime instances from ISO values:
   const startDate = luxon.DateTime.fromISO(start.value);
   const endDate = luxon.DateTime.fromISO(end.value);
-  //create Interval instance from the DateTime instances:
+  //create Interval instance from the DateTime instance
   const serviceTime = luxon.Interval.fromDateTimes(startDate, endDate);
-
-  // Check for proper date order using invalid method:
-  if (!serviceTime.isValid) {
-    // const reason = serviceTime.invalidReason;
-    showError(
-      end,
-      "Please check your dates.  The end date cannot be before your start date"
-    );
-    // console.log("invalid reason: " + reason);
-    return;
-  } else {
-    resetClass(end);
-  }
 
   const timeObj = serviceTime
     .toDuration(["years", "months", "days"])
@@ -227,7 +257,6 @@ const totalAnnuity = (high3, survivorBenefit) => {
   let finalAnnuity = salary * (servicePercent * 0.01);
   finalAnnuity =
     finalAnnuity - finalAnnuity * survivorBenefit.value + rasDecimal;
-  console.log("ras decimal: " + rasDecimal + " final annuity: " + finalAnnuity);
   return usCurrency.format(finalAnnuity);
 };
 
@@ -243,7 +272,6 @@ const calculateRAS = () => {
   let ssaValue = parseInt(ssa.value.replace(/,/g, ""));
   let rasFactor = Math.round(federalYears + federalMonths / 12) / 40;
   rasDecimal = ssaValue * rasFactor * 12;
-  console.log("in function ras: " + rasDecimal);
   rasMonthly = usCurrency.format(ssaValue * rasFactor);
   rasAnnual = usCurrency.format(ssaValue * rasFactor * 12);
 };
@@ -261,12 +289,19 @@ calculateButton.addEventListener("click", () => {
   if (!foundError) {
     checkValidDate(retirementDate);
   }
+  //check for proper date order:
+  if (!foundError) {
+    checkDateOrder(enterOnDate, retirementDate);
+  }
 
   //Check for null military dates only if the user selected buyback = 'yes'
   if (milService.value === "true") {
     checkValidDate(milStartDate);
     if (!foundError) {
       checkValidDate(milEndDate);
+    }
+    if (!foundError) {
+      checkDateOrder(milStartDate, milEndDate);
     }
     if (!foundError) {
       try {

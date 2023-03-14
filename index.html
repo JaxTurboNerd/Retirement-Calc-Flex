@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="https://use.typekit.net/ycb5qtw.css" />
     <!-- Scripts: -->
     <script async src="./scripts/luxon.js"></script>
-    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
     <script defer src="./scripts/script.js" type="module"></script>
     <script defer src="./scripts/annuity.js" type="module"></script>
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+    <!-- <script src="https://unpkg.com/browse/just-validate-plugin-date@1.2.0/dist/just-validate-plugin-date.production.min.js"></script> -->
     <title>FERS Retirement Calculator</title>
   </head>
   <body>
@@ -21,7 +22,7 @@
       <div class="container row">
         <div class="banner">
           <h1>FERS Retirement Calculator</h1>
-          <p>This website estimates the SCE FERS basic annuity figures.</p>
+          <p>This calculator estimates the Special Category Employee (SCE) FERS basic annuity figures.</p>
         </div>
         <!-- <nav>
           <ul>
@@ -42,6 +43,7 @@
         method="POST"
         autocomplete="off"
         enctype="multipart/form-data"
+        novalidate="nonvalidate"
       >
         <div class="row">
           <section class="first">
@@ -86,18 +88,16 @@
                     value="Boyd"
                   />
                 </div> -->
-                <div class="form-control age">
+                <div>
                   <label for="retirementAge">Retirement Age:</label>
                   <input
                     type="text"
                     name="retirementAge"
                     id="retirementAge"
                     size="5"
-                    value="52"
-                    required
                     maxlength="2"
+                    value="52"
                   />
-                  <small>Enter an age greater than 1</small>
                 </div>
               </div>
               <div class="info">
@@ -111,14 +111,13 @@
                       type="text"
                       name="high3"
                       id="high3"
-                      size="13"
-                      value="150000"
+                      size="10"
+                      value="150,000"
                       required
                       placeholder="00,000"
                       maxlength="7"
                     />
                   </div>
-                  <small>Enter a valid numerical value</small>
                 </div>
                 <div>
                   <label for="sickLeave">Current Sick Leave Balance:</label>
@@ -128,10 +127,9 @@
                       name="sickLeave"
                       id="sickLeave"
                       size="6"
-                      value="200"
-                      required
                       placeholder="0"
                       maxlength="4"
+                      value="200"
                     />
                     hrs
                   </span>
@@ -149,7 +147,7 @@
                 <div>
                   <label for="milBuyback">Military Buy back?</label>
                   <select name="military-buyback" id="milBuyback">
-                  <option value="false" selected>No</option>
+                  <option value="false">No</option>
                   <option value="true">Yes</option>
                 </select>
                 </div>
@@ -189,7 +187,7 @@
                     value="2002-01-13"
                     required
                   />
-                  <small>Please enter a valid date</small>
+                  <small class="date-error"></small>
                 </div>
                 <div class="form-control">
                   <label for="retirementDate">Retirement Date:</label>
@@ -200,11 +198,11 @@
                     value="2022-01-31"
                     required
                   />
-                  <small>Please enter a valid date</small>
+                  <small class="date-error order-error"></small>
                 </div>
               </div>
               <div class="dates-info military-dates display__toggle">
-                <div class="form-control">
+                <div class="form-control-mil">
                   <label for="milStartDate">Military buyback start date:</label>
                   <input
                     type="date"
@@ -212,9 +210,9 @@
                     id="milStartDate"
                     value=""
                   />
-                  <small>Error Message</small>
+                  <small class="mil-date-error"></small>
                 </div>
-                <div class="form-control">
+                <div class="form-control-mil">
                   <label for="milEndDate">Military buyback end date:</label>
                   <input
                     type="date"
@@ -222,12 +220,12 @@
                     id="milEndDate"
                     value=""
                   />
-                  <small>Please enter a valid date</small>
+                  <small class="mil-date-error mil-order-error"></small>
                 </div>
               </div>
               <div>
                 <button
-                  type="button"
+                  type="submit"
                   name="calculateButton"
                   id="calculateBtn"
                 >
@@ -262,7 +260,7 @@
                   <hr />
                 </div>
                 <div>
-                  <h3>Estimated Annuity Amount:</h3>
+                  <h3>Estimated Yearly Annuity:</h3>
                   <p class="results__info annuity-amount"></p>
                 </div>
                 <div class="ras__info">
@@ -284,7 +282,6 @@
     </main>
     <script>
       const validate = new window.JustValidate("#retirementForm");
-      const validDate = window.JustValidatePluginDate;
     </script>
   </body>
 </html>

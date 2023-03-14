@@ -1,18 +1,6 @@
 //Imports:
-import {
-  fedServiceTime,
-  milServiceTime,
-  totalTime,
-  servicePercent,
-  finalAnnuity,
-  rasAnnual,
-  rasMonthly,
-  checkValidDate,
-} from "./annuity.js";
+import { checkValidDate } from "./annuity.js";
 
-let firstName = document.querySelector("#firstName");
-let middleInit = document.querySelector("#middleInit");
-let lastName = document.querySelector("#lastName");
 let milBuyback = document.querySelector("#milBuyback");
 let milDateElements = document.querySelector(".military-dates");
 let militaryServiceTime = document.querySelector(".military__results");
@@ -28,18 +16,19 @@ const form = document.querySelector("#retirementForm");
 
 //variable declarations:
 const integerElements = [retirementAge, sickLeave, high3, ssa];
-const textElements = [firstName, middleInit, lastName];
 const dateElements = [enterOnDate, retireDate, milStartDate, milEndDate];
+// const textElements = [firstName, middleInit, lastName];
 
 // Just-validate configuration settings:
-const validation = new JustValidate("#retirementForm", {
+const validation = new JustValidate(form, {
+  validateBeforeSubmitting: true,
   errorFieldCssClass: "is-invalid",
   successFieldCssClass: "is-valid",
   errorLabelCssClass: "is-label-invalid",
   focusInvalidField: "true",
   lockForm: "true",
   tooltip: {
-    position: "right",
+    position: "bottom",
   },
 });
 
@@ -67,17 +56,36 @@ integerElements.forEach((input) => {
 });
 
 //loop through array of similar element value types (ie, int or float):
-textElements.forEach((input) => {
-  input.addEventListener("input", (event) => {
-    //provides input mask
-    event.target.value = event.target.value.replace(/[^a-zA-Z]+/gi, "") || "";
-  });
-});
+// textElements.forEach((input) => {
+//   input.addEventListener("input", (event) => {
+//     //provides input mask
+//     event.target.value = event.target.value.replace(/[^a-zA-Z]+/gi, "") || "";
+//   });
+// });
 
 //Show Military dates if the user selects buyback option "yes"
 milBuyback.addEventListener("change", (event) => {
   milDateElements.classList.toggle("display__toggle");
   militaryServiceTime.classList.toggle("display__toggle");
+  //add just-validate rule when "yes" selected:
+  if (event.target.value == "true") {
+    validation
+      .addField("#milStartDate", [
+        {
+          rule: "required",
+          errorMessage: "Please enter your Military Start Date",
+        },
+      ])
+      .addField("#milEndDate", [
+        {
+          rule: "required",
+          errorMessage: "Please enter your Military End Date",
+        },
+      ]);
+  } else {
+    validation.removeField("#milStartDate");
+    validation.removeField("#milEndDate");
+  }
 });
 
 //Check for valid dates as the user enters
@@ -87,70 +95,8 @@ dateElements.forEach((input) => {
   });
 });
 
-//Handle form data:
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const formData = new FormData(form);
-  //Append calculated results to the formData object:
-  formData.append("annuityPercent", servicePercent);
-  formData.append("annuityAmount", finalAnnuity);
-  formData.append("federalTime", fedServiceTime);
-  formData.append("militaryTime", milServiceTime);
-  formData.append("rasMonthly", rasMonthly);
-  formData.append("rasAnnual", rasAnnual);
-
-  //create instance of URLSearchParams with the form information
-  const payload = new URLSearchParams(formData);
-  //simulated endpoint request/response testing service
-  fetch("http://httpbin.org/post", {
-    method: "POST",
-    body: payload,
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error));
-});
-
 //Form Validation:
 validation
-  .addField("#firstName", [
-    {
-      rule: "minLength",
-      value: 1,
-    },
-    {
-      rule: "maxLength",
-      value: 30,
-    },
-    {
-      rule: "required",
-      errorMessage: "First name is required!",
-    },
-  ])
-  .addField("#lastName", [
-    {
-      rule: "minLength",
-      value: 1,
-    },
-    {
-      rule: "maxLength",
-      value: 30,
-    },
-    {
-      rule: "required",
-      errorMessage: "Last name is required!",
-    },
-  ])
-  .addField("#middleInit", [
-    {
-      rule: "minLength",
-      value: 0,
-    },
-    {
-      rule: "maxLength",
-      value: 1,
-    },
-  ])
   .addField("#retirementAge", [
     {
       rule: "required",
@@ -159,6 +105,7 @@ validation
     {
       rule: "minNumber",
       value: 1,
+      errorMessage: "Value should be greater than zero",
     },
     {
       rule: "maxNumber",
