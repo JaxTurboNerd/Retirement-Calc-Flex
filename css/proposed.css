@@ -1,0 +1,30 @@
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-row: 1fr 1fr;
+}
+
+.image-holder {
+  grid-column: 1 / 2;
+}
+
+header, .banner {
+  grid-column: 1 / 2 ;
+  grid-row: 1 / 2;
+}
+
+main {
+  grid-column: 2 / 5;
+}
+
+.personalInfo {
+  grid-column: 2 / 3;
+}
+
+.results {
+  grid-column: 2 / 4;
+}
+
+.datesInfo {
+  grid-column: 3 / 4;
+}
