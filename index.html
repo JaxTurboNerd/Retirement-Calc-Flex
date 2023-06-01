@@ -27,18 +27,11 @@
           <h1>FERS Retirement Calculator</h1>
           <p>This calculator estimates the Special Category Employee (SCE) FERS basic annuity figures.</p>
         </div>
-        <!-- <nav>
-          <ul>
-            <li>
-              <a href="tsp.html" target="_blank">TSP Calculator</a>
-            </li>
-            <li>
-              <a href="https://www.tsp.gov" target="_blank">TSP Website</a>
-            </li>
-          </ul>
-        </nav> -->
       </div>
     </header>
+    <div class="mainImage">
+      <img src="https://placehold.co/400x300" alt="placeholder"/>
+    </div>
     <main>
       <form
         id="retirementForm"
@@ -48,234 +41,187 @@
         enctype="multipart/form-data"
         novalidate="nonvalidate"
       >
-        <div class="row">
-          <section class="first">
-            <div class="container">
-              <h2>Personal Info</h2>
-              <div class="info">
-                <!-- <div>
-                  <label for="firstName">First Name:</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    value="Gregory"
-                    placeholder="First"
-                    minlength="1"
-                    maxlength="30"
-                    required
-                  />
+        <div class="results">
+          <div class="time__results">
+            <h2>Results</h2>
+            <h3>Total Service Time:</h3>
+            <p id="totalTime"></p>
+            <div class="federal__time">
+              <h4>Federal:</h4>
+              <p id="federalTime"></p>
+            </div>
+            
+            <div class="military__results display__toggle">
+              <h4>Military</h4>
+              <p class="mil__time__results"></p>
+            </div>
+            <hr />
+          </div>
+          
+          <div id="annuity-percent">
+            <h3>Estimated Annuity Percent:</h3>
+            <p class="results__info total-percent"></p>
+            <hr />
+          </div>
+          <div>
+            <h3>Estimated Yearly Annuity:</h3>
+            <p class="results__info annuity-amount"></p>
+          </div>
+          <div class="ras__info">
+            <p class="ras__text">Montly RAS Amount:</p>
+            <p class="rasMonthly"></p>
+          </div>
+          <div class="ras__info">
+            <p class="ras__text">Annual RAS amount:</p>
+            <p class="rasAnnual"></p>
+          </div>
+        </div>
+        <div class="personalInfo">
+          <h2>Personal Info</h2>
+          <div class="info">
+            <div>
+              <label for="retirementAge">Retirement Age:</label>
+              <input
+                type="text"
+                name="retirementAge"
+                id="retirementAge"
+                size="5"
+                maxlength="2"
+                value="52"
+              />
+            </div>
+          </div>
+          <div class="info">
+            <div class="form-control">
+              <label for="high3">High-3 Average Salary</label>
+              <div class="dollar__format">
+                <div class="dollar__sign">
+                  <span>$</span>
                 </div>
-                <div>
-                  <label for="middleInit">Middle Initial:</label>
-                  <input
-                    type="text"
-                    name="middleInit"
-                    id="middleInit"
-                    placeholder="I"
-                    minlength="0"
-                    maxlength="1"
-                    value="E"
-                  />
-                </div>
-                <div>
-                  <label for="lastName">Last Name:</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    placeholder="Last"
-                    required
-                    minlength="1"
-                    maxlength="30"
-                    value="Boyd"
-                  />
-                </div> -->
-                <div>
-                  <label for="retirementAge">Retirement Age:</label>
-                  <input
-                    type="text"
-                    name="retirementAge"
-                    id="retirementAge"
-                    size="5"
-                    maxlength="2"
-                    value="52"
-                  />
-                </div>
-              </div>
-              <div class="info">
-                <div class="form-control">
-                  <label for="high3">High-3 Average Salary</label>
-                  <div class="dollar__format">
-                    <div class="dollar__sign">
-                      <span>$</span>
-                    </div>
-                    <input
-                      type="text"
-                      name="high3"
-                      id="high3"
-                      size="10"
-                      value="0"
-                      required
-                      maxlength="7"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label for="sickLeave">Current Sick Leave Balance:</label>
-                  <span class="sickLeaveHours">
-                    <input
-                      type="text"
-                      name="sickLeave"
-                      id="sickLeave"
-                      size="6"
-                      placeholder="0"
-                      maxlength="4"
-                      value="0"
-                    />
-                    hrs
-                  </span>
-                </div>
-                <div>
-                  <label for="survivor-benefit"
-                    >Spousal Benefit Survivor Annuity:</label
-                  >
-                  <select name="survivor-benefit" id="survivor-benefit">
-                    <option value="0">0%</option>
-                    <option value="0.05">5%</option>
-                    <option value="0.10" selected>10%</option>
-                  </select>
-                </div>
-                <div>
-                  <label for="milBuyback">Military Buy back?</label>
-                  <select name="military-buyback" id="milBuyback">
-                  <option value="false">No</option>
-                  <option value="true">Yes</option>
-                </select>
-                </div>
-                <div>
-                  <h4>Retirement Annuity Supplement (RAS)</h4>
-                  <div>
-                    <label for="ssa">Montly Social Security Benefit: </label>
-                    <p style="font-style: italic">(page 2 of SSA statement)</p>
-                    <div class="dollar__format">
-                      <div class="dollar__sign">
-                        <span class="currency">$</span>
-                      </div>
-                      <input
-                      type="text"
-                      name="ssa"
-                      id="ssa"
-                      size="12"
-                      placeholder="0"
-                      value="0"
-                      maxlength="5"
-                    />
-                  </div>
-                </div>
+                <input
+                  type="text"
+                  name="high3"
+                  id="high3"
+                  size="10"
+                  value="0"
+                  required
+                  maxlength="7"
+                />
               </div>
             </div>
-          </section>
-          <section class="second">
-            <div class="container">
-              <div class="dates-info">
-                <h2>FERS Retirement Dates</h2>
-                <div class="form-control">
-                  <label for="enterOnDate">Enter On Date (EOD):</label>
-                  <input
-                    type="date"
-                    name="enterOnDate"
-                    id="enterOnDate"
-                    value="2002-01-13"
-                    required
-                  />
-                  <small class="date-error"></small>
-                </div>
-                <div class="form-control">
-                  <label for="retirementDate">Retirement Date:</label>
-                  <input
-                    type="date"
-                    name="retirementDate"
-                    id="retirementDate"
-                    value="2022-01-31"
-                    required
-                  />
-                  <small class="date-error order-error"></small>
-                </div>
-              </div>
-              <div class="dates-info military-dates display__toggle">
-                <div class="form-control-mil">
-                  <label for="milStartDate">Military buyback start date:</label>
-                  <input
-                    type="date"
-                    name="milStartDate"
-                    id="milStartDate"
-                    value=""
-                  />
-                  <small class="mil-date-error"></small>
-                </div>
-                <div class="form-control-mil">
-                  <label for="milEndDate">Military buyback end date:</label>
-                  <input
-                    type="date"
-                    name="milEndDate"
-                    id="milEndDate"
-                    value=""
-                  />
-                  <small class="mil-date-error mil-order-error"></small>
-                </div>
-              </div>
+            <div>
+              <label for="sickLeave">Current Sick Leave Balance:</label>
+              <span class="sickLeaveHours">
+                <input
+                  type="text"
+                  name="sickLeave"
+                  id="sickLeave"
+                  size="6"
+                  placeholder="0"
+                  maxlength="4"
+                  value="0"
+                />
+                hrs
+              </span>
+            </div>
+            <div>
+              <label for="survivor-benefit"
+                >Spousal Benefit Survivor Annuity:</label
+              >
+              <select name="survivor-benefit" id="survivor-benefit">
+                <option value="0">0%</option>
+                <option value="0.05">5%</option>
+                <option value="0.10" selected>10%</option>
+              </select>
+            </div>
+            <div>
+              <label for="milBuyback">Military Buy back?</label>
+              <select name="military-buyback" id="milBuyback">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+            </div>
+            <div>
+              <h4>Retirement Annuity Supplement (RAS)</h4>
               <div>
-                <button
-                  type="submit"
-                  name="calculateButton"
-                  id="calculateBtn"
-                >
-                  Calculate
-                </button>
-                <!-- <input id="form__submit" type="submit" value="Save Results" /> -->
-              </div>
-            </div>
-          </section>
-          <section class="third">
-            <div class="container">
-              <div class="results">
-                <div class="time__results">
-                  <h2>Results</h2>
-                  <h3>Total Service Time:</h3>
-                  <p id="totalTime"></p>
-                  <div class="federal__time">
-                    <h4>Federal:</h4>
-                    <p id="federalTime"></p>
+                <label for="ssa">Montly Social Security Benefit: </label>
+                <p style="font-style: italic">(page 2 of SSA statement)</p>
+                <div class="dollar__format">
+                  <div class="dollar__sign">
+                    <span class="currency">$</span>
                   </div>
-                  
-                  <div class="military__results display__toggle">
-                    <h4>Military</h4>
-                    <p class="mil__time__results"></p>
-                  </div>
-                  <hr />
-                </div>
-                
-                <div id="annuity-percent">
-                  <h3>Estimated Annuity Percent:</h3>
-                  <p class="results__info total-percent"></p>
-                  <hr />
-                </div>
-                <div>
-                  <h3>Estimated Yearly Annuity:</h3>
-                  <p class="results__info annuity-amount"></p>
-                </div>
-                <div class="ras__info">
-                  <p class="ras__text">Montly RAS Amount:</p>
-                  <p class="rasMonthly"></p>
-                </div>
-                <div class="ras__info">
-                  <p class="ras__text">Annual RAS amount:</p>
-                  <p class="rasAnnual"></p>
+                  <input
+                  type="text"
+                  name="ssa"
+                  id="ssa"
+                  size="12"
+                  placeholder="0"
+                  value="0"
+                  maxlength="5"
+                  />
                 </div>
               </div>
             </div>
-          </sectio>
+          </div>
+        </div>
+        <div class="datesInfo">
+          <div class="dates-info">
+            <h2>FERS Retirement Dates</h2>
+            <div class="form-control">
+              <label for="enterOnDate">Enter On Date (EOD):</label>
+              <input
+                type="date"
+                name="enterOnDate"
+                id="enterOnDate"
+                value="2002-01-13"
+                required
+              />
+              <small class="date-error"></small>
+            </div>
+            <div class="form-control">
+              <label for="retirementDate">Retirement Date:</label>
+              <input
+                type="date"
+                name="retirementDate"
+                id="retirementDate"
+                value="2022-01-31"
+                required
+              />
+              <small class="date-error order-error"></small>
+            </div>
+          </div>
+          <div class="dates-info military-dates display__toggle">
+            <div class="form-control-mil">
+              <label for="milStartDate">Military buyback start date:</label>
+              <input
+                type="date"
+                name="milStartDate"
+                id="milStartDate"
+                value=""
+              />
+              <small class="mil-date-error"></small>
+            </div>
+            <div class="form-control-mil">
+              <label for="milEndDate">Military buyback end date:</label>
+              <input
+                type="date"
+                name="milEndDate"
+                id="milEndDate"
+                value=""
+              />
+              <small class="mil-date-error mil-order-error"></small>
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              name="calculateButton"
+              id="calculateBtn"
+            >
+              Calculate
+            </button>
+            <!-- <input id="form__submit" type="submit" value="Save Results" /> -->
+          </div>
         </div>
       </form>
     </main>
